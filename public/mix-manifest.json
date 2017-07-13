@@ -2,6 +2,11 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/now-ui-kit.css": "/css/now-ui-kit.css",
+    "/css/paper-dashboard.css": "/css/paper-dashboard.css",
+    "/js/paper-dashboard.js": "/js/paper-dashboard.js",
     "/js/now-ui-kit.js": "/js/now-ui-kit.js",
-    "/js/combined.js": "/js/combined.js"
+    "/js/combined.js": "/js/combined.js",
+    "/js/paper-dashboard-plugins.js": "/js/paper-dashboard-plugins.js",
+    "/css/animate.min.css": "/css/animate.min.css",
+    "/css/themify-icons.css": "/css/themify-icons.css"
 }

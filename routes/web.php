@@ -14,6 +14,6 @@
 
 // HomeController
 Route::get('/', 'HomeController@index')->name('home'); // Home page
-Route::get('/dashboard', 'HomeController@dasbboard')->name('dashboard'); // Login Dashboard
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard'); // Login Dashboard
 Auth::routes(); // Handles /login and /register TODO: will update routes as need fit in future
 
