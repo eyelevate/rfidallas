@@ -27,15 +27,15 @@ var navbar_initialized,
 
 $(document).ready(function(){
     //  Activate the Tooltips
-    $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
+    // $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
 
     // Activate Popovers and set color for popovers
-    $('[data-toggle="popover"]').each(function(){
-        color_class = $(this).data('color');
-        $(this).popover({
-            template: '<div class="popover '+ color_class +' " role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-        });
-    });
+    // $('[data-toggle="popover"]').each(function(){
+    //     color_class = $(this).data('color');
+    //     $(this).popover({
+    //         template: '<div class="popover '+ color_class +' " role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+    //     });
+    // });
 
     $navbar = $('.navbar[color-on-scroll]');
     scroll_distance = $navbar.attr('color-on-scroll') || 500;
