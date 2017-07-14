@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
             <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
-                Now Ui Kit
+                RFIDallas
             </a>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
