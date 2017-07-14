@@ -1,19 +1,19 @@
 @extends('layouts.frontend')
 
 @section('header')
-<div class="page-header-image" data-parallax="true" style="background-image: url('/img/header.jpg');"></div>
+<div class="page-header-image" data-parallax="true" style="background-image: url('/img/themes/now-ui-kit/header.jpg');"></div>
 <div class="container">
 	<div class="content-center brand">
-		<img class="n-logo" src="/img/now-logo.png" alt="">
+		<img class="n-logo" src="/img/themes/now-ui-kit/now-logo.png" alt="">
 		<h1 class="h1-seo">Now UI Kit.</h1>
 		<h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
 	</div>
 	<h6 class="category category-absolute">Designed by
 		<a href="http://invisionapp.com/" target="_blank">
-			<img src="/img/invision-white-slim.png" class="invision-logo" />
+			<img src="/img/themes/now-ui-kit/invision-white-slim.png" class="invision-logo" />
 		</a>. Coded by
 		<a href="https://www.creative-tim.com" target="_blank">
-			<img src="/img/creative-tim-white-slim2.png" class="creative-tim-logo" />
+			<img src="/img/themes/now-ui-kit/creative-tim-white-slim2.png" class="creative-tim-logo" />
 		</a>.</h6>
 	</div>
 @endsection
@@ -24,13 +24,13 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="hero-images-container">
-					<img src="/img/hero-image-1.png" alt="">
+					<img src="/img/themes/now-ui-kit/hero-image-1.png" alt="">
 				</div>
 				<div class="hero-images-container-1">
-					<img src="/img/hero-image-2.png" alt="">
+					<img src="/img/themes/now-ui-kit/hero-image-2.png" alt="">
 				</div>
 				<div class="hero-images-container-2">
-					<img src="/img/hero-image-3.png" alt="">
+					<img src="/img/themes/now-ui-kit/hero-image-3.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -213,7 +213,7 @@
 							<span class="navbar-toggler-bar bar3"></span>
 						</button>
 						<a class="navbar-brand" href="#">Menu</a>
-						<div class="collapse navbar-collapse" id="example-navbar" data-nav-image="/img/blurred-image-1.jpg">
+						<div class="collapse navbar-collapse" id="example-navbar" data-nav-image="/img/themes/now-ui-kit/blurred-image-1.jpg">
 							<ul class="navbar-nav">
 								<li class="nav-item active">
 									<a class="nav-link" href="#">
@@ -284,7 +284,7 @@
 		<h4>Navigation</h4>
 	</div>
 	<div id="navbar">
-		<div class="navigation-example" style="background-image:url('/img/bg7.jpg')">
+		<div class="navigation-example" style="background-image:url('/img/themes/now-ui-kit/bg7.jpg')">
 			<!-- Navbar Primary  -->
 			<nav class="navbar navbar-toggleable-md bg-primary">
 				<div class="container">
@@ -851,19 +851,19 @@
 													<div class="row">
 														<div class="col-sm-2">
 															<p class="category">Image</p>
-															<img src="/img/avatar.jpg" alt="Rounded Image" class="rounded">
+															<img src="/img/themes/now-ui-kit/avatar.jpg" alt="Rounded Image" class="rounded">
 														</div>
 														<div class="col-sm-2 offset-sm-1">
 															<p class="category">Circle Image</p>
-															<img src="/img/avatar.jpg" alt="Circle Image" class="rounded-circle">
+															<img src="/img/themes/now-ui-kit/avatar.jpg" alt="Circle Image" class="rounded-circle">
 														</div>
 														<div class="col-sm-2 offset-sm-1">
 															<p class="category">Raised</p>
-															<img src="/img/avatar.jpg" alt="Raised Image" class="rounded img-raised">
+															<img src="/img/themes/now-ui-kit/avatar.jpg" alt="Raised Image" class="rounded img-raised">
 														</div>
 														<div class="col-sm-2 offset-sm-1">
 															<p class="category">Circle Raised</p>
-															<img src="/img/avatar.jpg" alt="Thumbnail Image" class="rounded-circle img-raised">
+															<img src="/img/themes/now-ui-kit/avatar.jpg" alt="Thumbnail Image" class="rounded-circle img-raised">
 														</div>
 													</div>
 													<div class="row">
@@ -933,19 +933,19 @@
 															</ol>
 															<div class="carousel-inner" role="listbox">
 																<div class="carousel-item active">
-																	<img class="d-block" src="/img/bg1.jpg" alt="First slide">
+																	<img class="d-block" src="/img/themes/now-ui-kit/bg1.jpg" alt="First slide">
 																	<div class="carousel-caption d-none d-md-block">
 																		<h5>Nature, United States</h5>
 																	</div>
 																</div>
 																<div class="carousel-item">
-																	<img class="d-block" src="/img/bg3.jpg" alt="Second slide">
+																	<img class="d-block" src="/img/themes/now-ui-kit/bg3.jpg" alt="Second slide">
 																	<div class="carousel-caption d-none d-md-block">
 																		<h5>Somewhere Beyond, United States</h5>
 																	</div>
 																</div>
 																<div class="carousel-item">
-																	<img class="d-block" src="/img/bg4.jpg" alt="Third slide">
+																	<img class="d-block" src="/img/themes/now-ui-kit/bg4.jpg" alt="Third slide">
 																	<div class="carousel-caption d-none d-md-block">
 																		<h5>Yellowstone National Park, United States</h5>
 																	</div>
@@ -971,7 +971,7 @@
 															Now UI Kit comes with 100 custom icons made by our friends from NucleoApp. The official package contains over 2.100 thin icons which are looking great in combination with Now UI Kit Make sure you check all of them and use those that you like the most.
 														</h5>
 <!-- <div class="nucleo-container">
-<img src="/img/nucleo.svg" alt="">
+<img src="/img/themes/now-ui-kit/nucleo.svg" alt="">
 </div> -->
 <a href="nucleo-icons.html" class="btn btn-primary btn-round btn-lg" target="_blank">View Demo Icons</a>
 <a href="https://nucleoapp.com/?ref=creativetim" class="btn btn-primary btn-simple btn-round btn-lg" target="_blank">View All Icons</a>
@@ -1008,7 +1008,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="section section-signup" style="background-image: url('/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image: url('/img/themes/now-ui-kit/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="orange">
@@ -1071,13 +1071,13 @@ Unchecked
 		<div class="row">
 			<div class="col">
 				<a href="examples/landing-page.html" target="_blank">
-					<img src="/img/landing.jpg" alt="Image" class="img-raised">
+					<img src="/img/themes/now-ui-kit/landing.jpg" alt="Image" class="img-raised">
 				</a>
 				<a href="examples/landing-page.html" class="btn btn-simple btn-primary btn-round">View Landing Page</a>
 			</div>
 			<div class="col">
 				<a href="examples/profile-page.html" target="_blank">
-					<img src="/img/profile.jpg" alt="Image" class="img-raised">
+					<img src="/img/themes/now-ui-kit/profile.jpg" alt="Image" class="img-raised">
 				</a>
 				<a href="examples/profile-page.html" class="btn btn-simple btn-primary btn-round">View Profile Page</a>
 			</div>

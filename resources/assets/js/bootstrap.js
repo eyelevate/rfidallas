@@ -51,3 +51,6 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+// Chartjs
+require('chart.js');

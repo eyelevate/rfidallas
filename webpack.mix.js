@@ -17,17 +17,20 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 
 // Now-ui-kit Theme
-mix.js('resources/assets/js/themes/now-ui-kit/now-ui-kit.js', 'public/js')
-   .combine(['resources/assets/js/themes/now-ui-kit/plugins/*'], 'public/js/combined.js')
-   .copyDirectory('resources/assets/img/themes/now-ui-kit', 'public/img')
+mix.js('resources/assets/js/themes/now-ui-kit/now-ui-kit.js', 'public/js/themes/now-ui-kit')
+   .combine(['resources/assets/js/themes/now-ui-kit/plugins/*'], 'public/js/themes/now-ui-kit/combined.js')
+   .copyDirectory('resources/assets/img/themes/now-ui-kit', 'public/img/themes/now-ui-kit')
    .copyDirectory('resources/assets/fonts/themes/now-ui-kit', 'public/fonts/themes/now-ui-kit')
-   .sass('resources/assets/sass/themes/now-ui-kit/now-ui-kit.scss','public/css');
+   .sass('resources/assets/sass/themes/now-ui-kit/now-ui-kit.scss','public/css/themes/now-ui-kit');
 
-// Paper-dashboard Theme
-mix.js('resources/assets/js/themes/paper-dashboard/paper-dashboard.js', 'public/js')
-   .combine(['resources/assets/js/themes/paper-dashboard/plugins/*'], 'public/js/paper-dashboard-plugins.js')
-   .copyDirectory('resources/assets/img/themes/paper-dashboard', 'public/img/themes/paper-dashboard')
-   .copyDirectory('resources/assets/fonts/themes/paper-dashboard', 'public/fonts/themes/paperdashboard')
-   .copy('resources/assets/sass/themes/paper-dashboard/animate.min.css', 'public/css')
-   .copy('resources/assets/sass/themes/paper-dashboard/themify-icons.css', 'public/css')
-   .sass('resources/assets/sass/themes/paper-dashboard/paper-dashboard.scss','public/css');
+// Core UI Theme
+mix.js('resources/assets/js/themes/coreui/coreui.js', 'public/js/themes/coreui')
+   .combine([
+   		'resources/assets/js/themes/coreui/views/pace.js',
+   		'resources/assets/js/themes/coreui/views/chart.js',
+   		'resources/assets/js/themes/coreui/views/widgets.js'], 
+   		'public/js/themes/coreui/dashboard-plugins.js')
+   .js('resources/assets/js/themes/coreui/views/main.js', 'public/js/themes/coreui')
+   .copyDirectory('resources/assets/img/themes/coreui', 'public/img/themes/coreui')
+   .copyDirectory('resources/assets/fonts/themes/coreui', 'public/fonts/themes/coreui')
+   .sass('resources/assets/sass/themes/coreui/style.scss','public/css/themes/coreui');

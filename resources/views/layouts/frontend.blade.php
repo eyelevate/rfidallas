@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/now-ui-kit.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/themes/now-ui-kit/now-ui-kit.css') }}">
     <!-- CSS Just for demo purpose, don't include it in your project -->
 <!--     <link href="./assets/css/demo.css" rel="stylesheet" /> -->
 </head>
@@ -46,10 +46,10 @@
 <!--   Core JS Files   -->
 <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 <!-- Theme dependencies -->
-<script type="text/javascript" src="{{ mix('/js/combined.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/themes/now-ui-kit/combined.js') }}"></script>
 
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script type="text/javascript" src="{{ mix('/js/now-ui-kit.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/themes/now-ui-kit/now-ui-kit.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         // the body of this function is in assets/js/now-ui-kit.js

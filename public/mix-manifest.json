@@ -1,12 +1,14 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/now-ui-kit.css": "/css/now-ui-kit.css",
-    "/css/paper-dashboard.css": "/css/paper-dashboard.css",
-    "/js/paper-dashboard.js": "/js/paper-dashboard.js",
-    "/js/now-ui-kit.js": "/js/now-ui-kit.js",
-    "/js/combined.js": "/js/combined.js",
-    "/js/paper-dashboard-plugins.js": "/js/paper-dashboard-plugins.js",
-    "/css/animate.min.css": "/css/animate.min.css",
-    "/css/themify-icons.css": "/css/themify-icons.css"
+    "/css/themes/now-ui-kit/now-ui-kit.css": "/css/themes/now-ui-kit/now-ui-kit.css",
+    "/css/themes/coreui/style.css": "/css/themes/coreui/style.css",
+    "/js/themes/now-ui-kit/now-ui-kit.js": "/js/themes/now-ui-kit/now-ui-kit.js",
+    "/js/themes/coreui/main.js": "/js/themes/coreui/main.js",
+    "/js/themes/coreui/coreui.js": "/js/themes/coreui/coreui.js",
+    "/js/themes/now-ui-kit/combined.js": "/js/themes/now-ui-kit/combined.js",
+    "/js/themes/coreui/dashboard-plugins.js": "/js/themes/coreui/dashboard-plugins.js",
+    "/css/themes/coreui/font-awesome.css.map": "/css/themes/coreui/font-awesome.css.map",
+    "/css/themes/coreui/font-awesome.min.css": "/css/themes/coreui/font-awesome.min.css",
+    "/css/themes/coreui/simple-line-icons.css": "/css/themes/coreui/simple-line-icons.css"
 }
