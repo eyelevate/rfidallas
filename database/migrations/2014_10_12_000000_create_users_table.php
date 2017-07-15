@@ -20,6 +20,14 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('password');
+            /**
+            * User Types
+            * 1 - Superadmin
+            * 2 - Admin
+            * 3 - Employee
+            * 4 - Member
+            **/
+            $table->tinyInteger('role_id')->default(4);
             $table->rememberToken();
             $table->timestamps();
         });

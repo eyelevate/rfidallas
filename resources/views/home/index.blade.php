@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.home')
 
 @section('header')
 <div class="page-header-image" data-parallax="true" style="background-image: url('/img/themes/now-ui-kit/header.jpg');"></div>
