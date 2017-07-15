@@ -22,7 +22,7 @@
 
 <body class="index-page">
     <!-- Navbar -->
-    @include('layouts.partials.frontend-navbar')    
+    @include('layouts.partials.home-navbar')    
     <!-- End Navbar -->
     <div class="wrapper">
         <!-- Start header -->

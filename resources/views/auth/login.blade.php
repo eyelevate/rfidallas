@@ -1,5 +1,9 @@
 @extends('layouts.frontend')
 
+@section('header')
+<br/><br/>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

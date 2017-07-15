@@ -15,7 +15,7 @@
 		<a href="https://www.creative-tim.com" target="_blank">
 			<img src="/img/themes/now-ui-kit/creative-tim-white-slim2.png" class="creative-tim-logo" />
 		</a>.</h6>
-	</div>
+</div>
 @endsection
 
 @section('content')

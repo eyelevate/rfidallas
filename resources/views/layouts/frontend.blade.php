@@ -26,15 +26,19 @@
     <!-- End Navbar -->
     <div class="wrapper">
         <!-- Start header -->
-        <div class="page-header clear-filter" filter-color="orange">
-            @yield('header')
+        <br/><br/><br/><br/>
+        <div class="container">
+            <header>
+                @yield('header')
+            </header>
+            <!-- End header -->
+            <!-- Start Content -->
+            <div class="main">
+                @include('flash::message')
+                @yield('content')
+            </div>    
         </div>
-        <!-- End header -->
-        <!-- Start Content -->
-        <div class="main">
-            @include('flash::message')
-            @yield('content')
-        </div>
+        
         <!-- End Content -->
         <!-- Start Modals -->
         @yield('modals')
