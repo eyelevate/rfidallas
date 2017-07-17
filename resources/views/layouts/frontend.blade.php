@@ -26,7 +26,7 @@
     <!-- End Navbar -->
     <div class="wrapper">
         <!-- Start header -->
-        <br/><br/><br/><br/>
+        <br/><br/>
         <div class="container">
             <header>
                 @yield('header')
@@ -44,6 +44,7 @@
         @yield('modals')
         <!-- End Modals -->
         <!-- Start Footer -->
+        <br><br>
         @include('layouts.partials.frontend-footer')
         <!-- End Footer -->
     </div>
@@ -56,19 +57,7 @@
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="{{ mix('/js/themes/now-ui-kit/now-ui-kit.js') }}"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        // the body of this function is in assets/js/now-ui-kit.js
-        nowuiKit.initSliders();
-    });
 
-    function scrollToDownload() {
-
-        if ($('.section-download').length != 0) {
-            $("html, body").animate({
-                scrollTop: $('.section-download').offset().top
-            }, 1000);
-        }
-    }
 </script>
 
 </html>

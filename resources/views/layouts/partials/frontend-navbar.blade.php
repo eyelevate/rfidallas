@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-md bg-primary fixed-top" color-on-scroll="0">
+<nav class="navbar navbar-toggleable-md bg-primary fixed-top">
     <div class="container">
         <div class="navbar-translate">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

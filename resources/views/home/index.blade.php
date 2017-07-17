@@ -1040,24 +1040,24 @@
 								<input type="password" placeholder="Password..." class="form-control" />
 							</div>
 							<!-- If you want to add a checkbox to this form, uncomment this code -->
-<!-- <div class="checkbox">
-<input id="checkboxSignup" type="checkbox">
-<label for="checkboxSignup">
-Unchecked
-</label>
-</div> -->
-</div>
-<div class="footer text-center">
-	<a href="#pablo" class="btn btn-neutral btn-round btn-lg">Get Started</a>
-</div>
-</form>
-</div>
-</div>
-<div class="col text-center">
-	<a href="examples/login-page.html" class="btn btn-simple btn-round btn-white btn-lg" target="_blank">View Login Page</a>
-</div>
-</div>
-</div>
+							<!-- <div class="checkbox">
+							<input id="checkboxSignup" type="checkbox">
+							<label for="checkboxSignup">
+							Unchecked
+							</label>
+							</div> -->
+						</div>
+						<div class="footer text-center">
+							<a href="#pablo" class="btn btn-neutral btn-round btn-lg">Get Started</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col text-center">
+				<a href="examples/login-page.html" class="btn btn-simple btn-round btn-white btn-lg" target="_blank">View Login Page</a>
+			</div>
+		</div>
+	</div>
 <div class="section section-examples" data-background-color="black">
 	<div class="space-50"></div>
 	<div class="container text-center">
