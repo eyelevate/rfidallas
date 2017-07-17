@@ -6,15 +6,8 @@
 	<div class="content-center brand">
 		<img class="n-logo" src="/img/themes/now-ui-kit/now-logo.png" alt="">
 		<h1 class="h1-seo">RFIDallas</h1>
-		<h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
+		<h3>Control your inventory in the palm of your hands.</h3>
 	</div>
-	<h6 class="category category-absolute">Designed by
-		<a href="http://invisionapp.com/" target="_blank">
-			<img src="/img/themes/now-ui-kit/invision-white-slim.png" class="invision-logo" />
-		</a>. Coded by
-		<a href="https://www.creative-tim.com" target="_blank">
-			<img src="/img/themes/now-ui-kit/creative-tim-white-slim2.png" class="creative-tim-logo" />
-		</a>.</h6>
 </div>
 @endsection
 
