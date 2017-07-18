@@ -15,7 +15,8 @@
 @section('content')
 
 <div class="row" style="padding-top:30px;">
-    <bootstrap-card class="card-backend" title="Login">
+    <bootstrap-card class="card-backend" use-body="true" use-header="true">
+        <template slot="header">Login</template>
         <template slot="body">
             <form class="form-horizontal" method="POST" action="{{ route('admins_auth') }}">
                 {{ csrf_field() }}

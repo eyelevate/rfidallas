@@ -1,10 +1,12 @@
 @extends('layouts.backend')
-
+@section('scripts')
+<script type="text/javascript" src="{{ mix('/js/views/admins/index.js') }}"></script>
+@endsection
 @section('content')
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item"><a href="#">Admin</a>
+    <li class="breadcrumb-item active">Home</li>
+{{--     <li class="breadcrumb-item"><a href="{{  }}">Admin</a>
     </li>
     <li class="breadcrumb-item active">Dashboard</li>
 
@@ -15,15 +17,15 @@
             <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
             <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
         </div>
-    </li>
+    </li> --}}
 </ol>
 
 <div class="container-fluid">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="card card-inverse card-primary">
-                    <div class="card-block pb-0">
+                <bootstrap-card class="card-inverse card-primary" body-class="pb-0" use-body="true">
+                    <template slot="body">
                         <div class="btn-group float-right">
                             <button type="button" class="btn btn-transparent active dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon-settings"></i>
@@ -35,34 +37,37 @@
                             </div>
                         </div>
                         <h4 class="mb-0">9.823</h4>
-                        <p>Members online</p>
-                    </div>
-                    <div class="chart-wrapper px-3" style="height:70px;">
-                        <canvas id="card-chart1" class="chart" height="70"></canvas>
-                    </div>
-                </div>
+                        <p>Members Online</p>
+                        <div class="chart-wrapper px-3" style="height:70px;">
+                            <canvas id="card-chart1" class="chart" height="70"></canvas>
+                        </div>
+                    </template>
+                </bootstrap-card>
+
             </div>
             <!--/.col-->
 
             <div class="col-sm-6 col-lg-3">
-                <div class="card card-inverse card-info">
-                    <div class="card-block pb-0">
+                <bootstrap-card class="card-inverse card-info" body-class="pb-0" use-body="true">
+                    <template slot="body">
                         <button type="button" class="btn btn-transparent active p-0 float-right">
                             <i class="icon-location-pin"></i>
                         </button>
                         <h4 class="mb-0">9.823</h4>
                         <p>Members online</p>
-                    </div>
-                    <div class="chart-wrapper px-3" style="height:70px;">
-                        <canvas id="card-chart2" class="chart" height="70"></canvas>
-                    </div>
-                </div>
+                        
+                        <div class="chart-wrapper px-3" style="height:70px;">
+                            <canvas id="card-chart2" class="chart" height="70"></canvas>
+                        </div>
+                    </template>
+                </bootstrap-card>
+
             </div>
             <!--/.col-->
 
             <div class="col-sm-6 col-lg-3">
-                <div class="card card-inverse card-warning">
-                    <div class="card-block pb-0">
+                <bootstrap-card class="card-inverse card-warning" body-class="pb-0" use-body="true">
+                    <template slot="body">
                         <div class="btn-group float-right">
                             <button type="button" class="btn btn-transparent active dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon-settings"></i>
@@ -75,17 +80,18 @@
                         </div>
                         <h4 class="mb-0">9.823</h4>
                         <p>Members online</p>
-                    </div>
-                    <div class="chart-wrapper" style="height:70px;">
-                        <canvas id="card-chart3" class="chart" height="70"></canvas>
-                    </div>
-                </div>
+                        <div class="chart-wrapper px-3" style="height:70px;">
+                            <canvas id="card-chart3" class="chart" height="70"></canvas>
+                        </div>
+                    </template>
+
+                </bootstrap-card>
             </div>
             <!--/.col-->
 
             <div class="col-sm-6 col-lg-3">
-                <div class="card card-inverse card-danger">
-                    <div class="card-block pb-0">
+                <bootstrap-card class="card-inverse card-danger" body-class="pb-0" use-body="true">
+                    <template slot="body">
                         <div class="btn-group float-right">
                             <button type="button" class="btn btn-transparent active dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon-settings"></i>
@@ -98,18 +104,19 @@
                         </div>
                         <h4 class="mb-0">9.823</h4>
                         <p>Members online</p>
-                    </div>
-                    <div class="chart-wrapper px-3" style="height:70px;">
-                        <canvas id="card-chart4" class="chart" height="70"></canvas>
-                    </div>
-                </div>
+                        <div class="chart-wrapper px-3" style="height:70px;">
+                            <canvas id="card-chart4" class="chart" height="70"></canvas>
+                        </div>
+                    </template>
+
+                </bootstrap-card>
             </div>
             <!--/.col-->
         </div>
         <!--/.row-->
 
-        <div class="card">
-            <div class="card-block">
+        <bootstrap-card check-header="false" use-body="true" use-footer="true">
+            <template slot="body">
                 <div class="row">
                     <div class="col-sm-5">
                         <h4 class="card-title mb-0">Traffic</h4>
@@ -134,13 +141,12 @@
                         </div>
                     </div>
                     <!--/.col-->
+                    <div class="chart-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:300px;margin-top:40px;">
+                        <canvas id="main-chart" class="chart" height="300"></canvas>
+                    </div>
                 </div>
-                <!--/.row-->
-                <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-                    <canvas id="main-chart" class="chart" height="300"></canvas>
-                </div>
-            </div>
-            <div class="card-footer">
+            </template>
+            <template slot="footer">
                 <ul>
                     <li>
                         <div class="text-muted">Visits</div>
@@ -178,8 +184,10 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-        </div>
+
+            </template>
+        </bootstrap-card>
+        
         <!--/.card-->
 
         <div class="row">
@@ -653,244 +661,246 @@
                         </div>
                         <!--/.row-->
                         <br>
-                        <table class="table table-responsive table-hover table-outline mb-0">
-                            <thead class="thead-default">
-                                <tr>
-                                    <th class="text-center"><i class="icon-people"></i>
-                                    </th>
-                                    <th>User</th>
-                                    <th class="text-center">Country</th>
-                                    <th>Usage</th>
-                                    <th class="text-center">Payment Method</th>
-                                    <th>Activity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/1.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-success"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Yiorgos Avraamu</div>
-                                        <div class="small text-muted">
-                                            <span>New</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/USA.png" alt="USA" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>50%</strong>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-outline mb-0">
+                                <thead class="thead-default col-12">
+                                    <tr>
+                                        <th class="text-center"><i class="icon-people"></i>
+                                        </th>
+                                        <th>User</th>
+                                        <th class="text-center">Country</th>
+                                        <th>Usage</th>
+                                        <th class="text-center">Payment Method</th>
+                                        <th>Activity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/1.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-success"></span>
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td>
+                                            <div>Yiorgos Avraamu</div>
+                                            <div class="small text-muted">
+                                                <span>New</span>| Registered: Jan 1, 2015
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-cc-mastercard" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>10 sec ago</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-danger"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Avram Tarasios</div>
-                                        <div class="small text-muted">
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/USA.png" alt="USA" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>50%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-cc-mastercard" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>10 sec ago</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>Avram Tarasios</div>
+                                            <div class="small text-muted">
 
-                                            <span>Recurring</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/Brazil.png" alt="Brazil" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>10%</strong>
+                                                <span>Recurring</span>| Registered: Jan 1, 2015
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/Brazil.png" alt="Brazil" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>10%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-cc-visa" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>5 minutes ago</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-warning"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Quintin Ed</div>
-                                        <div class="small text-muted">
-                                            <span>New</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/India.png" alt="India" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>74%</strong>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-cc-visa" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>5 minutes ago</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-warning"></span>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-cc-stripe" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>1 hour ago</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-default"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Enéas Kwadwo</div>
-                                        <div class="small text-muted">
-                                            <span>New</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/France.png" alt="France" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>98%</strong>
+                                        </td>
+                                        <td>
+                                            <div>Quintin Ed</div>
+                                            <div class="small text-muted">
+                                                <span>New</span>| Registered: Jan 1, 2015
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/India.png" alt="India" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>74%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-paypal" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>Last month</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-success"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Agapetus Tadeáš</div>
-                                        <div class="small text-muted">
-                                            <span>New</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/Spain.png" alt="Spain" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>22%</strong>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-cc-stripe" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>1 hour ago</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-default"></span>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-google-wallet" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>Last week</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="avatar">
-                                            <img src="/img/themes/coreui/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                            <span class="avatar-status badge-danger"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>Friderik Dávid</div>
-                                        <div class="small text-muted">
-                                            <span>New</span>| Registered: Jan 1, 2015
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <img src="/img/themes/coreui/flags/Poland.png" alt="Poland" style="height:24px;">
-                                    </td>
-                                    <td>
-                                        <div class="clearfix">
-                                            <div class="float-left">
-                                                <strong>43%</strong>
+                                        </td>
+                                        <td>
+                                            <div>Enéas Kwadwo</div>
+                                            <div class="small text-muted">
+                                                <span>New</span>| Registered: Jan 1, 2015
                                             </div>
-                                            <div class="float-right">
-                                                <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/France.png" alt="France" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>98%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <i class="fa fa-cc-amex" style="font-size:24px"></i>
-                                    </td>
-                                    <td>
-                                        <div class="small text-muted">Last login</div>
-                                        <strong>Yesterday</strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-paypal" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>Last month</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-success"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>Agapetus Tadeáš</div>
+                                            <div class="small text-muted">
+                                                <span>New</span>| Registered: Jan 1, 2015
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/Spain.png" alt="Spain" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>22%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-google-wallet" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>Last week</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar">
+                                                <img src="/img/themes/coreui/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                                                <span class="avatar-status badge-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>Friderik Dávid</div>
+                                            <div class="small text-muted">
+                                                <span>New</span>| Registered: Jan 1, 2015
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <img src="/img/themes/coreui/flags/Poland.png" alt="Poland" style="height:24px;">
+                                        </td>
+                                        <td>
+                                            <div class="clearfix">
+                                                <div class="float-left">
+                                                    <strong>43%</strong>
+                                                </div>
+                                                <div class="float-right">
+                                                    <small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-cc-amex" style="font-size:24px"></i>
+                                        </td>
+                                        <td>
+                                            <div class="small text-muted">Last login</div>
+                                            <strong>Yesterday</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

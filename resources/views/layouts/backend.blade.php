@@ -59,7 +59,7 @@
         @include('layouts.partials.backend-nav')
     </header>
 
-    <div class="app-body">
+    <div id="root" class="app-body">
         @include('layouts.partials.backend-sidebar')
 
         <!-- Main content -->
@@ -80,6 +80,7 @@
     </footer>
 
     <!-- Bootstrap and necessary plugins -->
+    <!--   Core JS Files   -->
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/dashboard-plugins.js') }}"></script>
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/coreui.js') }}"></script>

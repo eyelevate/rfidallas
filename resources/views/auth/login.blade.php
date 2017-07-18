@@ -15,7 +15,7 @@
 @section('content')
 
 <div class="row">
-    <bootstrap-card class="card-signup" data-background-color="orange">
+    <bootstrap-card class="card-signup" data-background-color="orange" use-body="true">
         <template slot="header"></template>
         <template slot="body">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">

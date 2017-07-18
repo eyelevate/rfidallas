@@ -72203,14 +72203,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['title'],
-    mounted: function mounted() {
-        console.log('Card mounted.');
-    }
+	props: ['body-class', 'footer-class', 'use-header', 'use-body', 'use-footer'],
+	data: function data() {
+		return {
+			checkCardHeader: this.useHeader == 'true',
+			checkCardBody: this.useBody == 'true',
+			checkCardFooter: this.useFooter == 'true',
+			bClass: this.bodyClass,
+			fClass: this.footerClass
+		};
+	},
+
+	methods: {},
+	mounted: function mounted() {}
 });
 
 /***/ }),
@@ -72220,11 +72227,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "card"
-  }, [_vm._t("header", [_c('div', {
+  }, [(_vm.checkCardHeader) ? _c('div', {
     staticClass: "card-header"
-  }, [_vm._v("\n\t\t       \t" + _vm._s(_vm.title) + "\n\t\t    ")])]), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_vm._t("body"), _vm._v(" "), _vm._t("footer")], 2)], 2)
+  }, [_vm._t("header")], 2) : _vm._e(), _vm._v(" "), (_vm.checkCardBody) ? _c('div', {
+    staticClass: "card-block",
+    class: _vm.bClass
+  }, [_vm._t("body")], 2) : _vm._e(), _vm._v(" "), (_vm.checkCardFooter) ? _c('div', {
+    staticClass: "card-footer",
+    class: _vm.fClass
+  }, [_vm._t("footer")], 2) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

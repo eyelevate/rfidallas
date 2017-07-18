@@ -20,8 +20,13 @@ Route::get('/', 'HomeController@index')->name('home'); // Home page
 Auth::routes(); // Handles /login and /register TODO: will update routes as need fit in future
 Route::get('/logout','HomeController@logout')->name('logout');
 
-// Public Dashboard
-Route::get('/dashboard','HomeController@dashboard')->name('dashboard');
+
+/** Member pages **/
+
+Route::group(['middleware' => ['frontend']], function () {
+	// dashboard
+	Route::get('/dashboard','HomeController@dashboard')->name('dashboard');
+});
 
 
 

@@ -8,6 +8,7 @@
     "/js/views/auth/register.js": "/js/views/auth/register.js",
     "/js/views/auth/login.js": "/js/views/auth/login.js",
     "/js/views/admins/login.js": "/js/views/admins/login.js",
+    "/js/views/admins/index.js": "/js/views/admins/index.js",
     "/js/views/admins/general.js": "/js/views/admins/general.js",
     "/js/themes/now-ui-kit/now-ui-kit.js": "/js/themes/now-ui-kit/now-ui-kit.js",
     "/js/themes/coreui/main.js": "/js/themes/coreui/main.js",

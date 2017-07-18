@@ -18,32 +18,24 @@ class Authenticate
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next)
     {
-
         if (!Auth::check()) { // Is the user logged in?
-            // Check where the user came from, if from admins then redirect accordingly
-            $redirect_path = ($request->is('admins') || $request->is('admins/*')) ? '/admins/login' : '/';
             // Set intended page
-            Session::put('intended_url',$request->url());
-            flash('You must be logged in to view the page')->error();
-            return redirect($redirect_path);
+            session()->put('intended_url',$request->url());
+            flash('You must be logged in to view the page')->warning();
+            return redirect()->route('login');
         }
 
         // Is the user a guest? Kick em out if they are
-        if (Auth::guard($guard)->guest()) {
-            flash()->message('You are a not allowed to visit this page.')->warning();
+        if (Auth::guard()->guest()) {
+            
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
+                flash('You must be logged into view this page. Please try logging in.')->warning()->important();
                 return redirect()->route('home');
             }
-        }
-
-        // Check if user has a role_id that is less than 4 (employees or higher)
-        if (Auth::user()->role_id > 3) {
-            flash('You must be logged in to view the page')->error();
-            return redirect()->route('pages_index');
         }
 
         // Otherwise show as usual
