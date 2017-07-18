@@ -12,6 +12,16 @@
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
             <ul class="navbar-nav">
+                @if (Auth::check())
+                
+                <li class="nav-item dropdown">
+                    <a id="nav-logged-in" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#ffffff;">{{ Auth::user()->email }}</a>
+                    <div class="dropdown-menu" aria-labelledby="nav-logged-in">
+                        <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                    </div>
+
+                </li>
+                @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">
                         <i class="now-ui-icons arrows-1_cloud-download-93"></i>
@@ -24,6 +34,7 @@
                         <p>Register</p>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
                         <i class="fa fa-twitter"></i>

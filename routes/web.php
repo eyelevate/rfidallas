@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index')->name('home'); // Home page
 
 // Login and Registration page
 Auth::routes(); // Handles /login and /register TODO: will update routes as need fit in future
+Route::get('/logout','HomeController@logout')->name('logout');
 
 // Public Dashboard
 Route::get('/dashboard','HomeController@dashboard')->name('dashboard');
@@ -29,7 +30,7 @@ Route::post('/admins/authenticate','AdminsController@authenticate')->name('admin
 /** Administrative pages **/
 // Redirects if role_id > 3 (employee) check middleware/Authentice class if need to change
 Route::middleware(['auth'])->group(function () { 
-	Route::post('/admins','AdminsController@index')->name('admins_index');
+	Route::get('/admins','AdminsController@index')->name('admins_index');
 	Route::get('/admins/create','AdminsController@create')->name('admins_create');
 	Route::post('/admins/store','AdminsController@store')->name('admins_store');
 	Route::get('/admins/show/{admin}','AdminsController@show')->name('admins_show');

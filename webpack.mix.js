@@ -34,3 +34,16 @@ mix.js('resources/assets/js/themes/coreui/coreui.js', 'public/js/themes/coreui')
    .copyDirectory('resources/assets/img/themes/coreui', 'public/img/themes/coreui')
    .copyDirectory('resources/assets/fonts/themes/coreui', 'public/fonts/themes/coreui')
    .sass('resources/assets/sass/themes/coreui/style.scss','public/css/themes/coreui');
+
+mix.sass('resources/assets/fonts/themes/ionicons/scss/ionicons.scss','public/css/themes/ionicons');
+
+
+// Page Specific Mix
+
+// Admins
+mix.js('resources/assets/js/views/admins/login.js','public/js/views/admins')
+   .sass('resources/assets/sass/views/admins/general.scss','public/css/views/admins');
+
+// Auth
+mix.js('resources/assets/js/views/auth/login.js','public/js/views/auth')
+   .js('resources/assets/js/views/auth/register.js','public/js/views/auth');

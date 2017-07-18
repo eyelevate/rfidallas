@@ -16,15 +16,17 @@
     <!-- CSS Files -->
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/themes/now-ui-kit/now-ui-kit.css') }}">
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-<!--     <link href="./assets/css/demo.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/themes/ionicons/ionicons.css') }}">
+    <!-- Page specific styles -->
+    @yield('styles')
+
 </head>
 
 <body class="index-page">
     <!-- Navbar -->
     @include('layouts.partials.frontend-navbar')    
     <!-- End Navbar -->
-    <div class="wrapper">
+    <div id="bootstrap-root" class="wrapper">
         <!-- Start header -->
         <br/><br/>
         <div class="container">
@@ -57,5 +59,7 @@
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="{{ mix('/js/themes/now-ui-kit/now-ui-kit.js') }}"></script>
 
+<!-- Page specific scripts -->
+@yield('scripts')
 
 </html>

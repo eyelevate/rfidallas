@@ -1,9 +1,10 @@
 @extends('layouts.home')
 
 @section('header')
-<div class="page-header-image" data-parallax="true" style="background-image: url('/img/themes/now-ui-kit/header.jpg');"></div>
+<div class="page-header-image" data-parallax="true" style="background-image: url('/img/themes/now-ui-kit/header.jpg');"></div> 
 <div class="container">
 	<div class="content-center brand">
+		@include('flash::message')
 		<img class="n-logo" src="/img/themes/now-ui-kit/now-logo.png" alt="">
 		<h1 class="h1-seo">RFIDallas</h1>
 		<h3>Control your inventory in the palm of your hands.</h3>

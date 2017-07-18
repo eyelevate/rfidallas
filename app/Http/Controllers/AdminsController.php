@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AdminsController extends Controller
@@ -13,16 +14,25 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admins.index');
     }
 
     public function login()
     {
-
+        return view('admins.login');
     }
 
-    public function authenticate()
+    public function authenticate(Request $request)
     {
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+           flash()->message('Successfully logged in as '.Auth::user()->email.'!')->success();
+           return redirect()->route('admins_index');
+        } else {
+           flash()->message('Could not log you in please try again..')->error();
+           Auth::logout();
+           return redirect()->route('admins_login'); 
+        }
 
     }
 

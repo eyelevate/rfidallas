@@ -1,104 +1,102 @@
 @extends('layouts.frontend')
+@section('scripts')
+<script type="text/javascript" src="{{ mix('/js/views/auth/register.js') }}"></script>
+@endsection
 @section('header')
-    <h2>Registration Page</h2>
+<br/><br/>
 @endsection
 @section('content')
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">First Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+        <bootstrap-card class="card-signup" data-background-color="orange">
+            <template slot="header"></template>
+            <template slot="body">
+                <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    {{ csrf_field() }}
+                    <div class="header header-primary text-center">
+                        <h4 class="title title-up">Register</h4>
+                        <div class="social-line">
+                            <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-icon-mini">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                            <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#pablo" class="btn btn-neutral btn-google btn-icon  btn-icon-mini">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
                         </div>
-                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Last Name</label>
+                    </div>
+                    <div class="content">
+                        <!-- First Name -->
+                        <now-input class="form-group-no-border {{ $errors->has('first_name') ? ' has-danger' : '' }}" 
+                            b-icon="ion-ios-person-outline" 
+                            b-placeholder="First Name"
+                            b-name="first_name"
+                            b-type="text"
+                            b-value="{{ old('first_name') }}"
+                            b-err="{{ $errors->has('first_name') }}"
+                            b-error="{{ $errors->first('first_name') }}">
+                        </now-input>
+                        <!-- Last Name -->
+                        <now-input class="form-group-no-border {{ $errors->has('last_name') ? ' has-danger' : '' }}" 
+                            b-icon="ion-ios-person" 
+                            b-placeholder="Last Name"
+                            b-name="last_name"
+                            b-type="text"
+                            b-value="{{ old('last_name') }}"
+                            b-err="{{ $errors->has('last_name') }}"
+                            b-error="{{ $errors->first('last_name') }}">
+                        </now-input>
+                        <!-- Email -->
+                        <now-input class="form-group-no-border {{ $errors->has('email') ? ' has-danger' : '' }}" 
+                            b-icon="ion-email" 
+                            b-placeholder="Email Address"
+                            b-name="email"
+                            b-type="email"
+                            b-value="{{ old('email') }}"
+                            b-err="{{ $errors->has('email') }}"
+                            b-error="{{ $errors->first('email') }}">
+                        </now-input>
+                        <!-- Phone -->
+                        <now-input class="form-group-no-border {{ $errors->has('phone') ? ' has-danger' : '' }}" 
+                            b-icon="ion-android-call" 
+                            b-placeholder="Phone"
+                            b-name="phone"
+                            b-type="text"
+                            b-value="{{ old('phone') }}"
+                            b-err="{{ $errors->has('phone') }}"
+                            b-error="{{ $errors->first('phone') }}">
+                        </now-input>
+                        <!-- Password -->
+                        <now-input class="form-group-no-border {{ $errors->has('password') ? ' has-danger' : '' }}" 
+                            b-icon="ion-locked" 
+                            b-placeholder="Password"
+                            b-name="password"
+                            b-type="password"
+                            b-value="{{ old('password') }}"
+                            b-err="{{ $errors->has('password') }}"
+                            b-error="{{ $errors->first('password') }}">
+                        </now-input>  
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Phone</label>
-
-                            <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="name" value="{{ old('phone') }}" required autofocus>
-
-                                @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                        <!-- Confirm Password -->
+                        <now-input class="form-group-no-border {{ $errors->has('password_confirmation') ? ' has-danger' : '' }}" 
+                            b-icon="ion-unlocked" 
+                            b-placeholder="Confirm Password"
+                            b-name="password_confirmation"
+                            b-type="password"
+                            b-value="{{ old('password_confirmation') }}"
+                            b-err="{{ $errors->has('password_confimration') }}"
+                            b-error="{{ $errors->first('password_confirmation') }}">
+                        </now-input>            
+                    </div>
+                    <div class="footer text-center">
+                        <button type="submit" class="btn btn-neutral btn-round btn-lg">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </template>
+        </bootstrap-card>
     </div>
 @endsection

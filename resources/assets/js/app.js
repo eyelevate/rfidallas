@@ -10,6 +10,21 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Wrappers
+window.Event = new class {
+	constructor() {
+		this.vue = new Vue();
+	}
+
+	fire(event, data = null) { // $emit
+		this.vue.$emit(event,data);
+	}
+
+	listen(event, callback) { // $on
+		this.vue.$on(event,callback);
+	}
+}
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18,10 +33,14 @@ window.Vue = require('vue');
 
 // Vue.component('example', require('./components/Example.vue'));
 
+// Bootsrap components
+Vue.component('bootstrap-card',require('./components/bootstrap/Card.vue'));
+Vue.component('bootstrap-input',require('./components/bootstrap/Input.vue'));
+
+// Now-ui-kit Components
+Vue.component('now-input',require('./components/now-ui-kit/FormInput.vue'));
+
 // Passport Components
 Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens',require('./components/passport/PersonalAccessTokens.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });

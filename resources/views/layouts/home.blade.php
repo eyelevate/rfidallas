@@ -22,7 +22,8 @@
 
 <body class="index-page">
     <!-- Navbar -->
-    @include('layouts.partials.home-navbar')    
+    @include('layouts.partials.home-navbar')   
+
     <!-- End Navbar -->
     <div class="wrapper">
         <!-- Start header -->
@@ -32,7 +33,7 @@
         <!-- End header -->
         <!-- Start Content -->
         <div class="main">
-            @include('flash::message')
+            
             @yield('content')
         </div>
         <!-- End Content -->

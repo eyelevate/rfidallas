@@ -1,14 +1,23 @@
 @extends('layouts.frontend')
 
+@section('styles')
+
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{ mix('/js/views/auth/login.js') }}"></script>
+@endsection
+
 @section('header')
 <br/><br/>
 @endsection
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="card card-signup" data-background-color="orange">
+<div class="row">
+    <bootstrap-card class="card-signup" data-background-color="orange">
+        <template slot="header"></template>
+        <template slot="body">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
                 <div class="header header-primary text-center">
@@ -26,42 +35,32 @@
                     </div>
                 </div>
                 <div class="content">
+                <!-- Email -->
+                    <now-input class="form-group-no-border {{ $errors->has('email') ? ' has-danger' : '' }}" 
+                        b-icon="ion-email" 
+                        b-placeholder="Email Address"
+                        b-name="email"
+                        b-type="email"
+                        b-value="{{ old('email') }}"
+                        b-err="{{ $errors->has('email') }}"
+                        b-error="{{ $errors->first('email') }}">
+                    </now-input>
 
-                    <div class="input-group form-group-no-border {{ $errors->has('email') ? ' has-error' : '' }}">
-                        <span class="input-group-addon">
-                            <i class="now-ui-icons ui-1_email-85" style="padding-right:3px;"></i>
-                        </span>
-                        <input id="email" placeholder="Email Address" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                    </div>           
-                    @if ($errors->has('email'))
-                        <div class="col-12">
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        </div>
-                    @endif
-                    
-
-                    <div class="input-group form-group-no-border {{ $errors->has('password') ? ' has-error' : '' }}">
-                        <span class="input-group-addon" style="padding-right:3px;">
-                            <i class="now-ui-icons ui-1_lock-circle-open"></i>
-                        </span>
-                        <input id="password" placeholder="Password" type="password" class="form-control" name="password" required>
-                    </div>
-                    @if ($errors->has('password'))
-                        <div class="col-12">
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        </div>
-                    @endif
+                    <!-- Password -->
+                    <now-input class="form-group-no-border {{ $errors->has('password') ? ' has-danger' : '' }}" 
+                        b-icon="ion-locked" 
+                        b-placeholder="Password"
+                        b-name="password"
+                        b-type="password"
+                        b-value="{{ old('password') }}"
+                        b-err="{{ $errors->has('password') }}"
+                        b-error="{{ $errors->first('password') }}">
+                    </now-input>
 
                     <div class="col-12">
-
                         <label>
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                         </label>
-  
                     </div>
                     
                 </div>
@@ -75,7 +74,8 @@
                     </a>
                 </div>
             </form>
-        </div>
-    </div>
+        </template>
+    </bootstrap-card>
 </div>
+
 @endsection

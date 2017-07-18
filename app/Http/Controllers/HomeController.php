@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,8 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+
         return view('home.index');
     }
 
@@ -34,5 +36,18 @@ class HomeController extends Controller
     public function dashboard()
     {
         return view('home.dashboard');
+    }
+
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            flash()->message('Successfully logged out!')->success();
+        } else {
+            flash()->message('Warning: no instances of a logged in session remaining. Please try logging in again.')->warning();
+        }
+
+        return back();
+        
     }
 }

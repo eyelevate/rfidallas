@@ -3,12 +3,14 @@
     "/css/app.css": "/css/app.css",
     "/css/themes/now-ui-kit/now-ui-kit.css": "/css/themes/now-ui-kit/now-ui-kit.css",
     "/css/themes/coreui/style.css": "/css/themes/coreui/style.css",
+    "/css/themes/ionicons/ionicons.css": "/css/themes/ionicons/ionicons.css",
+    "/css/views/admins/general.css": "/css/views/admins/general.css",
+    "/js/views/auth/register.js": "/js/views/auth/register.js",
+    "/js/views/auth/login.js": "/js/views/auth/login.js",
+    "/js/views/admins/login.js": "/js/views/admins/login.js",
     "/js/themes/now-ui-kit/now-ui-kit.js": "/js/themes/now-ui-kit/now-ui-kit.js",
     "/js/themes/coreui/main.js": "/js/themes/coreui/main.js",
     "/js/themes/coreui/coreui.js": "/js/themes/coreui/coreui.js",
     "/js/themes/now-ui-kit/combined.js": "/js/themes/now-ui-kit/combined.js",
-    "/js/themes/coreui/dashboard-plugins.js": "/js/themes/coreui/dashboard-plugins.js",
-    "/css/themes/coreui/font-awesome.css.map": "/css/themes/coreui/font-awesome.css.map",
-    "/css/themes/coreui/font-awesome.min.css": "/css/themes/coreui/font-awesome.min.css",
-    "/css/themes/coreui/simple-line-icons.css": "/css/themes/coreui/simple-line-icons.css"
+    "/js/themes/coreui/dashboard-plugins.js": "/js/themes/coreui/dashboard-plugins.js"
 }
