@@ -42,6 +42,7 @@ mix.sass('resources/assets/fonts/themes/ionicons/scss/ionicons.scss','public/css
 
 // Admins
 mix.js('resources/assets/js/views/admins/login.js','public/js/views/admins')
+   .js('resources/assets/js/views/admins/general.js','public/js/views/admins')
    .sass('resources/assets/sass/views/admins/general.scss','public/css/views/admins');
 
 // Auth

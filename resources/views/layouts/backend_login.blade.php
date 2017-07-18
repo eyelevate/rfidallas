@@ -59,6 +59,7 @@
 
 	        <!-- Main content -->
 	        <main class="main" style="margin-left:0px;">
+                @include('flash::message')
 	            @yield('content')
 	        </main>
 
@@ -80,6 +81,7 @@
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/coreui.js') }}"></script>
     <!-- Custom scripts required by this view -->
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/views/admins/general.js') }}"></script>
     <!-- Page specific scripts -->
 	@yield('scripts')
 

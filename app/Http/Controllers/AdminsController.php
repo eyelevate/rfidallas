@@ -5,8 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+
 class AdminsController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +30,9 @@ class AdminsController extends Controller
 
     public function login()
     {
+        if (Auth::check()) {
+            return redirect()->route('admins_index');
+        }
         return view('admins.login');
     }
 
@@ -26,14 +40,32 @@ class AdminsController extends Controller
     {
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-           flash()->message('Successfully logged in as '.Auth::user()->email.'!')->success();
-           return redirect()->route('admins_index');
+            if (Auth::user()->role_id > 3) {
+                flash()->message('Successfully logged in, however, you are not authorized to view this page.')->warning();
+                return redirect()->route('home');
+            } else {
+                flash()->message('Successfully logged in as '.Auth::user()->email.'!')->success();
+                return (session()->has('intended_url')) ? redirect()->to(session()->get('intended_url')) : redirect()->intended('/admins');
+            }
+           
         } else {
            flash()->message('Could not log you in please try again..')->error();
            Auth::logout();
            return redirect()->route('admins_login'); 
         }
 
+    }
+
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            flash()->message('Successfully logged out!')->success();
+        } else {
+            flash()->message('Warning: no instances of a logged in session remaining. Please try logging in again.')->warning();
+        }
+
+        return redirect()->route('admins_login');
     }
 
     /**

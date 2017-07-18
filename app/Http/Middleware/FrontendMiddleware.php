@@ -20,7 +20,7 @@ class FrontendMiddleware
     public function handle($request, Closure $next)
     {
         if (!Auth::check()) {
-
+            dd('you are not allowed to view this page');
             // Check where the user came from, if from admins then redirect accordingly
             // Set intended page
             Session::put('intended_url',$request->url());

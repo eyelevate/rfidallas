@@ -60,29 +60,24 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 239);
+/******/ 	return __webpack_require__(__webpack_require__.s = 237);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 239:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(240);
+module.exports = __webpack_require__(238);
 
 
 /***/ }),
 
-/***/ 240:
+/***/ 238:
 /***/ (function(module, exports) {
 
-var app = new Vue({
-	el: '#bootstrap-root',
-	data: {},
-	methods: {},
-	computed: {},
-	created: function created() {},
-	mounted: function mounted() {}
+$(document).ready(function () {
+	$('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 });
 
 /***/ })
