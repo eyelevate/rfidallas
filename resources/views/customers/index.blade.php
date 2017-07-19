@@ -2,17 +2,12 @@
 
 
 @section('styles')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/cr-1.3.3/fc-3.2.2/fh-3.1.2/kt-2.2.1/r-2.1.1/rg-1.0.0/rr-1.2.0/sc-1.4.2/se-1.2.2/datatables.min.css"/>
-{{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css"> --}}
+
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/cr-1.3.3/fc-3.2.2/fh-3.1.2/kt-2.2.1/r-2.1.1/rg-1.0.0/rr-1.2.0/sc-1.4.2/se-1.2.2/datatables.min.js"></script>
 <script type="text/javascript" src="{{ mix('/js/views/admins/index.js') }}"></script>
-<script type="text/javascript">
-	$('#example').DataTable();
 
-</script>
 @endsection
 
 @section('content')
@@ -22,11 +17,12 @@
 		<template slot="body">
 			<div class="row">
 				<bootstrap-table
-					title="Demo Table"
-					:columns="columns"
-					:rows="rows"
+					title="Customer Search Results"
+					:columns="{{ $columns }}"
+					:rows="{{ $customers }}"
 					:paginate="true"
-					:lineNumbers="true"/>
+					:global-search="true"
+					:line-numbers="true"/>
 				</bootstrap-table>
 		    </div>
 		</template>

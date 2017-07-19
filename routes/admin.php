@@ -53,10 +53,11 @@ Route::group(['middleware' => ['check:3']], function () {
 	// Customers
 	Route::get('/customers','CustomersController@index')->name('customers_index');
 	Route::get('/customers/create','CustomersController@create')->name('customers_create');
+	Route::get('/customers/destroy/{customer}','CustomersController@show')->name('customers_destroy');
 	Route::post('/customers/search','CustomersController@search')->name('customers_search');
 	Route::post('/customers/store','CustomersController@store')->name('customers_store');
-	Route::get('/customers/show/{vendor}','CustomersController@show')->name('customers_show');
-	Route::get('/customers/edit/{vendor}','CustomersController@edit')->name('customers_edit');
+	Route::get('/customers/show/{customer}','CustomersController@show')->name('customers_show');
+	Route::get('/customers/edit/{customer}','CustomersController@edit')->name('customers_edit');
 	Route::post('/customers/update/{vendor}','CustomersController@update')->name('customers_update');
 
 	// Devices

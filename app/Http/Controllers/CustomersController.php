@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Schema;
+use App\User;
 
 class CustomersController extends Controller
 {
@@ -11,9 +13,11 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('customers.index');
+        $columns = $user->prepareTableColumns();
+        $customers = $user->prepareTableRows($user->all());
+        return view('customers.index', compact(['columns','customers']));
     }
 
     /**

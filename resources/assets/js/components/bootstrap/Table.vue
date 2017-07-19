@@ -1,57 +1,58 @@
 <template>
-  <div class="good-table table-responsive">
+  <div class="good-table">
     <div class="table-header clearfix">
       <h2 v-if="title" class="table-title pull-left">{{title}}</h2>
       <div class="actions pull-right">
       </div>
     </div>
-    <table ref="table" :class="styleClass">
-      <thead>
-        <tr v-if="globalSearch && externalSearchQuery == null">
-          <td :colspan="lineNumbers ? columns.length + 1: columns.length">
-            <div class="global-search">
-              <span class="global-search-icon">
-              <img src="/img/themes/vue-good-table/search_icon.png" alt="Search Icon" />
-              </span>
-              <input type="text" class="form-control global-search-input" :placeholder="globalSearchPlaceholder" v-model="globalSearchTerm" @keyup.enter="searchTable()" />
-            </div>
-          </td>
+    <div class="table-responsive">
+      <table ref="table" :class="styleClass">
+        <thead>
+          <tr v-if="globalSearch && externalSearchQuery == null">
+            <td :colspan="lineNumbers ? columns.length + 1: columns.length">
+              <div class="global-search">
+                <span class="global-search-icon">
+                <img src="/img/themes/vue-good-table/search_icon.png" alt="Search Icon" />
+                </span>
+                <input type="text" class="form-control global-search-input" :placeholder="globalSearchPlaceholder" v-model="globalSearchTerm" @keyup.enter="searchTable()" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th v-if="lineNumbers" class="line-numbers"></th>
+            <th v-for="(column, index) in columns"
+            @click="sort(index)"
+            :class="columnHeaderClass(column, index)"
+            :style="{width: column.width ? column.width : 'auto'}"
+            v-if="!column.hidden">
+            <span>{{column.label}}</span>
+          </th>
+          <slot name="thead-tr"></slot>
         </tr>
-        <tr>
-          <th v-if="lineNumbers" class="line-numbers"></th>
-          <th v-for="(column, index) in columns"
-          @click="sort(index)"
-          :class="columnHeaderClass(column, index)"
-          :style="{width: column.width ? column.width : 'auto'}"
-          v-if="!column.hidden">
-          <span>{{column.label}}</span>
-        </th>
-        <slot name="thead-tr"></slot>
-      </tr>
-      <tr v-if="hasFilterRow">
-        <th v-if="lineNumbers"></th>
-        <th v-for="(column, index) in columns">
-          <input v-if="column.filterable" type="text" class="form-control" v-bind:placeholder="'Filter ' + column.label"
-          v-bind:value="columnFilters[column.field]"
-          v-on:input="updateFilters(column, $event.target.value)">
-        </th>
-      </tr>
-    </thead>
+        <tr v-if="hasFilterRow">
+          <th v-if="lineNumbers"></th>
+          <th v-for="(column, index) in columns">
+            <input v-if="column.filterable" type="text" class="form-control" v-bind:placeholder="'Filter ' + column.label"
+            v-bind:value="columnFilters[column.field]"
+            v-on:input="updateFilters(column, $event.target.value)">
+          </th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr v-for="(row, index) in paginated" :class="onClick ? 'clickable' : ''" @click="click(row, index)">
-        <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
-        <slot name="table-row" :row="row" :index="index">
-          <td v-for="(column, i) in columns" :class="getDataStyle(i, 'td')" v-if="!column.hidden">
-            <span v-if="!column.html">{{ collectFormatted(row, column) }}</span>
-            <span v-if="column.html" v-html="collect(row, column.field)"></span>
-          </td>
-        </slot>
-      </tr>
+      <tbody>
+        <tr v-for="(row, index) in paginated" :class="onClick ? 'clickable' : ''" @click="click(row, index)">
+          <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
+          <slot name="table-row" :row="row" :index="index">
+            <td v-for="(column, i) in columns" :class="getDataStyle(i, 'td')" v-if="!column.hidden">
+              <span v-if="!column.html">{{ collectFormatted(row, column) }}</span>
+              <span v-if="column.html" v-html="collect(row, column.field)"></span>
+            </td>
+          </slot>
+        </tr>
 
-    </tbody>
-  </table>
-
+      </tbody>
+    </table>
+    </div>
   <div class="table-footer clearfix" v-if="paginate">
     <div class="datatable-length pull-left">
       <label>
