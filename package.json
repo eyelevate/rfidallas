@@ -19,6 +19,9 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "chart.js": "^2.6.0"
+    "chart.js": "^2.6.0",
+    "datatables.net": "^1.10.15",
+    "vue-good-table": "^1.9.0",
+    "vue2-bootstrap-table2": "^1.1.6"
   }
 }

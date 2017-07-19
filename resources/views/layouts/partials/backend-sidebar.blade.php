@@ -2,43 +2,42 @@
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+                <a class="nav-link" href="{{ route('admins_index') }}"><i class="icon-speedometer"></i> Dashboard</a>
+            </li>
+
+            <li class="nav-item">
+                <form class="form-horizontal" method="POST" action="{{ route('customers_search') }}">
+                    {{ csrf_field() }}
+                    <input id="" placeholder="search.." type="text" class="form-control" name="search" value="{{ old('search') }}" required autofocus>
+                </form>
             </li>
 
             <li class="nav-title">
-                UI Elements
+                Menu
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Components</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-people"></i> Users</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="components-buttons.html"><i class="icon-puzzle"></i> Buttons</a>
+                        <a class="nav-link" href="{{ route('customers_index') }}"><i class="icon-user"></i> Customers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i> Social Buttons</a>
+                        <a class="nav-link" href="{{ route('employees_index') }}"><i class="icon-user"></i> Employees</a>
                     </li>
+                    @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1)
                     <li class="nav-item">
-                        <a class="nav-link" href="components-cards.html"><i class="icon-puzzle"></i> Cards</a>
+                        <a class="nav-link" href="{{ route('managers_index') }}"><i class="icon-user"></i> Managers</a>
                     </li>
+                    @endif
+                    @if(Auth::user()->role_id == 1)
                     <li class="nav-item">
-                        <a class="nav-link" href="components-forms.html"><i class="icon-puzzle"></i> Forms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-modals.html"><i class="icon-puzzle"></i> Modals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-switches.html"><i class="icon-puzzle"></i> Switches</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-tables.html"><i class="icon-puzzle"></i> Tables</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-tabs.html"><i class="icon-puzzle"></i> Tabs</a>
-                    </li>
+                        <a class="nav-link" href="{{ route('partners_index') }}"><i class="icon-user"></i> Partners</a>
+                    </li>                
+                    @endif
                 </ul>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> Setup</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome</a>
@@ -49,10 +48,10 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="badge badge-info">NEW</span></a>
+                <a class="nav-link" href="widgets.html"><i class="icon-key"></i> Accessibility </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Charts</a>
+                <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Reports</a>
             </li>
             <li class="divider"></li>
             <li class="nav-title">

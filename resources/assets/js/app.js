@@ -36,6 +36,7 @@ window.Event = new class {
 // Bootsrap components
 Vue.component('bootstrap-card',require('./components/bootstrap/Card.vue'));
 Vue.component('bootstrap-input',require('./components/bootstrap/Input.vue'));
+Vue.component('bootstrap-table',require('./components/bootstrap/Table.vue'));
 
 // Now-ui-kit Components
 Vue.component('now-input',require('./components/now-ui-kit/FormInput.vue'));

@@ -54,3 +54,7 @@ if (token) {
 
 // Chartjs
 require('chart.js');
+
+// Vue Good Table
+require('vue-good-table');
+

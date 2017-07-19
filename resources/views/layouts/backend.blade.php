@@ -30,6 +30,7 @@
     <!-- Main styles for this application -->
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/themes/coreui/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/views/admins/general.css') }}">
+    @yield('styles')
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -82,12 +83,13 @@
     <!-- Bootstrap and necessary plugins -->
     <!--   Core JS Files   -->
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ mix('/js/themes/coreui/dashboard-plugins.js') }}"></script>
-    <script type="text/javascript" src="{{ mix('/js/themes/coreui/coreui.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ mix('/js/themes/coreui/dashboard-plugins.js') }}"></script> --}}
+    
     <!-- Custom scripts required by this view -->
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script>
     <script type="text/javascript" src="{{ mix('/js/views/admins/general.js') }}"></script>
     <!-- Page specific scripts -->
+    <script type="text/javascript" src="{{ mix('/js/themes/coreui/coreui.js') }}"></script>
     @yield('scripts')
 </body>
 

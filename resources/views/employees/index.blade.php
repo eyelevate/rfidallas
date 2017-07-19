@@ -1,4 +1,8 @@
-@extends('')
+@extends('layouts.backend')
+
+@section('scripts')
+
+@endsection
 
 @section('content')
 

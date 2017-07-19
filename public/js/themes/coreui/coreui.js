@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 231);
+/******/ 	return __webpack_require__(__webpack_require__.s = 260);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 231:
+/***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(232);
+module.exports = __webpack_require__(261);
 
 
 /***/ }),
 
-/***/ 232:
+/***/ 261:
 /***/ (function(module, exports) {
 
 /*****
@@ -108,7 +108,6 @@ $(document).ready(function ($) {
 
   // Add class .active to current link
   $.navigation.find('a').each(function () {
-
     var cUrl = String(window.location).split('?')[0];
 
     if (cUrl.substr(cUrl.length - 1) == '#') {
@@ -125,8 +124,7 @@ $(document).ready(function ($) {
   });
 
   // Dropdown Menu
-  $.navigation.on('click', 'a', function (e) {
-
+  $('.nav li a').click(function (e) {
     if ($.ajaxLoad) {
       e.preventDefault();
     }
@@ -145,7 +143,8 @@ $(document).ready(function ($) {
       if (timesRun === 5) {
         clearInterval(interval);
       }
-      window.dispatchEvent(new Event('resize'));
+      $(this).trigger("resize");
+      // window.dispatchEvent(new Event('resize'));
     }, 62.5);
   }
 

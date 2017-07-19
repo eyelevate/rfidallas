@@ -35,8 +35,12 @@ mix.js('resources/assets/js/themes/coreui/coreui.js', 'public/js/themes/coreui')
    .copyDirectory('resources/assets/fonts/themes/coreui', 'public/fonts/themes/coreui')
    .sass('resources/assets/sass/themes/coreui/style.scss','public/css/themes/coreui');
 
+// Ionicons
 mix.sass('resources/assets/fonts/themes/ionicons/scss/ionicons.scss','public/css/themes/ionicons');
 
+
+// Vue good tables
+mix.copyDirectory('resources/assets/img/themes/vue-good-table','public/img/themes/vue-good-table');
 
 // Page Specific Mix
 

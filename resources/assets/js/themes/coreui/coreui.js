@@ -1,8 +1,8 @@
 /*****
 * CONFIGURATION
 */
-    //Main navigation
-    $.navigation = $('nav > ul.nav');
+  //Main navigation
+  $.navigation = $('nav > ul.nav');
 
   $.panelIconOpened = 'icon-arrow-up';
   $.panelIconClosed = 'icon-arrow-down';
@@ -30,7 +30,6 @@ $(document).ready(function($){
 
   // Add class .active to current link
   $.navigation.find('a').each(function(){
-
     var cUrl = String(window.location).split('?')[0];
 
     if (cUrl.substr(cUrl.length - 1) == '#') {
@@ -47,8 +46,7 @@ $(document).ready(function($){
   });
 
   // Dropdown Menu
-  $.navigation.on('click', 'a', function(e){
-
+  $('.nav li a').click(function(e){
     if ($.ajaxLoad) {
       e.preventDefault();
     }
@@ -68,7 +66,8 @@ $(document).ready(function($){
       if(timesRun === 5){
         clearInterval(interval);
       }
-      window.dispatchEvent(new Event('resize'));
+      $(this).trigger("resize");
+      // window.dispatchEvent(new Event('resize'));
     }, 62.5);
   }
 
