@@ -56,6 +56,10 @@ class User extends Authenticatable
 
         $columns =  [
             [
+                'label'=>'ID',
+                'field'=> 'id',
+                'filterable'=> true
+            ], [
                 'label'=>'First',
                 'field'=> 'first_name',
                 'filterable'=> true
@@ -76,13 +80,13 @@ class User extends Authenticatable
                 'field'=> 'created_at',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MMM Do YY'
+                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
             ], [
                 'label'=>'Updated',
                 'field'=> 'updated_at',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ss a'
+                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
             ], [
                 'label'=>'Action',
                 'field'=> 'action',

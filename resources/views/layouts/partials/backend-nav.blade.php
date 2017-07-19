@@ -28,7 +28,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <img src="/img/themes/coreui/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="d-md-down-none">admin</span>
+            <span class="d-md-down-none">{{ Auth::user()->email }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
 
