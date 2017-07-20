@@ -25,9 +25,9 @@ Route::group(['middleware' => ['check:1']], function () {
 	Route::get('/partners/create','PartnersController@create')->name('partners_create');
 	Route::delete('/partners/{partner}','PartnersController@destroy')->name('partners_destroy');
 	Route::post('/partners/store','PartnersController@store')->name('partners_store');
-	Route::get('/partners/{vendor}/show','PartnersController@show')->name('partners_show');
-	Route::get('/partners/{vendor}/edit','PartnersController@edit')->name('partners_edit');
-	Route::patch('/partners/{vendor}','PartnersController@update')->name('partners_update');
+	Route::get('/partners/{partner}/show','PartnersController@show')->name('partners_show');
+	Route::get('/partners/{partner}/edit','PartnersController@edit')->name('partners_edit');
+	Route::patch('/partners/{partner}','PartnersController@update')->name('partners_update');
 
 	// Managers
 	Route::get('/managers','ManagersController@index')->name('managers_index');

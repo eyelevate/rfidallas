@@ -20,16 +20,14 @@
 	<bootstrap-card use-header="true" use-body="true" use-footer="true">
 		<template slot="header">Customer Search Results</template>
 		<template slot="body">
-			<div class="row">
-				<bootstrap-table
-					title="Customer Search Results"
-					:columns="{{ $columns }}"
-					:rows="{{ $rows }}"
-					:paginate="true"
-					:global-search="true"
-					:line-numbers="true"/>
-				</bootstrap-table>
-		    </div>
+			<bootstrap-table
+				title="Customer Search Results"
+				:columns="{{ $columns }}"
+				:rows="{{ $rows }}"
+				:paginate="true"
+				:global-search="true"
+				:line-numbers="true"/>
+			</bootstrap-table>
 		</template>
 		<template slot="footer">
 			<a href="{{ route('customers_create') }}" class="btn btn-primary">Add Customer</a>

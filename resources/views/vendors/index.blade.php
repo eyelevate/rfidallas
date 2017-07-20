@@ -16,7 +16,7 @@
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
     <li class="breadcrumb-item active">Vendors</li>
 </ol>
-<div class="container-fluid" style="padding-top:25px;">
+<div class="container-fluid">
 	
 		<bootstrap-card use-header="true" use-body="true" use-footer="true">
 			<template slot="header">Vendors Search Results</template>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tax;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TaxesController extends Controller
 {
@@ -12,9 +13,11 @@ class TaxesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Tax $tax)
     {
-        //
+        $current= Tax::latest()->first();
+        $history = Tax::orderBy('id','desc')->get();
+        return view('taxes.index',compact(['current','history']));
     }
 
     /**
@@ -24,7 +27,7 @@ class TaxesController extends Controller
      */
     public function create()
     {
-        //
+        return view('taxes.create');
     }
 
     /**
@@ -35,51 +38,20 @@ class TaxesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validate the form
+        $this->validate(request(), [
+            'rate' => 'required|numeric'
+        ]);
+
+        // Create and save the user.
+        Tax::create(request()->all());
+
+        // Redirect to the previous page.
+
+        flash('You successfully updated the tax rate.')->success();
+        
+        return redirect()->route('taxes_index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tax  $tax
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tax $tax)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tax  $tax
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tax $tax)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tax  $tax
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tax $tax)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tax  $tax
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tax $tax)
-    {
-        //
-    }
 }

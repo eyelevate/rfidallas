@@ -16,20 +16,20 @@
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
     <li class="breadcrumb-item active">Partners</li>
 </ol>
-<div class="container-fluid" style="padding-top:25px;">
+<div class="container-fluid">
+
 	<bootstrap-card use-header="true" use-body="true" use-footer="true">
 		<template slot="header">Partners Search Results</template>
 		<template slot="body">
-			<div class="row">
-				<bootstrap-table
-					title="Partners Search Results"
-					:columns="{{ $columns }}"
-					:rows="{{ $rows }}"
-					:paginate="true"
-					:global-search="true"
-					:line-numbers="true"/>
-				</bootstrap-table>
-		    </div>
+			<bootstrap-table
+				title="Partners Search Results"
+				:columns="{{ $columns }}"
+				:rows="{{ $rows }}"
+				:paginate="true"
+				:global-search="true"
+				:line-numbers="true"/>
+			</bootstrap-table>
+
 		</template>
 		<template slot="footer">
 			<a href="{{ route('partners_create') }}" class="btn btn-primary">Add Partner</a>

@@ -1,11 +1,12 @@
 <template>
   <div class="good-table">
+    <div class="table-responsive">
     <div class="table-header clearfix">
       <h2 v-if="title" class="table-title pull-left">{{title}}</h2>
       <div class="actions pull-right">
       </div>
     </div>
-    <div class="table-responsive">
+  
       <table ref="table" :class="styleClass">
         <thead>
           <tr v-if="globalSearch && externalSearchQuery == null">
@@ -52,7 +53,7 @@
 
       </tbody>
     </table>
-    </div>
+    
   <div class="table-footer clearfix" v-if="paginate">
     <div class="datatable-length pull-left">
       <label>
@@ -79,6 +80,7 @@
         <span class="chevron right"></span>
       </a>
     </div>
+  </div>
   </div>
 </div>
 </template>
