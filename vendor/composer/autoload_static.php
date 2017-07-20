@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
+class ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -12,8 +12,8 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -362,6 +362,7 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'App\\DeviceHistory' => __DIR__ . '/../..' . '/app/DeviceHistory.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Fee' => __DIR__ . '/../..' . '/app/Fee.php',
+        'App\\Http\\Controllers\\AdminsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminsController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -369,17 +370,22 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'App\\Http\\Controllers\\CardsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CardsController.php',
         'App\\Http\\Controllers\\CompaniesController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompaniesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CustomersController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomersController.php',
         'App\\Http\\Controllers\\DevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/DevicesController.php',
+        'App\\Http\\Controllers\\EmployeesController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeesController.php',
         'App\\Http\\Controllers\\FeesController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeesController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ManagersController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManagersController.php',
+        'App\\Http\\Controllers\\PartnersController' => __DIR__ . '/../..' . '/app/Http/Controllers/PartnersController.php',
         'App\\Http\\Controllers\\PlansController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlansController.php',
         'App\\Http\\Controllers\\ServicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicesController.php',
         'App\\Http\\Controllers\\TaxesController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaxesController.php',
         'App\\Http\\Controllers\\TransactionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TransactionsController.php',
         'App\\Http\\Controllers\\VendorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckRole' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckRole.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
-        'App\\Http\\Middleware\\FrontendMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/FrontendMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
@@ -3697,10 +3703,10 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd::$classMap;
 
         }, null, ClassLoader::class);
     }

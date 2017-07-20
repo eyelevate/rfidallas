@@ -28,6 +28,7 @@ class CustomersController extends Controller
     public function create()
     {
         //
+        return view('customers.create');
     }
 
     public function search(Request $request)
@@ -43,7 +44,32 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //Validate the form
+        $this->validate(request(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        // Create and save the user.
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // Redirect to the previous page.
+
+        flash('You successfully created a new customer.')->success()->important();
+        
+        return redirect()->route('customers_index');
+
+
     }
 
     /**
@@ -63,9 +89,11 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $customer)
     {
-        //
+        
+
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -77,7 +105,45 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        //Validate the form
+        $this->validate(request(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255',
+            'password' => 'string|min:6|confirmed',
+        ]);
+
+        //Check if the user enters the password.
+        if (trim($request->password) == '')
+        {
+            $user->save([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email
+            ]);
+        }
+        else
+        {
+            $user->save([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        // Create and save the user.
+
+
+        // Redirect to the previous page.
+        flash('You successfully updated the customer.')->success()->important();
+        
+        return redirect()->route('customers_index');
+
     }
 
     /**

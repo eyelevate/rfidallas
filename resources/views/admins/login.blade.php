@@ -25,6 +25,7 @@
                 <!-- Email -->
                     <bootstrap-input class="form-group-no-border {{ $errors->has('email') ? ' has-danger' : '' }}" 
                         b-icon="ion-email" 
+                        use-icon= "true"
                         b-placeholder="Email Address"
                         b-name="email"
                         b-type="email"
@@ -38,6 +39,7 @@
                     <!-- Password -->
                     <bootstrap-input class="form-group-no-border {{ $errors->has('password') ? ' has-danger' : '' }}" 
                         b-icon="ion-locked" 
+                        use-icon= "true"
                         b-placeholder="Password"
                         b-name="password"
                         b-type="password"

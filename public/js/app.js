@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 134);
+/******/ 	return __webpack_require__(__webpack_require__.s = 133);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1896,7 +1896,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(191)("./" + name);
+            __webpack_require__(190)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -4541,7 +4541,7 @@ return hooks;
 
 
 var bind = __webpack_require__(10);
-var isBuffer = __webpack_require__(142);
+var isBuffer = __webpack_require__(141);
 
 /*global toString:true*/
 
@@ -5368,7 +5368,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(212)
+var listToStyles = __webpack_require__(211)
 
 /*
 type StyleObject = {
@@ -5577,7 +5577,7 @@ function applyToTag (styleElement, obj) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(145);
+var normalizeHeaderName = __webpack_require__(144);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -5667,13 +5667,13 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(144)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(143)))
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var startOfWeek = __webpack_require__(219)
+var startOfWeek = __webpack_require__(232)
 
 /**
  * @category ISO Week Helpers
@@ -5781,12 +5781,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(146);
-var buildURL = __webpack_require__(148);
-var parseHeaders = __webpack_require__(149);
-var isURLSameOrigin = __webpack_require__(150);
+var settle = __webpack_require__(145);
+var buildURL = __webpack_require__(147);
+var parseHeaders = __webpack_require__(148);
+var isURLSameOrigin = __webpack_require__(149);
 var createError = __webpack_require__(12);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(151);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(150);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -5883,7 +5883,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(152);
+      var cookies = __webpack_require__(151);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -5967,7 +5967,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(147);
+var enhanceError = __webpack_require__(146);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -6028,8 +6028,8 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* MIT license */
-var convert = __webpack_require__(163);
-var string = __webpack_require__(165);
+var convert = __webpack_require__(162);
+var string = __webpack_require__(164);
 
 var Color = function (obj) {
 	if (obj instanceof Color) {
@@ -17624,340 +17624,6 @@ module.exports = isDate
 /* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getDayOfYear = __webpack_require__(214)
-var getISOWeek = __webpack_require__(218)
-var getISOYear = __webpack_require__(133)
-var parse = __webpack_require__(2)
-var isValid = __webpack_require__(221)
-var enLocale = __webpack_require__(222)
-
-/**
- * @category Common Helpers
- * @summary Format the date.
- *
- * @description
- * Return the formatted date string in the given format.
- *
- * Accepted tokens:
- * | Unit                    | Token | Result examples                  |
- * |-------------------------|-------|----------------------------------|
- * | Month                   | M     | 1, 2, ..., 12                    |
- * |                         | Mo    | 1st, 2nd, ..., 12th              |
- * |                         | MM    | 01, 02, ..., 12                  |
- * |                         | MMM   | Jan, Feb, ..., Dec               |
- * |                         | MMMM  | January, February, ..., December |
- * | Quarter                 | Q     | 1, 2, 3, 4                       |
- * |                         | Qo    | 1st, 2nd, 3rd, 4th               |
- * | Day of month            | D     | 1, 2, ..., 31                    |
- * |                         | Do    | 1st, 2nd, ..., 31st              |
- * |                         | DD    | 01, 02, ..., 31                  |
- * | Day of year             | DDD   | 1, 2, ..., 366                   |
- * |                         | DDDo  | 1st, 2nd, ..., 366th             |
- * |                         | DDDD  | 001, 002, ..., 366               |
- * | Day of week             | d     | 0, 1, ..., 6                     |
- * |                         | do    | 0th, 1st, ..., 6th               |
- * |                         | dd    | Su, Mo, ..., Sa                  |
- * |                         | ddd   | Sun, Mon, ..., Sat               |
- * |                         | dddd  | Sunday, Monday, ..., Saturday    |
- * | Day of ISO week         | E     | 1, 2, ..., 7                     |
- * | ISO week                | W     | 1, 2, ..., 53                    |
- * |                         | Wo    | 1st, 2nd, ..., 53rd              |
- * |                         | WW    | 01, 02, ..., 53                  |
- * | Year                    | YY    | 00, 01, ..., 99                  |
- * |                         | YYYY  | 1900, 1901, ..., 2099            |
- * | ISO week-numbering year | GG    | 00, 01, ..., 99                  |
- * |                         | GGGG  | 1900, 1901, ..., 2099            |
- * | AM/PM                   | A     | AM, PM                           |
- * |                         | a     | am, pm                           |
- * |                         | aa    | a.m., p.m.                       |
- * | Hour                    | H     | 0, 1, ... 23                     |
- * |                         | HH    | 00, 01, ... 23                   |
- * |                         | h     | 1, 2, ..., 12                    |
- * |                         | hh    | 01, 02, ..., 12                  |
- * | Minute                  | m     | 0, 1, ..., 59                    |
- * |                         | mm    | 00, 01, ..., 59                  |
- * | Second                  | s     | 0, 1, ..., 59                    |
- * |                         | ss    | 00, 01, ..., 59                  |
- * | 1/10 of second          | S     | 0, 1, ..., 9                     |
- * | 1/100 of second         | SS    | 00, 01, ..., 99                  |
- * | Millisecond             | SSS   | 000, 001, ..., 999               |
- * | Timezone                | Z     | -01:00, +00:00, ... +12:00       |
- * |                         | ZZ    | -0100, +0000, ..., +1200         |
- * | Seconds timestamp       | X     | 512969520                        |
- * | Milliseconds timestamp  | x     | 512969520900                     |
- *
- * The characters wrapped in square brackets are escaped.
- *
- * The result may vary by locale.
- *
- * @param {Date|String|Number} date - the original date
- * @param {String} [format='YYYY-MM-DDTHH:mm:ss.SSSZ'] - the string of tokens
- * @param {Object} [options] - the object with options
- * @param {Object} [options.locale=enLocale] - the locale object
- * @returns {String} the formatted date string
- *
- * @example
- * // Represent 11 February 2014 in middle-endian format:
- * var result = format(
- *   new Date(2014, 1, 11),
- *   'MM/DD/YYYY'
- * )
- * //=> '02/11/2014'
- *
- * @example
- * // Represent 2 July 2014 in Esperanto:
- * var eoLocale = require('date-fns/locale/eo')
- * var result = format(
- *   new Date(2014, 6, 2),
- *   'Do [de] MMMM YYYY',
- *   {locale: eoLocale}
- * )
- * //=> '2-a de julio 2014'
- */
-function format (dirtyDate, dirtyFormatStr, dirtyOptions) {
-  var formatStr = dirtyFormatStr ? String(dirtyFormatStr) : 'YYYY-MM-DDTHH:mm:ss.SSSZ'
-  var options = dirtyOptions || {}
-
-  var locale = options.locale
-  var localeFormatters = enLocale.format.formatters
-  var formattingTokensRegExp = enLocale.format.formattingTokensRegExp
-  if (locale && locale.format && locale.format.formatters) {
-    localeFormatters = locale.format.formatters
-
-    if (locale.format.formattingTokensRegExp) {
-      formattingTokensRegExp = locale.format.formattingTokensRegExp
-    }
-  }
-
-  var date = parse(dirtyDate)
-
-  if (!isValid(date)) {
-    return 'Invalid Date'
-  }
-
-  var formatFn = buildFormatFn(formatStr, localeFormatters, formattingTokensRegExp)
-
-  return formatFn(date)
-}
-
-var formatters = {
-  // Month: 1, 2, ..., 12
-  'M': function (date) {
-    return date.getMonth() + 1
-  },
-
-  // Month: 01, 02, ..., 12
-  'MM': function (date) {
-    return addLeadingZeros(date.getMonth() + 1, 2)
-  },
-
-  // Quarter: 1, 2, 3, 4
-  'Q': function (date) {
-    return Math.ceil((date.getMonth() + 1) / 3)
-  },
-
-  // Day of month: 1, 2, ..., 31
-  'D': function (date) {
-    return date.getDate()
-  },
-
-  // Day of month: 01, 02, ..., 31
-  'DD': function (date) {
-    return addLeadingZeros(date.getDate(), 2)
-  },
-
-  // Day of year: 1, 2, ..., 366
-  'DDD': function (date) {
-    return getDayOfYear(date)
-  },
-
-  // Day of year: 001, 002, ..., 366
-  'DDDD': function (date) {
-    return addLeadingZeros(getDayOfYear(date), 3)
-  },
-
-  // Day of week: 0, 1, ..., 6
-  'd': function (date) {
-    return date.getDay()
-  },
-
-  // Day of ISO week: 1, 2, ..., 7
-  'E': function (date) {
-    return date.getDay() || 7
-  },
-
-  // ISO week: 1, 2, ..., 53
-  'W': function (date) {
-    return getISOWeek(date)
-  },
-
-  // ISO week: 01, 02, ..., 53
-  'WW': function (date) {
-    return addLeadingZeros(getISOWeek(date), 2)
-  },
-
-  // Year: 00, 01, ..., 99
-  'YY': function (date) {
-    return addLeadingZeros(date.getFullYear(), 4).substr(2)
-  },
-
-  // Year: 1900, 1901, ..., 2099
-  'YYYY': function (date) {
-    return addLeadingZeros(date.getFullYear(), 4)
-  },
-
-  // ISO week-numbering year: 00, 01, ..., 99
-  'GG': function (date) {
-    return String(getISOYear(date)).substr(2)
-  },
-
-  // ISO week-numbering year: 1900, 1901, ..., 2099
-  'GGGG': function (date) {
-    return getISOYear(date)
-  },
-
-  // Hour: 0, 1, ... 23
-  'H': function (date) {
-    return date.getHours()
-  },
-
-  // Hour: 00, 01, ..., 23
-  'HH': function (date) {
-    return addLeadingZeros(date.getHours(), 2)
-  },
-
-  // Hour: 1, 2, ..., 12
-  'h': function (date) {
-    var hours = date.getHours()
-    if (hours === 0) {
-      return 12
-    } else if (hours > 12) {
-      return hours % 12
-    } else {
-      return hours
-    }
-  },
-
-  // Hour: 01, 02, ..., 12
-  'hh': function (date) {
-    return addLeadingZeros(formatters['h'](date), 2)
-  },
-
-  // Minute: 0, 1, ..., 59
-  'm': function (date) {
-    return date.getMinutes()
-  },
-
-  // Minute: 00, 01, ..., 59
-  'mm': function (date) {
-    return addLeadingZeros(date.getMinutes(), 2)
-  },
-
-  // Second: 0, 1, ..., 59
-  's': function (date) {
-    return date.getSeconds()
-  },
-
-  // Second: 00, 01, ..., 59
-  'ss': function (date) {
-    return addLeadingZeros(date.getSeconds(), 2)
-  },
-
-  // 1/10 of second: 0, 1, ..., 9
-  'S': function (date) {
-    return Math.floor(date.getMilliseconds() / 100)
-  },
-
-  // 1/100 of second: 00, 01, ..., 99
-  'SS': function (date) {
-    return addLeadingZeros(Math.floor(date.getMilliseconds() / 10), 2)
-  },
-
-  // Millisecond: 000, 001, ..., 999
-  'SSS': function (date) {
-    return addLeadingZeros(date.getMilliseconds(), 3)
-  },
-
-  // Timezone: -01:00, +00:00, ... +12:00
-  'Z': function (date) {
-    return formatTimezone(date.getTimezoneOffset(), ':')
-  },
-
-  // Timezone: -0100, +0000, ... +1200
-  'ZZ': function (date) {
-    return formatTimezone(date.getTimezoneOffset())
-  },
-
-  // Seconds timestamp: 512969520
-  'X': function (date) {
-    return Math.floor(date.getTime() / 1000)
-  },
-
-  // Milliseconds timestamp: 512969520900
-  'x': function (date) {
-    return date.getTime()
-  }
-}
-
-function buildFormatFn (formatStr, localeFormatters, formattingTokensRegExp) {
-  var array = formatStr.match(formattingTokensRegExp)
-  var length = array.length
-
-  var i
-  var formatter
-  for (i = 0; i < length; i++) {
-    formatter = localeFormatters[array[i]] || formatters[array[i]]
-    if (formatter) {
-      array[i] = formatter
-    } else {
-      array[i] = removeFormattingTokens(array[i])
-    }
-  }
-
-  return function (date) {
-    var output = ''
-    for (var i = 0; i < length; i++) {
-      if (array[i] instanceof Function) {
-        output += array[i](date, formatters)
-      } else {
-        output += array[i]
-      }
-    }
-    return output
-  }
-}
-
-function removeFormattingTokens (input) {
-  if (input.match(/\[[\s\S]/)) {
-    return input.replace(/^\[|]$/g, '')
-  }
-  return input.replace(/\\/g, '')
-}
-
-function formatTimezone (offset, delimeter) {
-  delimeter = delimeter || ''
-  var sign = offset > 0 ? '-' : '+'
-  var absOffset = Math.abs(offset)
-  var hours = Math.floor(absOffset / 60)
-  var minutes = absOffset % 60
-  return sign + addLeadingZeros(hours, 2) + delimeter + addLeadingZeros(minutes, 2)
-}
-
-function addLeadingZeros (number, targetLength) {
-  var output = Math.abs(number).toString()
-  while (output.length < targetLength) {
-    output = '0' + output
-  }
-  return output
-}
-
-module.exports = format
-
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var parse = __webpack_require__(2)
 var startOfISOWeek = __webpack_require__(7)
 
@@ -18006,10 +17672,10 @@ module.exports = getISOYear
 
 
 /***/ }),
-/* 134 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(135);
+__webpack_require__(134);
 __webpack_require__(253);
 __webpack_require__(254);
 __webpack_require__(255);
@@ -18018,7 +17684,7 @@ module.exports = __webpack_require__(257);
 
 
 /***/ }),
-/* 135 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -18031,9 +17697,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(136);
+__webpack_require__(135);
 
-window.Vue = __webpack_require__(228);
+window.Vue = __webpack_require__(215);
 
 // Wrappers
 window.Event = new (function () {
@@ -18070,9 +17736,9 @@ window.Event = new (function () {
 // Vue.component('example', require('./components/Example.vue'));
 
 // Bootsrap components
-Vue.component('bootstrap-card', __webpack_require__(229));
-Vue.component('bootstrap-input', __webpack_require__(232));
-Vue.component('bootstrap-table', __webpack_require__(235));
+Vue.component('bootstrap-card', __webpack_require__(216));
+Vue.component('bootstrap-input', __webpack_require__(219));
+Vue.component('bootstrap-table', __webpack_require__(222));
 
 // Now-ui-kit Components
 Vue.component('now-input', __webpack_require__(240));
@@ -18082,11 +17748,11 @@ Vue.component('passport-authorized-clients', __webpack_require__(243));
 Vue.component('passport-personal-access-tokens', __webpack_require__(248));
 
 /***/ }),
-/* 136 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(137);
+window._ = __webpack_require__(136);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -18095,9 +17761,9 @@ window._ = __webpack_require__(137);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(138);
+  window.$ = window.jQuery = __webpack_require__(137);
 
-  __webpack_require__(139);
+  __webpack_require__(138);
 } catch (e) {}
 
 /**
@@ -18106,7 +17772,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(140);
+window.axios = __webpack_require__(139);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -18140,13 +17806,13 @@ if (token) {
 // });
 
 // Chartjs
-__webpack_require__(160);
+__webpack_require__(159);
 
 // Vue Good Table
-__webpack_require__(208);
+__webpack_require__(207);
 
 /***/ }),
-/* 137 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -35238,7 +34904,7 @@ __webpack_require__(208);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(9)(module)))
 
 /***/ }),
-/* 138 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -45498,7 +45164,7 @@ return jQuery;
 
 
 /***/ }),
-/* 139 */
+/* 138 */
 /***/ (function(module, exports) {
 
 /*!
@@ -49039,13 +48705,13 @@ var Popover = function ($) {
 
 
 /***/ }),
-/* 140 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(141);
+module.exports = __webpack_require__(140);
 
 /***/ }),
-/* 141 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49053,7 +48719,7 @@ module.exports = __webpack_require__(141);
 
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(10);
-var Axios = __webpack_require__(143);
+var Axios = __webpack_require__(142);
 var defaults = __webpack_require__(6);
 
 /**
@@ -49088,14 +48754,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(14);
-axios.CancelToken = __webpack_require__(158);
+axios.CancelToken = __webpack_require__(157);
 axios.isCancel = __webpack_require__(13);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(159);
+axios.spread = __webpack_require__(158);
 
 module.exports = axios;
 
@@ -49104,7 +48770,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 142 */
+/* 141 */
 /***/ (function(module, exports) {
 
 /*!
@@ -49131,7 +48797,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 143 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49139,10 +48805,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(153);
-var dispatchRequest = __webpack_require__(154);
-var isAbsoluteURL = __webpack_require__(156);
-var combineURLs = __webpack_require__(157);
+var InterceptorManager = __webpack_require__(152);
+var dispatchRequest = __webpack_require__(153);
+var isAbsoluteURL = __webpack_require__(155);
+var combineURLs = __webpack_require__(156);
 
 /**
  * Create a new instance of Axios
@@ -49224,7 +48890,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 144 */
+/* 143 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -49414,7 +49080,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 145 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49433,7 +49099,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 146 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49466,7 +49132,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 147 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49494,7 +49160,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 148 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49569,7 +49235,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 149 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49613,7 +49279,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 150 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49688,7 +49354,7 @@ module.exports = (
 
 
 /***/ }),
-/* 151 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49731,7 +49397,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 152 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49791,7 +49457,7 @@ module.exports = (
 
 
 /***/ }),
-/* 153 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49850,14 +49516,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 154 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(155);
+var transformData = __webpack_require__(154);
 var isCancel = __webpack_require__(13);
 var defaults = __webpack_require__(6);
 
@@ -49936,7 +49602,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49963,7 +49629,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 156 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49984,7 +49650,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 157 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50005,7 +49671,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 158 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50069,7 +49735,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 159 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50103,16 +49769,17 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 160 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * @namespace Chart
  */
-var Chart = __webpack_require__(161)();
+var Chart = __webpack_require__(160)();
 
-__webpack_require__(162)(Chart);
-__webpack_require__(167)(Chart);
+__webpack_require__(161)(Chart);
+__webpack_require__(166)(Chart);
+__webpack_require__(168)(Chart);
 __webpack_require__(169)(Chart);
 __webpack_require__(170)(Chart);
 __webpack_require__(171)(Chart);
@@ -50124,44 +49791,43 @@ __webpack_require__(176)(Chart);
 __webpack_require__(177)(Chart);
 __webpack_require__(178)(Chart);
 __webpack_require__(179)(Chart);
-__webpack_require__(180)(Chart);
 
+__webpack_require__(180)(Chart);
 __webpack_require__(181)(Chart);
 __webpack_require__(182)(Chart);
 __webpack_require__(183)(Chart);
-__webpack_require__(184)(Chart);
 
+__webpack_require__(184)(Chart);
 __webpack_require__(185)(Chart);
 __webpack_require__(186)(Chart);
 __webpack_require__(187)(Chart);
 __webpack_require__(188)(Chart);
 __webpack_require__(189)(Chart);
-__webpack_require__(190)(Chart);
 
 // Controllers must be loaded after elements
 // See Chart.core.datasetController.dataElementType
+__webpack_require__(191)(Chart);
 __webpack_require__(192)(Chart);
 __webpack_require__(193)(Chart);
 __webpack_require__(194)(Chart);
 __webpack_require__(195)(Chart);
 __webpack_require__(196)(Chart);
-__webpack_require__(197)(Chart);
 
+__webpack_require__(197)(Chart);
 __webpack_require__(198)(Chart);
 __webpack_require__(199)(Chart);
 __webpack_require__(200)(Chart);
 __webpack_require__(201)(Chart);
 __webpack_require__(202)(Chart);
 __webpack_require__(203)(Chart);
-__webpack_require__(204)(Chart);
 
 // Loading built-it plugins
 var plugins = [];
 
 plugins.push(
+    __webpack_require__(204)(Chart),
     __webpack_require__(205)(Chart),
-    __webpack_require__(206)(Chart),
-    __webpack_require__(207)(Chart)
+    __webpack_require__(206)(Chart)
 );
 
 Chart.plugins.register(plugins);
@@ -50173,7 +49839,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 161 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50236,7 +49902,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 162 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51227,10 +50893,10 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 163 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var conversions = __webpack_require__(164);
+var conversions = __webpack_require__(163);
 
 var convert = function() {
    return new Converter();
@@ -51324,7 +50990,7 @@ Converter.prototype.getValues = function(space) {
 module.exports = convert;
 
 /***/ }),
-/* 164 */
+/* 163 */
 /***/ (function(module, exports) {
 
 /* MIT license */
@@ -52028,11 +51694,11 @@ for (var key in cssKeywords) {
 
 
 /***/ }),
-/* 165 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* MIT license */
-var colorNames = __webpack_require__(166);
+var colorNames = __webpack_require__(165);
 
 module.exports = {
    getRgba: getRgba,
@@ -52255,8 +51921,11 @@ for (var name in colorNames) {
 
 
 /***/ }),
-/* 166 */
-/***/ (function(module, exports) {
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 module.exports = {
 	"aliceblue": [240, 248, 255],
@@ -52409,8 +52078,9 @@ module.exports = {
 	"yellowgreen": [154, 205, 50]
 };
 
+
 /***/ }),
-/* 167 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52418,7 +52088,7 @@ module.exports = {
 
 // By default, select the browser (DOM) platform.
 // @TODO Make possible to select another platform at build time.
-var implementation = __webpack_require__(168);
+var implementation = __webpack_require__(167);
 
 module.exports = function(Chart) {
 	/**
@@ -52486,7 +52156,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 168 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52776,7 +52446,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 169 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52933,7 +52603,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 170 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53059,7 +52729,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 171 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53437,7 +53107,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 172 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53612,7 +53282,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 173 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54470,7 +54140,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 174 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54807,7 +54477,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 175 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55250,7 +54920,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 176 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55301,7 +54971,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 177 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55516,7 +55186,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 178 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56280,7 +55950,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 179 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56603,7 +56273,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 180 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57548,7 +57218,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 181 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57659,7 +57329,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 182 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57753,7 +57423,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 183 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57860,7 +57530,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 184 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58075,7 +57745,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 185 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58188,7 +57858,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 186 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58327,7 +57997,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 187 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58524,7 +58194,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 188 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58777,7 +58447,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 189 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59307,7 +58977,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 190 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59756,7 +59426,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 191 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -60005,10 +59675,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 191;
+webpackContext.id = 190;
 
 /***/ }),
-/* 192 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60398,7 +60068,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 193 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60527,7 +60197,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 194 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60837,7 +60507,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 195 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61177,7 +60847,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 196 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61407,7 +61077,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 197 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61581,7 +61251,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 198 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61599,7 +61269,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 199 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61616,7 +61286,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 200 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61634,7 +61304,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 201 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61652,7 +61322,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 202 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61670,7 +61340,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 203 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61688,7 +61358,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 204 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61742,7 +61412,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 205 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62058,7 +61728,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 206 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62609,7 +62279,7 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 207 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62842,12 +62512,12 @@ module.exports = function(Chart) {
 
 
 /***/ }),
-/* 208 */
+/* 207 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Table_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Table_vue__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Table_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Table_vue__);
 /* harmony reexport (default from non-hamory) */ __webpack_require__.d(__webpack_exports__, "VueGoodTable", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Table_vue___default.a; });
 
@@ -62868,19 +62538,19 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 
 /***/ }),
-/* 209 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(210)
+  __webpack_require__(209)
 }
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(213),
+  __webpack_require__(212),
   /* template */
-  __webpack_require__(226),
+  __webpack_require__(213),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -62888,7 +62558,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/node_modules/vue-good-table/src/components/Table.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\node_modules\\vue-good-table\\src\\components\\Table.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -62912,13 +62582,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 210 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(211);
+var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -62938,7 +62608,7 @@ if(false) {
 }
 
 /***/ }),
-/* 211 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -62952,7 +62622,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 212 */
+/* 211 */
 /***/ (function(module, exports) {
 
 /**
@@ -62985,14 +62655,14 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 213 */
+/* 212 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_date_fns_parse__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_date_fns_parse__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_date_fns_format__);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -63448,564 +63118,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 });
 
 /***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parse = __webpack_require__(2)
-var startOfYear = __webpack_require__(215)
-var differenceInCalendarDays = __webpack_require__(216)
-
-/**
- * @category Day Helpers
- * @summary Get the day of the year of the given date.
- *
- * @description
- * Get the day of the year of the given date.
- *
- * @param {Date|String|Number} date - the given date
- * @returns {Number} the day of year
- *
- * @example
- * // Which day of the year is 2 July 2014?
- * var result = getDayOfYear(new Date(2014, 6, 2))
- * //=> 183
- */
-function getDayOfYear (dirtyDate) {
-  var date = parse(dirtyDate)
-  var diff = differenceInCalendarDays(date, startOfYear(date))
-  var dayOfYear = diff + 1
-  return dayOfYear
-}
-
-module.exports = getDayOfYear
-
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parse = __webpack_require__(2)
-
-/**
- * @category Year Helpers
- * @summary Return the start of a year for the given date.
- *
- * @description
- * Return the start of a year for the given date.
- * The result will be in the local timezone.
- *
- * @param {Date|String|Number} date - the original date
- * @returns {Date} the start of a year
- *
- * @example
- * // The start of a year for 2 September 2014 11:55:00:
- * var result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
- * //=> Wed Jan 01 2014 00:00:00
- */
-function startOfYear (dirtyDate) {
-  var cleanDate = parse(dirtyDate)
-  var date = new Date(0)
-  date.setFullYear(cleanDate.getFullYear(), 0, 1)
-  date.setHours(0, 0, 0, 0)
-  return date
-}
-
-module.exports = startOfYear
-
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var startOfDay = __webpack_require__(217)
-
-var MILLISECONDS_IN_MINUTE = 60000
-var MILLISECONDS_IN_DAY = 86400000
-
-/**
- * @category Day Helpers
- * @summary Get the number of calendar days between the given dates.
- *
- * @description
- * Get the number of calendar days between the given dates.
- *
- * @param {Date|String|Number} dateLeft - the later date
- * @param {Date|String|Number} dateRight - the earlier date
- * @returns {Number} the number of calendar days
- *
- * @example
- * // How many calendar days are between
- * // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
- * var result = differenceInCalendarDays(
- *   new Date(2012, 6, 2, 0, 0),
- *   new Date(2011, 6, 2, 23, 0)
- * )
- * //=> 366
- */
-function differenceInCalendarDays (dirtyDateLeft, dirtyDateRight) {
-  var startOfDayLeft = startOfDay(dirtyDateLeft)
-  var startOfDayRight = startOfDay(dirtyDateRight)
-
-  var timestampLeft = startOfDayLeft.getTime() -
-    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-  var timestampRight = startOfDayRight.getTime() -
-    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
-
-  // Round the number of days to the nearest integer
-  // because the number of milliseconds in a day is not constant
-  // (e.g. it's different in the day of the daylight saving time clock shift)
-  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY)
-}
-
-module.exports = differenceInCalendarDays
-
-
-/***/ }),
-/* 217 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parse = __webpack_require__(2)
-
-/**
- * @category Day Helpers
- * @summary Return the start of a day for the given date.
- *
- * @description
- * Return the start of a day for the given date.
- * The result will be in the local timezone.
- *
- * @param {Date|String|Number} date - the original date
- * @returns {Date} the start of a day
- *
- * @example
- * // The start of a day for 2 September 2014 11:55:00:
- * var result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
- * //=> Tue Sep 02 2014 00:00:00
- */
-function startOfDay (dirtyDate) {
-  var date = parse(dirtyDate)
-  date.setHours(0, 0, 0, 0)
-  return date
-}
-
-module.exports = startOfDay
-
-
-/***/ }),
-/* 218 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parse = __webpack_require__(2)
-var startOfISOWeek = __webpack_require__(7)
-var startOfISOYear = __webpack_require__(220)
-
-var MILLISECONDS_IN_WEEK = 604800000
-
-/**
- * @category ISO Week Helpers
- * @summary Get the ISO week of the given date.
- *
- * @description
- * Get the ISO week of the given date.
- *
- * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
- *
- * @param {Date|String|Number} date - the given date
- * @returns {Number} the ISO week
- *
- * @example
- * // Which week of the ISO-week numbering year is 2 January 2005?
- * var result = getISOWeek(new Date(2005, 0, 2))
- * //=> 53
- */
-function getISOWeek (dirtyDate) {
-  var date = parse(dirtyDate)
-  var diff = startOfISOWeek(date).getTime() - startOfISOYear(date).getTime()
-
-  // Round the number of days to the nearest integer
-  // because the number of milliseconds in a week is not constant
-  // (e.g. it's different in the week of the daylight saving time clock shift)
-  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1
-}
-
-module.exports = getISOWeek
-
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parse = __webpack_require__(2)
-
-/**
- * @category Week Helpers
- * @summary Return the start of a week for the given date.
- *
- * @description
- * Return the start of a week for the given date.
- * The result will be in the local timezone.
- *
- * @param {Date|String|Number} date - the original date
- * @param {Object} [options] - the object with options
- * @param {Number} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
- * @returns {Date} the start of a week
- *
- * @example
- * // The start of a week for 2 September 2014 11:55:00:
- * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
- * //=> Sun Aug 31 2014 00:00:00
- *
- * @example
- * // If the week starts on Monday, the start of the week for 2 September 2014 11:55:00:
- * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
- * //=> Mon Sep 01 2014 00:00:00
- */
-function startOfWeek (dirtyDate, dirtyOptions) {
-  var weekStartsOn = dirtyOptions ? (Number(dirtyOptions.weekStartsOn) || 0) : 0
-
-  var date = parse(dirtyDate)
-  var day = date.getDay()
-  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn
-
-  date.setDate(date.getDate() - diff)
-  date.setHours(0, 0, 0, 0)
-  return date
-}
-
-module.exports = startOfWeek
-
-
-/***/ }),
-/* 220 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getISOYear = __webpack_require__(133)
-var startOfISOWeek = __webpack_require__(7)
-
-/**
- * @category ISO Week-Numbering Year Helpers
- * @summary Return the start of an ISO week-numbering year for the given date.
- *
- * @description
- * Return the start of an ISO week-numbering year,
- * which always starts 3 days before the year's first Thursday.
- * The result will be in the local timezone.
- *
- * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
- *
- * @param {Date|String|Number} date - the original date
- * @returns {Date} the start of an ISO year
- *
- * @example
- * // The start of an ISO week-numbering year for 2 July 2005:
- * var result = startOfISOYear(new Date(2005, 6, 2))
- * //=> Mon Jan 03 2005 00:00:00
- */
-function startOfISOYear (dirtyDate) {
-  var year = getISOYear(dirtyDate)
-  var fourthOfJanuary = new Date(0)
-  fourthOfJanuary.setFullYear(year, 0, 4)
-  fourthOfJanuary.setHours(0, 0, 0, 0)
-  var date = startOfISOWeek(fourthOfJanuary)
-  return date
-}
-
-module.exports = startOfISOYear
-
-
-/***/ }),
-/* 221 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isDate = __webpack_require__(131)
-
-/**
- * @category Common Helpers
- * @summary Is the given date valid?
- *
- * @description
- * Returns false if argument is Invalid Date and true otherwise.
- * Invalid Date is a Date, whose time value is NaN.
- *
- * Time value of Date: http://es5.github.io/#x15.9.1.1
- *
- * @param {Date} date - the date to check
- * @returns {Boolean} the date is valid
- * @throws {TypeError} argument must be an instance of Date
- *
- * @example
- * // For the valid date:
- * var result = isValid(new Date(2014, 1, 31))
- * //=> true
- *
- * @example
- * // For the invalid date:
- * var result = isValid(new Date(''))
- * //=> false
- */
-function isValid (dirtyDate) {
-  if (isDate(dirtyDate)) {
-    return !isNaN(dirtyDate)
-  } else {
-    throw new TypeError(toString.call(dirtyDate) + ' is not an instance of Date')
-  }
-}
-
-module.exports = isValid
-
-
-/***/ }),
-/* 222 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var buildDistanceInWordsLocale = __webpack_require__(223)
-var buildFormatLocale = __webpack_require__(224)
-
-/**
- * @category Locales
- * @summary English locale.
- */
-module.exports = {
-  distanceInWords: buildDistanceInWordsLocale(),
-  format: buildFormatLocale()
-}
-
-
-/***/ }),
-/* 223 */
-/***/ (function(module, exports) {
-
-function buildDistanceInWordsLocale () {
-  var distanceInWordsLocale = {
-    lessThanXSeconds: {
-      one: 'less than a second',
-      other: 'less than {{count}} seconds'
-    },
-
-    xSeconds: {
-      one: '1 second',
-      other: '{{count}} seconds'
-    },
-
-    halfAMinute: 'half a minute',
-
-    lessThanXMinutes: {
-      one: 'less than a minute',
-      other: 'less than {{count}} minutes'
-    },
-
-    xMinutes: {
-      one: '1 minute',
-      other: '{{count}} minutes'
-    },
-
-    aboutXHours: {
-      one: 'about 1 hour',
-      other: 'about {{count}} hours'
-    },
-
-    xHours: {
-      one: '1 hour',
-      other: '{{count}} hours'
-    },
-
-    xDays: {
-      one: '1 day',
-      other: '{{count}} days'
-    },
-
-    aboutXMonths: {
-      one: 'about 1 month',
-      other: 'about {{count}} months'
-    },
-
-    xMonths: {
-      one: '1 month',
-      other: '{{count}} months'
-    },
-
-    aboutXYears: {
-      one: 'about 1 year',
-      other: 'about {{count}} years'
-    },
-
-    xYears: {
-      one: '1 year',
-      other: '{{count}} years'
-    },
-
-    overXYears: {
-      one: 'over 1 year',
-      other: 'over {{count}} years'
-    },
-
-    almostXYears: {
-      one: 'almost 1 year',
-      other: 'almost {{count}} years'
-    }
-  }
-
-  function localize (token, count, options) {
-    options = options || {}
-
-    var result
-    if (typeof distanceInWordsLocale[token] === 'string') {
-      result = distanceInWordsLocale[token]
-    } else if (count === 1) {
-      result = distanceInWordsLocale[token].one
-    } else {
-      result = distanceInWordsLocale[token].other.replace('{{count}}', count)
-    }
-
-    if (options.addSuffix) {
-      if (options.comparison > 0) {
-        return 'in ' + result
-      } else {
-        return result + ' ago'
-      }
-    }
-
-    return result
-  }
-
-  return {
-    localize: localize
-  }
-}
-
-module.exports = buildDistanceInWordsLocale
-
-
-/***/ }),
-/* 224 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var buildFormattingTokensRegExp = __webpack_require__(225)
-
-function buildFormatLocale () {
-  // Note: in English, the names of days of the week and months are capitalized.
-  // If you are making a new locale based on this one, check if the same is true for the language you're working on.
-  // Generally, formatted dates should look like they are in the middle of a sentence,
-  // e.g. in Spanish language the weekdays and months should be in the lowercase.
-  var months3char = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-  var monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  var weekdays2char = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-  var weekdays3char = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  var weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  var meridiemUppercase = ['AM', 'PM']
-  var meridiemLowercase = ['am', 'pm']
-  var meridiemFull = ['a.m.', 'p.m.']
-
-  var formatters = {
-    // Month: Jan, Feb, ..., Dec
-    'MMM': function (date) {
-      return months3char[date.getMonth()]
-    },
-
-    // Month: January, February, ..., December
-    'MMMM': function (date) {
-      return monthsFull[date.getMonth()]
-    },
-
-    // Day of week: Su, Mo, ..., Sa
-    'dd': function (date) {
-      return weekdays2char[date.getDay()]
-    },
-
-    // Day of week: Sun, Mon, ..., Sat
-    'ddd': function (date) {
-      return weekdays3char[date.getDay()]
-    },
-
-    // Day of week: Sunday, Monday, ..., Saturday
-    'dddd': function (date) {
-      return weekdaysFull[date.getDay()]
-    },
-
-    // AM, PM
-    'A': function (date) {
-      return (date.getHours() / 12) >= 1 ? meridiemUppercase[1] : meridiemUppercase[0]
-    },
-
-    // am, pm
-    'a': function (date) {
-      return (date.getHours() / 12) >= 1 ? meridiemLowercase[1] : meridiemLowercase[0]
-    },
-
-    // a.m., p.m.
-    'aa': function (date) {
-      return (date.getHours() / 12) >= 1 ? meridiemFull[1] : meridiemFull[0]
-    }
-  }
-
-  // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
-  var ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W']
-  ordinalFormatters.forEach(function (formatterToken) {
-    formatters[formatterToken + 'o'] = function (date, formatters) {
-      return ordinal(formatters[formatterToken](date))
-    }
-  })
-
-  return {
-    formatters: formatters,
-    formattingTokensRegExp: buildFormattingTokensRegExp(formatters)
-  }
-}
-
-function ordinal (number) {
-  var rem100 = number % 100
-  if (rem100 > 20 || rem100 < 10) {
-    switch (rem100 % 10) {
-      case 1:
-        return number + 'st'
-      case 2:
-        return number + 'nd'
-      case 3:
-        return number + 'rd'
-    }
-  }
-  return number + 'th'
-}
-
-module.exports = buildFormatLocale
-
-
-/***/ }),
-/* 225 */
-/***/ (function(module, exports) {
-
-var commonFormatterKeys = [
-  'M', 'MM', 'Q', 'D', 'DD', 'DDD', 'DDDD', 'd',
-  'E', 'W', 'WW', 'YY', 'YYYY', 'GG', 'GGGG',
-  'H', 'HH', 'h', 'hh', 'm', 'mm',
-  's', 'ss', 'S', 'SS', 'SSS',
-  'Z', 'ZZ', 'X', 'x'
-]
-
-function buildFormattingTokensRegExp (formatters) {
-  var formatterKeys = []
-  for (var key in formatters) {
-    if (formatters.hasOwnProperty(key)) {
-      formatterKeys.push(key)
-    }
-  }
-
-  var formattingTokens = commonFormatterKeys
-    .concat(formatterKeys)
-    .sort()
-    .reverse()
-  var formattingTokensRegExp = new RegExp(
-    '(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g'
-  )
-
-  return formattingTokensRegExp
-}
-
-module.exports = buildFormattingTokensRegExp
-
-
-/***/ }),
-/* 226 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -64178,7 +63291,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "global-search-icon"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(227),
+      "src": __webpack_require__(214),
       "alt": "Search Icon"
     }
   })])
@@ -64192,13 +63305,13 @@ if (false) {
 }
 
 /***/ }),
-/* 227 */
+/* 214 */
 /***/ (function(module, exports) {
 
 module.exports = "/images/vendor/vue-good-table/src/search_icon.png?098f9a4b44b992c990a207bc31c0a0be";
 
 /***/ }),
-/* 228 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74272,15 +73385,15 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 229 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(230),
+  __webpack_require__(217),
   /* template */
-  __webpack_require__(231),
+  __webpack_require__(218),
   /* styles */
   null,
   /* scopeId */
@@ -74288,7 +73401,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/bootstrap/Card.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\bootstrap\\Card.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Card.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -74312,7 +73425,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 230 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74349,7 +73462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 231 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -74374,15 +73487,15 @@ if (false) {
 }
 
 /***/ }),
-/* 232 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(233),
+  __webpack_require__(220),
   /* template */
-  __webpack_require__(234),
+  __webpack_require__(221),
   /* styles */
   null,
   /* scopeId */
@@ -74390,7 +73503,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/bootstrap/Input.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\bootstrap\\Input.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Input.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -74414,7 +73527,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 233 */
+/* 220 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74436,9 +73549,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['b-icon', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type'],
+	props: ['b-icon', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type', 'use-icon', 'use-label', 'label'],
+
 	data: function data() {
 		return {
 			err: this.bError,
@@ -74446,24 +73561,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			ph: this.bPlaceholder,
 			ty: this.bType,
 			nm: this.bName,
-			old: this.bValue
+			old: this.bValue,
+			uIcon: this.useIcon == "true",
+			uLabel: this.useLabel == "true"
 		};
 	},
 	mounted: function mounted() {}
 });
 
 /***/ }),
-/* 234 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "input-group mb-2 mr-sm-2 mb-sm-0"
-  }, [_c('div', {
-    staticClass: "input-group-addon",
-    staticStyle: {
-      "width": "40px"
-    }
+  return _c('div', {
+    staticClass: "form-group"
+  }, [(_vm.uLabel) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [(_vm.uIcon) ? _c('div', {
+    staticClass: "input-group-addon"
   }, [_c('i', {
     staticClass: "ion",
     class: _vm.icon,
@@ -74471,14 +73587,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "padding-right": "3px",
       "font-size": "20px"
     }
-  })]), _vm._v(" "), _c('input', {
+  })]) : _vm._e(), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
       "id": "",
       "placeholder": _vm.bPlaceholder,
       "type": _vm.ty,
       "name": _vm.nm,
-      "required": "",
       "autofocus": ""
     },
     domProps: {
@@ -74497,17 +73612,17 @@ if (false) {
 }
 
 /***/ }),
-/* 235 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(236)
+  __webpack_require__(223)
 }
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(238),
+  __webpack_require__(225),
   /* template */
   __webpack_require__(239),
   /* styles */
@@ -74517,7 +73632,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/bootstrap/Table.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\bootstrap\\Table.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -74541,13 +73656,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 236 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(237);
+var content = __webpack_require__(224);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -74567,7 +73682,7 @@ if(false) {
 }
 
 /***/ }),
-/* 237 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -74575,23 +73690,24 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-51dfcd51]{\n  text-align: right;\n}\n.left-align[data-v-51dfcd51]{\n  text-align: left;\n}\n.pull-left[data-v-51dfcd51]{\n  float:  left !important;\n}\n.pull-right[data-v-51dfcd51]{\n  float:  right !important;\n}\n.clearfix[data-v-51dfcd51]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table specific styles\n************************************************/\ntable[data-v-51dfcd51]{\n  border-collapse: collapse;\n  background-color: transparent;\n  margin-bottom:  20px;\n}\n.table[data-v-51dfcd51]{\n  width: 100%;\n  max-width: 100%;\n}\n.table.table-striped tbody tr[data-v-51dfcd51]:nth-of-type(odd) {\n  background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-51dfcd51], .table-bordered th[data-v-51dfcd51] {\n  border: 1px solid #DDD;\n}\n.table td[data-v-51dfcd51], .table th[data-v-51dfcd51]:not(.line-numbers) {\n  padding: .75rem 1.5rem .75rem .75rem;\n  vertical-align: top;\n  border-top: 1px solid #ddd;\n}\n.table.condensed td[data-v-51dfcd51], .table.condensed th[data-v-51dfcd51] {\n  padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-51dfcd51], .table.condensed thead th[data-v-51dfcd51] {\n  vertical-align: bottom;\n  border-bottom:  2px solid #ddd;\n  padding-right: 1.5rem;\n  background-color: rgba(35,41,53,0.03);\n}\ntr.clickable[data-v-51dfcd51] {\n  cursor: pointer;\n}\n.table input[data-v-51dfcd51]{\n  display: block;\n  width: calc(100% - 24px);\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n  box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-51dfcd51],\ntable th.sorting-desc[data-v-51dfcd51] {\n  color: rgba(0, 0, 0, 0.66);\n  position: relative;\n}\ntable th.sorting[data-v-51dfcd51]:after,\ntable th.sorting-asc[data-v-51dfcd51]:after  {\n  font-family: 'Material Icons';\n  position:  absolute;\n  height:  0px;\n  width:  0px;\n  content: '';\n  display: none;\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-bottom: 6px solid rgba(0, 0, 0, 0.66);\n  margin-top:  6px;\n  margin-left:  5px;\n}\ntable th.sorting[data-v-51dfcd51]:hover:after{\n  display: inline-block;\n  border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-51dfcd51]:after,\ntable th.sorting-desc[data-v-51dfcd51]:after {\n  display: inline-block;\n}\ntable th.sorting-desc[data-v-51dfcd51]:after {\n  border-top:  6px solid rgba(0, 0, 0, 0.66);\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-bottom: none;\n  margin-top:  8px;\n}\n\n/* Table header specific styles\n************************************************/\n.table-header[data-v-51dfcd51]{\n  padding:  .75rem;\n}\n.table-header .table-title[data-v-51dfcd51]{\n  margin:  0px;\n  font-size: 18px;\n}\n\n\n/* Table footer specific styles\n************************************************/\n.table-footer[data-v-51dfcd51]{\n  /* background-color: rgba(35,41,53, 0.03); */\n  background-color: rgba(35,41,53,0.05);\n  border: 1px solid #DDD;\n  margin-bottom:  2rem;\n  margin-top:  -20px;\n  padding:  1rem;\n  border-bottom-right-radius: 5px;\n  border-bottom-left-radius: 5px;\n  font-size: 14px;\n  color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-51dfcd51]{\n  display: inline-block;\n}\n.pagination-controls>*[data-v-51dfcd51]{\n  display: inline-block;\n}\n.pagination-controls a[data-v-51dfcd51]{\n  text-decoration: none;\n  color: rgba(0, 0, 0, 0.66);\n  font-size: 14px;\n  font-weight: 600;\n  opacity: 0.8;\n}\n.pagination-controls a[data-v-51dfcd51]:hover{\n  opacity: 1;\n}\n.pagination-controls a span[data-v-51dfcd51]{\n  display: inline-block;\n  vertical-align: middle;\n}\n.pagination-controls .info[data-v-51dfcd51]{\n  margin:  0px 15px;\n  font-size: 13px;\n  font-weight: bold;\n  color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-51dfcd51]{\n  width:  24px;\n  height:  24px;\n  border-radius: 15%;\n/* border:  1px solid rgba(35,41,53,0.2);\nbackground-color: #fff; */\nposition:  relative;\nmargin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-51dfcd51]::after{\n  content:  '';\n  position:  absolute;\n  display:  block;\n  left:  50%;\n  top:  50%;\n  margin-top:  -6px;\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-51dfcd51]::after{\n  border-right:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-51dfcd51]::after{\n  border-left:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.table-footer select[data-v-51dfcd51] {\n  display: inline-block;\n  background-color: transparent;\n  width: auto;\n  padding: 0;\n  border: 0;\n  border-radius: 0;\n  height: auto;\n  font-size: 14px;\n  margin-left: 8px;\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n.table-footer .perpage-count[data-v-51dfcd51]{\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n.pagination-controls .info[data-v-51dfcd51]{\n    display:  none;\n}\n}\n\n/* Global Search  \n**********************************************/\n.global-search[data-v-51dfcd51]{\n  position:  relative;\n  padding-left: 40px;\n}\n.global-search-icon[data-v-51dfcd51]{\n  position:  absolute;\n  left:  0px;\n  max-width:  32px;\n}\n.global-search-icon > img[data-v-51dfcd51]{\n  max-width:  100%;\n  margin-top:  8px;\n  opacity: 0.5;\n}\ntable .global-search-input[data-v-51dfcd51]{\n  width:  calc(100% - 30px);\n}\n\n/* Line numbers \n**********************************************/\ntable th.line-numbers[data-v-51dfcd51], .table.condensed th.line-numbers[data-v-51dfcd51]{\n  background-color: rgba(35,41,53,0.05);\n  padding-left:  3px;\n  padding-right:  3px;\n  word-wrap: break-word;\n  width: 45px;\n  text-align: center;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* Utility styles\r\n************************************************/\n.right-align[data-v-51dfcd51]{\r\n  text-align: right;\n}\n.left-align[data-v-51dfcd51]{\r\n  text-align: left;\n}\n.pull-left[data-v-51dfcd51]{\r\n  float:  left !important;\n}\n.pull-right[data-v-51dfcd51]{\r\n  float:  right !important;\n}\n.clearfix[data-v-51dfcd51]::after {\r\n  display: block;\r\n  content: \"\";\r\n  clear: both;\n}\r\n\r\n/* Table specific styles\r\n************************************************/\ntable[data-v-51dfcd51]{\r\n  border-collapse: collapse;\r\n  background-color: transparent;\r\n  margin-bottom:  20px;\n}\n.table[data-v-51dfcd51]{\r\n  width: 100%;\r\n  max-width: 100%;\n}\n.table.table-striped tbody tr[data-v-51dfcd51]:nth-of-type(odd) {\r\n  background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-51dfcd51], .table-bordered th[data-v-51dfcd51] {\r\n  border: 1px solid #DDD;\n}\n.table td[data-v-51dfcd51], .table th[data-v-51dfcd51]:not(.line-numbers) {\r\n  padding: .75rem 1.5rem .75rem .75rem;\r\n  vertical-align: top;\r\n  border-top: 1px solid #ddd;\n}\n.table.condensed td[data-v-51dfcd51], .table.condensed th[data-v-51dfcd51] {\r\n  padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-51dfcd51], .table.condensed thead th[data-v-51dfcd51] {\r\n  vertical-align: bottom;\r\n  border-bottom:  2px solid #ddd;\r\n  padding-right: 1.5rem;\r\n  background-color: rgba(35,41,53,0.03);\n}\ntr.clickable[data-v-51dfcd51] {\r\n  cursor: pointer;\n}\n.table input[data-v-51dfcd51]{\r\n  display: block;\r\n  width: calc(100% - 24px);\r\n  height: 34px;\r\n  padding: 6px 12px;\r\n  font-size: 14px;\r\n  line-height: 1.42857143;\r\n  color: #555;\r\n  background-color: #fff;\r\n  background-image: none;\r\n  border: 1px solid #ccc;\r\n  border-radius: 4px;\r\n  -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\r\n  box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\r\n  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\r\n  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\r\n  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-51dfcd51],\r\ntable th.sorting-desc[data-v-51dfcd51] {\r\n  color: rgba(0, 0, 0, 0.66);\r\n  position: relative;\n}\ntable th.sorting[data-v-51dfcd51]:after,\r\ntable th.sorting-asc[data-v-51dfcd51]:after  {\r\n  font-family: 'Material Icons';\r\n  position:  absolute;\r\n  height:  0px;\r\n  width:  0px;\r\n  content: '';\r\n  display: none;\r\n  border-left: 6px solid transparent;\r\n  border-right: 6px solid transparent;\r\n  border-bottom: 6px solid rgba(0, 0, 0, 0.66);\r\n  margin-top:  6px;\r\n  margin-left:  5px;\n}\ntable th.sorting[data-v-51dfcd51]:hover:after{\r\n  display: inline-block;\r\n  border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-51dfcd51]:after,\r\ntable th.sorting-desc[data-v-51dfcd51]:after {\r\n  display: inline-block;\n}\ntable th.sorting-desc[data-v-51dfcd51]:after {\r\n  border-top:  6px solid rgba(0, 0, 0, 0.66);\r\n  border-left: 6px solid transparent;\r\n  border-right: 6px solid transparent;\r\n  border-bottom: none;\r\n  margin-top:  8px;\n}\r\n\r\n/* Table header specific styles\r\n************************************************/\n.table-header[data-v-51dfcd51]{\r\n  padding:  .75rem;\n}\n.table-header .table-title[data-v-51dfcd51]{\r\n  margin:  0px;\r\n  font-size: 18px;\n}\r\n\r\n\r\n/* Table footer specific styles\r\n************************************************/\n.table-footer[data-v-51dfcd51]{\r\n  /* background-color: rgba(35,41,53, 0.03); */\r\n  background-color: rgba(35,41,53,0.05);\r\n  border: 1px solid #DDD;\r\n  margin-bottom:  2rem;\r\n  margin-top:  -20px;\r\n  padding:  1rem;\r\n  border-bottom-right-radius: 5px;\r\n  border-bottom-left-radius: 5px;\r\n  font-size: 14px;\r\n  color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-51dfcd51]{\r\n  display: inline-block;\n}\n.pagination-controls>*[data-v-51dfcd51]{\r\n  display: inline-block;\n}\n.pagination-controls a[data-v-51dfcd51]{\r\n  text-decoration: none;\r\n  color: rgba(0, 0, 0, 0.66);\r\n  font-size: 14px;\r\n  font-weight: 600;\r\n  opacity: 0.8;\n}\n.pagination-controls a[data-v-51dfcd51]:hover{\r\n  opacity: 1;\n}\n.pagination-controls a span[data-v-51dfcd51]{\r\n  display: inline-block;\r\n  vertical-align: middle;\n}\n.pagination-controls .info[data-v-51dfcd51]{\r\n  margin:  0px 15px;\r\n  font-size: 13px;\r\n  font-weight: bold;\r\n  color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-51dfcd51]{\r\n  width:  24px;\r\n  height:  24px;\r\n  border-radius: 15%;\r\n/* border:  1px solid rgba(35,41,53,0.2);\r\nbackground-color: #fff; */\r\nposition:  relative;\r\nmargin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-51dfcd51]::after{\r\n  content:  '';\r\n  position:  absolute;\r\n  display:  block;\r\n  left:  50%;\r\n  top:  50%;\r\n  margin-top:  -6px;\r\n  border-top: 6px solid transparent;\r\n  border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-51dfcd51]::after{\r\n  border-right:  6px solid rgba(0, 0, 0, 0.66);\r\n  margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-51dfcd51]::after{\r\n  border-left:  6px solid rgba(0, 0, 0, 0.66);\r\n  margin-left:  -3px;\n}\n.table-footer select[data-v-51dfcd51] {\r\n  display: inline-block;\r\n  background-color: transparent;\r\n  width: auto;\r\n  padding: 0;\r\n  border: 0;\r\n  border-radius: 0;\r\n  height: auto;\r\n  font-size: 14px;\r\n  margin-left: 8px;\r\n  color:  rgba(0, 0, 0, 0.55);\r\n  font-weight: bold;\n}\n.table-footer .perpage-count[data-v-51dfcd51]{\r\n  color:  rgba(0, 0, 0, 0.55);\r\n  font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\r\n  /* on small screens hide the info */\n.pagination-controls .info[data-v-51dfcd51]{\r\n    display:  none;\n}\n}\r\n\r\n/* Global Search  \r\n**********************************************/\n.global-search[data-v-51dfcd51]{\r\n  position:  relative;\r\n  padding-left: 40px;\n}\n.global-search-icon[data-v-51dfcd51]{\r\n  position:  absolute;\r\n  left:  0px;\r\n  max-width:  32px;\n}\n.global-search-icon > img[data-v-51dfcd51]{\r\n  max-width:  100%;\r\n  margin-top:  8px;\r\n  opacity: 0.5;\n}\ntable .global-search-input[data-v-51dfcd51]{\r\n  width:  calc(100% - 30px);\n}\r\n\r\n/* Line numbers \r\n**********************************************/\ntable th.line-numbers[data-v-51dfcd51], .table.condensed th.line-numbers[data-v-51dfcd51]{\r\n  background-color: rgba(35,41,53,0.05);\r\n  padding-left:  3px;\r\n  padding-right:  3px;\r\n  word-wrap: break-word;\r\n  width: 45px;\r\n  text-align: center;\n}\r\n\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 238 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_date_fns_parse__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_date_fns_parse__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_date_fns_format___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_date_fns_format__);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+//
 //
 //
 //
@@ -75189,19 +74305,912 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 });
 
 /***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getDayOfYear = __webpack_require__(227)
+var getISOWeek = __webpack_require__(231)
+var getISOYear = __webpack_require__(132)
+var parse = __webpack_require__(2)
+var isValid = __webpack_require__(234)
+var enLocale = __webpack_require__(235)
+
+/**
+ * @category Common Helpers
+ * @summary Format the date.
+ *
+ * @description
+ * Return the formatted date string in the given format.
+ *
+ * Accepted tokens:
+ * | Unit                    | Token | Result examples                  |
+ * |-------------------------|-------|----------------------------------|
+ * | Month                   | M     | 1, 2, ..., 12                    |
+ * |                         | Mo    | 1st, 2nd, ..., 12th              |
+ * |                         | MM    | 01, 02, ..., 12                  |
+ * |                         | MMM   | Jan, Feb, ..., Dec               |
+ * |                         | MMMM  | January, February, ..., December |
+ * | Quarter                 | Q     | 1, 2, 3, 4                       |
+ * |                         | Qo    | 1st, 2nd, 3rd, 4th               |
+ * | Day of month            | D     | 1, 2, ..., 31                    |
+ * |                         | Do    | 1st, 2nd, ..., 31st              |
+ * |                         | DD    | 01, 02, ..., 31                  |
+ * | Day of year             | DDD   | 1, 2, ..., 366                   |
+ * |                         | DDDo  | 1st, 2nd, ..., 366th             |
+ * |                         | DDDD  | 001, 002, ..., 366               |
+ * | Day of week             | d     | 0, 1, ..., 6                     |
+ * |                         | do    | 0th, 1st, ..., 6th               |
+ * |                         | dd    | Su, Mo, ..., Sa                  |
+ * |                         | ddd   | Sun, Mon, ..., Sat               |
+ * |                         | dddd  | Sunday, Monday, ..., Saturday    |
+ * | Day of ISO week         | E     | 1, 2, ..., 7                     |
+ * | ISO week                | W     | 1, 2, ..., 53                    |
+ * |                         | Wo    | 1st, 2nd, ..., 53rd              |
+ * |                         | WW    | 01, 02, ..., 53                  |
+ * | Year                    | YY    | 00, 01, ..., 99                  |
+ * |                         | YYYY  | 1900, 1901, ..., 2099            |
+ * | ISO week-numbering year | GG    | 00, 01, ..., 99                  |
+ * |                         | GGGG  | 1900, 1901, ..., 2099            |
+ * | AM/PM                   | A     | AM, PM                           |
+ * |                         | a     | am, pm                           |
+ * |                         | aa    | a.m., p.m.                       |
+ * | Hour                    | H     | 0, 1, ... 23                     |
+ * |                         | HH    | 00, 01, ... 23                   |
+ * |                         | h     | 1, 2, ..., 12                    |
+ * |                         | hh    | 01, 02, ..., 12                  |
+ * | Minute                  | m     | 0, 1, ..., 59                    |
+ * |                         | mm    | 00, 01, ..., 59                  |
+ * | Second                  | s     | 0, 1, ..., 59                    |
+ * |                         | ss    | 00, 01, ..., 59                  |
+ * | 1/10 of second          | S     | 0, 1, ..., 9                     |
+ * | 1/100 of second         | SS    | 00, 01, ..., 99                  |
+ * | Millisecond             | SSS   | 000, 001, ..., 999               |
+ * | Timezone                | Z     | -01:00, +00:00, ... +12:00       |
+ * |                         | ZZ    | -0100, +0000, ..., +1200         |
+ * | Seconds timestamp       | X     | 512969520                        |
+ * | Milliseconds timestamp  | x     | 512969520900                     |
+ *
+ * The characters wrapped in square brackets are escaped.
+ *
+ * The result may vary by locale.
+ *
+ * @param {Date|String|Number} date - the original date
+ * @param {String} [format='YYYY-MM-DDTHH:mm:ss.SSSZ'] - the string of tokens
+ * @param {Object} [options] - the object with options
+ * @param {Object} [options.locale=enLocale] - the locale object
+ * @returns {String} the formatted date string
+ *
+ * @example
+ * // Represent 11 February 2014 in middle-endian format:
+ * var result = format(
+ *   new Date(2014, 1, 11),
+ *   'MM/DD/YYYY'
+ * )
+ * //=> '02/11/2014'
+ *
+ * @example
+ * // Represent 2 July 2014 in Esperanto:
+ * var eoLocale = require('date-fns/locale/eo')
+ * var result = format(
+ *   new Date(2014, 6, 2),
+ *   'Do [de] MMMM YYYY',
+ *   {locale: eoLocale}
+ * )
+ * //=> '2-a de julio 2014'
+ */
+function format (dirtyDate, dirtyFormatStr, dirtyOptions) {
+  var formatStr = dirtyFormatStr ? String(dirtyFormatStr) : 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+  var options = dirtyOptions || {}
+
+  var locale = options.locale
+  var localeFormatters = enLocale.format.formatters
+  var formattingTokensRegExp = enLocale.format.formattingTokensRegExp
+  if (locale && locale.format && locale.format.formatters) {
+    localeFormatters = locale.format.formatters
+
+    if (locale.format.formattingTokensRegExp) {
+      formattingTokensRegExp = locale.format.formattingTokensRegExp
+    }
+  }
+
+  var date = parse(dirtyDate)
+
+  if (!isValid(date)) {
+    return 'Invalid Date'
+  }
+
+  var formatFn = buildFormatFn(formatStr, localeFormatters, formattingTokensRegExp)
+
+  return formatFn(date)
+}
+
+var formatters = {
+  // Month: 1, 2, ..., 12
+  'M': function (date) {
+    return date.getMonth() + 1
+  },
+
+  // Month: 01, 02, ..., 12
+  'MM': function (date) {
+    return addLeadingZeros(date.getMonth() + 1, 2)
+  },
+
+  // Quarter: 1, 2, 3, 4
+  'Q': function (date) {
+    return Math.ceil((date.getMonth() + 1) / 3)
+  },
+
+  // Day of month: 1, 2, ..., 31
+  'D': function (date) {
+    return date.getDate()
+  },
+
+  // Day of month: 01, 02, ..., 31
+  'DD': function (date) {
+    return addLeadingZeros(date.getDate(), 2)
+  },
+
+  // Day of year: 1, 2, ..., 366
+  'DDD': function (date) {
+    return getDayOfYear(date)
+  },
+
+  // Day of year: 001, 002, ..., 366
+  'DDDD': function (date) {
+    return addLeadingZeros(getDayOfYear(date), 3)
+  },
+
+  // Day of week: 0, 1, ..., 6
+  'd': function (date) {
+    return date.getDay()
+  },
+
+  // Day of ISO week: 1, 2, ..., 7
+  'E': function (date) {
+    return date.getDay() || 7
+  },
+
+  // ISO week: 1, 2, ..., 53
+  'W': function (date) {
+    return getISOWeek(date)
+  },
+
+  // ISO week: 01, 02, ..., 53
+  'WW': function (date) {
+    return addLeadingZeros(getISOWeek(date), 2)
+  },
+
+  // Year: 00, 01, ..., 99
+  'YY': function (date) {
+    return addLeadingZeros(date.getFullYear(), 4).substr(2)
+  },
+
+  // Year: 1900, 1901, ..., 2099
+  'YYYY': function (date) {
+    return addLeadingZeros(date.getFullYear(), 4)
+  },
+
+  // ISO week-numbering year: 00, 01, ..., 99
+  'GG': function (date) {
+    return String(getISOYear(date)).substr(2)
+  },
+
+  // ISO week-numbering year: 1900, 1901, ..., 2099
+  'GGGG': function (date) {
+    return getISOYear(date)
+  },
+
+  // Hour: 0, 1, ... 23
+  'H': function (date) {
+    return date.getHours()
+  },
+
+  // Hour: 00, 01, ..., 23
+  'HH': function (date) {
+    return addLeadingZeros(date.getHours(), 2)
+  },
+
+  // Hour: 1, 2, ..., 12
+  'h': function (date) {
+    var hours = date.getHours()
+    if (hours === 0) {
+      return 12
+    } else if (hours > 12) {
+      return hours % 12
+    } else {
+      return hours
+    }
+  },
+
+  // Hour: 01, 02, ..., 12
+  'hh': function (date) {
+    return addLeadingZeros(formatters['h'](date), 2)
+  },
+
+  // Minute: 0, 1, ..., 59
+  'm': function (date) {
+    return date.getMinutes()
+  },
+
+  // Minute: 00, 01, ..., 59
+  'mm': function (date) {
+    return addLeadingZeros(date.getMinutes(), 2)
+  },
+
+  // Second: 0, 1, ..., 59
+  's': function (date) {
+    return date.getSeconds()
+  },
+
+  // Second: 00, 01, ..., 59
+  'ss': function (date) {
+    return addLeadingZeros(date.getSeconds(), 2)
+  },
+
+  // 1/10 of second: 0, 1, ..., 9
+  'S': function (date) {
+    return Math.floor(date.getMilliseconds() / 100)
+  },
+
+  // 1/100 of second: 00, 01, ..., 99
+  'SS': function (date) {
+    return addLeadingZeros(Math.floor(date.getMilliseconds() / 10), 2)
+  },
+
+  // Millisecond: 000, 001, ..., 999
+  'SSS': function (date) {
+    return addLeadingZeros(date.getMilliseconds(), 3)
+  },
+
+  // Timezone: -01:00, +00:00, ... +12:00
+  'Z': function (date) {
+    return formatTimezone(date.getTimezoneOffset(), ':')
+  },
+
+  // Timezone: -0100, +0000, ... +1200
+  'ZZ': function (date) {
+    return formatTimezone(date.getTimezoneOffset())
+  },
+
+  // Seconds timestamp: 512969520
+  'X': function (date) {
+    return Math.floor(date.getTime() / 1000)
+  },
+
+  // Milliseconds timestamp: 512969520900
+  'x': function (date) {
+    return date.getTime()
+  }
+}
+
+function buildFormatFn (formatStr, localeFormatters, formattingTokensRegExp) {
+  var array = formatStr.match(formattingTokensRegExp)
+  var length = array.length
+
+  var i
+  var formatter
+  for (i = 0; i < length; i++) {
+    formatter = localeFormatters[array[i]] || formatters[array[i]]
+    if (formatter) {
+      array[i] = formatter
+    } else {
+      array[i] = removeFormattingTokens(array[i])
+    }
+  }
+
+  return function (date) {
+    var output = ''
+    for (var i = 0; i < length; i++) {
+      if (array[i] instanceof Function) {
+        output += array[i](date, formatters)
+      } else {
+        output += array[i]
+      }
+    }
+    return output
+  }
+}
+
+function removeFormattingTokens (input) {
+  if (input.match(/\[[\s\S]/)) {
+    return input.replace(/^\[|]$/g, '')
+  }
+  return input.replace(/\\/g, '')
+}
+
+function formatTimezone (offset, delimeter) {
+  delimeter = delimeter || ''
+  var sign = offset > 0 ? '-' : '+'
+  var absOffset = Math.abs(offset)
+  var hours = Math.floor(absOffset / 60)
+  var minutes = absOffset % 60
+  return sign + addLeadingZeros(hours, 2) + delimeter + addLeadingZeros(minutes, 2)
+}
+
+function addLeadingZeros (number, targetLength) {
+  var output = Math.abs(number).toString()
+  while (output.length < targetLength) {
+    output = '0' + output
+  }
+  return output
+}
+
+module.exports = format
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(2)
+var startOfYear = __webpack_require__(228)
+var differenceInCalendarDays = __webpack_require__(229)
+
+/**
+ * @category Day Helpers
+ * @summary Get the day of the year of the given date.
+ *
+ * @description
+ * Get the day of the year of the given date.
+ *
+ * @param {Date|String|Number} date - the given date
+ * @returns {Number} the day of year
+ *
+ * @example
+ * // Which day of the year is 2 July 2014?
+ * var result = getDayOfYear(new Date(2014, 6, 2))
+ * //=> 183
+ */
+function getDayOfYear (dirtyDate) {
+  var date = parse(dirtyDate)
+  var diff = differenceInCalendarDays(date, startOfYear(date))
+  var dayOfYear = diff + 1
+  return dayOfYear
+}
+
+module.exports = getDayOfYear
+
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(2)
+
+/**
+ * @category Year Helpers
+ * @summary Return the start of a year for the given date.
+ *
+ * @description
+ * Return the start of a year for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|String|Number} date - the original date
+ * @returns {Date} the start of a year
+ *
+ * @example
+ * // The start of a year for 2 September 2014 11:55:00:
+ * var result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
+ * //=> Wed Jan 01 2014 00:00:00
+ */
+function startOfYear (dirtyDate) {
+  var cleanDate = parse(dirtyDate)
+  var date = new Date(0)
+  date.setFullYear(cleanDate.getFullYear(), 0, 1)
+  date.setHours(0, 0, 0, 0)
+  return date
+}
+
+module.exports = startOfYear
+
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var startOfDay = __webpack_require__(230)
+
+var MILLISECONDS_IN_MINUTE = 60000
+var MILLISECONDS_IN_DAY = 86400000
+
+/**
+ * @category Day Helpers
+ * @summary Get the number of calendar days between the given dates.
+ *
+ * @description
+ * Get the number of calendar days between the given dates.
+ *
+ * @param {Date|String|Number} dateLeft - the later date
+ * @param {Date|String|Number} dateRight - the earlier date
+ * @returns {Number} the number of calendar days
+ *
+ * @example
+ * // How many calendar days are between
+ * // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
+ * var result = differenceInCalendarDays(
+ *   new Date(2012, 6, 2, 0, 0),
+ *   new Date(2011, 6, 2, 23, 0)
+ * )
+ * //=> 366
+ */
+function differenceInCalendarDays (dirtyDateLeft, dirtyDateRight) {
+  var startOfDayLeft = startOfDay(dirtyDateLeft)
+  var startOfDayRight = startOfDay(dirtyDateRight)
+
+  var timestampLeft = startOfDayLeft.getTime() -
+    startOfDayLeft.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+  var timestampRight = startOfDayRight.getTime() -
+    startOfDayRight.getTimezoneOffset() * MILLISECONDS_IN_MINUTE
+
+  // Round the number of days to the nearest integer
+  // because the number of milliseconds in a day is not constant
+  // (e.g. it's different in the day of the daylight saving time clock shift)
+  return Math.round((timestampLeft - timestampRight) / MILLISECONDS_IN_DAY)
+}
+
+module.exports = differenceInCalendarDays
+
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(2)
+
+/**
+ * @category Day Helpers
+ * @summary Return the start of a day for the given date.
+ *
+ * @description
+ * Return the start of a day for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|String|Number} date - the original date
+ * @returns {Date} the start of a day
+ *
+ * @example
+ * // The start of a day for 2 September 2014 11:55:00:
+ * var result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Tue Sep 02 2014 00:00:00
+ */
+function startOfDay (dirtyDate) {
+  var date = parse(dirtyDate)
+  date.setHours(0, 0, 0, 0)
+  return date
+}
+
+module.exports = startOfDay
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(2)
+var startOfISOWeek = __webpack_require__(7)
+var startOfISOYear = __webpack_require__(233)
+
+var MILLISECONDS_IN_WEEK = 604800000
+
+/**
+ * @category ISO Week Helpers
+ * @summary Get the ISO week of the given date.
+ *
+ * @description
+ * Get the ISO week of the given date.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|String|Number} date - the given date
+ * @returns {Number} the ISO week
+ *
+ * @example
+ * // Which week of the ISO-week numbering year is 2 January 2005?
+ * var result = getISOWeek(new Date(2005, 0, 2))
+ * //=> 53
+ */
+function getISOWeek (dirtyDate) {
+  var date = parse(dirtyDate)
+  var diff = startOfISOWeek(date).getTime() - startOfISOYear(date).getTime()
+
+  // Round the number of days to the nearest integer
+  // because the number of milliseconds in a week is not constant
+  // (e.g. it's different in the week of the daylight saving time clock shift)
+  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1
+}
+
+module.exports = getISOWeek
+
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(2)
+
+/**
+ * @category Week Helpers
+ * @summary Return the start of a week for the given date.
+ *
+ * @description
+ * Return the start of a week for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|String|Number} date - the original date
+ * @param {Object} [options] - the object with options
+ * @param {Number} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @returns {Date} the start of a week
+ *
+ * @example
+ * // The start of a week for 2 September 2014 11:55:00:
+ * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Sun Aug 31 2014 00:00:00
+ *
+ * @example
+ * // If the week starts on Monday, the start of the week for 2 September 2014 11:55:00:
+ * var result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), {weekStartsOn: 1})
+ * //=> Mon Sep 01 2014 00:00:00
+ */
+function startOfWeek (dirtyDate, dirtyOptions) {
+  var weekStartsOn = dirtyOptions ? (Number(dirtyOptions.weekStartsOn) || 0) : 0
+
+  var date = parse(dirtyDate)
+  var day = date.getDay()
+  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn
+
+  date.setDate(date.getDate() - diff)
+  date.setHours(0, 0, 0, 0)
+  return date
+}
+
+module.exports = startOfWeek
+
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getISOYear = __webpack_require__(132)
+var startOfISOWeek = __webpack_require__(7)
+
+/**
+ * @category ISO Week-Numbering Year Helpers
+ * @summary Return the start of an ISO week-numbering year for the given date.
+ *
+ * @description
+ * Return the start of an ISO week-numbering year,
+ * which always starts 3 days before the year's first Thursday.
+ * The result will be in the local timezone.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|String|Number} date - the original date
+ * @returns {Date} the start of an ISO year
+ *
+ * @example
+ * // The start of an ISO week-numbering year for 2 July 2005:
+ * var result = startOfISOYear(new Date(2005, 6, 2))
+ * //=> Mon Jan 03 2005 00:00:00
+ */
+function startOfISOYear (dirtyDate) {
+  var year = getISOYear(dirtyDate)
+  var fourthOfJanuary = new Date(0)
+  fourthOfJanuary.setFullYear(year, 0, 4)
+  fourthOfJanuary.setHours(0, 0, 0, 0)
+  var date = startOfISOWeek(fourthOfJanuary)
+  return date
+}
+
+module.exports = startOfISOYear
+
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isDate = __webpack_require__(131)
+
+/**
+ * @category Common Helpers
+ * @summary Is the given date valid?
+ *
+ * @description
+ * Returns false if argument is Invalid Date and true otherwise.
+ * Invalid Date is a Date, whose time value is NaN.
+ *
+ * Time value of Date: http://es5.github.io/#x15.9.1.1
+ *
+ * @param {Date} date - the date to check
+ * @returns {Boolean} the date is valid
+ * @throws {TypeError} argument must be an instance of Date
+ *
+ * @example
+ * // For the valid date:
+ * var result = isValid(new Date(2014, 1, 31))
+ * //=> true
+ *
+ * @example
+ * // For the invalid date:
+ * var result = isValid(new Date(''))
+ * //=> false
+ */
+function isValid (dirtyDate) {
+  if (isDate(dirtyDate)) {
+    return !isNaN(dirtyDate)
+  } else {
+    throw new TypeError(toString.call(dirtyDate) + ' is not an instance of Date')
+  }
+}
+
+module.exports = isValid
+
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildDistanceInWordsLocale = __webpack_require__(236)
+var buildFormatLocale = __webpack_require__(237)
+
+/**
+ * @category Locales
+ * @summary English locale.
+ */
+module.exports = {
+  distanceInWords: buildDistanceInWordsLocale(),
+  format: buildFormatLocale()
+}
+
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports) {
+
+function buildDistanceInWordsLocale () {
+  var distanceInWordsLocale = {
+    lessThanXSeconds: {
+      one: 'less than a second',
+      other: 'less than {{count}} seconds'
+    },
+
+    xSeconds: {
+      one: '1 second',
+      other: '{{count}} seconds'
+    },
+
+    halfAMinute: 'half a minute',
+
+    lessThanXMinutes: {
+      one: 'less than a minute',
+      other: 'less than {{count}} minutes'
+    },
+
+    xMinutes: {
+      one: '1 minute',
+      other: '{{count}} minutes'
+    },
+
+    aboutXHours: {
+      one: 'about 1 hour',
+      other: 'about {{count}} hours'
+    },
+
+    xHours: {
+      one: '1 hour',
+      other: '{{count}} hours'
+    },
+
+    xDays: {
+      one: '1 day',
+      other: '{{count}} days'
+    },
+
+    aboutXMonths: {
+      one: 'about 1 month',
+      other: 'about {{count}} months'
+    },
+
+    xMonths: {
+      one: '1 month',
+      other: '{{count}} months'
+    },
+
+    aboutXYears: {
+      one: 'about 1 year',
+      other: 'about {{count}} years'
+    },
+
+    xYears: {
+      one: '1 year',
+      other: '{{count}} years'
+    },
+
+    overXYears: {
+      one: 'over 1 year',
+      other: 'over {{count}} years'
+    },
+
+    almostXYears: {
+      one: 'almost 1 year',
+      other: 'almost {{count}} years'
+    }
+  }
+
+  function localize (token, count, options) {
+    options = options || {}
+
+    var result
+    if (typeof distanceInWordsLocale[token] === 'string') {
+      result = distanceInWordsLocale[token]
+    } else if (count === 1) {
+      result = distanceInWordsLocale[token].one
+    } else {
+      result = distanceInWordsLocale[token].other.replace('{{count}}', count)
+    }
+
+    if (options.addSuffix) {
+      if (options.comparison > 0) {
+        return 'in ' + result
+      } else {
+        return result + ' ago'
+      }
+    }
+
+    return result
+  }
+
+  return {
+    localize: localize
+  }
+}
+
+module.exports = buildDistanceInWordsLocale
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildFormattingTokensRegExp = __webpack_require__(238)
+
+function buildFormatLocale () {
+  // Note: in English, the names of days of the week and months are capitalized.
+  // If you are making a new locale based on this one, check if the same is true for the language you're working on.
+  // Generally, formatted dates should look like they are in the middle of a sentence,
+  // e.g. in Spanish language the weekdays and months should be in the lowercase.
+  var months3char = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  var monthsFull = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  var weekdays2char = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+  var weekdays3char = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  var weekdaysFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  var meridiemUppercase = ['AM', 'PM']
+  var meridiemLowercase = ['am', 'pm']
+  var meridiemFull = ['a.m.', 'p.m.']
+
+  var formatters = {
+    // Month: Jan, Feb, ..., Dec
+    'MMM': function (date) {
+      return months3char[date.getMonth()]
+    },
+
+    // Month: January, February, ..., December
+    'MMMM': function (date) {
+      return monthsFull[date.getMonth()]
+    },
+
+    // Day of week: Su, Mo, ..., Sa
+    'dd': function (date) {
+      return weekdays2char[date.getDay()]
+    },
+
+    // Day of week: Sun, Mon, ..., Sat
+    'ddd': function (date) {
+      return weekdays3char[date.getDay()]
+    },
+
+    // Day of week: Sunday, Monday, ..., Saturday
+    'dddd': function (date) {
+      return weekdaysFull[date.getDay()]
+    },
+
+    // AM, PM
+    'A': function (date) {
+      return (date.getHours() / 12) >= 1 ? meridiemUppercase[1] : meridiemUppercase[0]
+    },
+
+    // am, pm
+    'a': function (date) {
+      return (date.getHours() / 12) >= 1 ? meridiemLowercase[1] : meridiemLowercase[0]
+    },
+
+    // a.m., p.m.
+    'aa': function (date) {
+      return (date.getHours() / 12) >= 1 ? meridiemFull[1] : meridiemFull[0]
+    }
+  }
+
+  // Generate ordinal version of formatters: M -> Mo, D -> Do, etc.
+  var ordinalFormatters = ['M', 'D', 'DDD', 'd', 'Q', 'W']
+  ordinalFormatters.forEach(function (formatterToken) {
+    formatters[formatterToken + 'o'] = function (date, formatters) {
+      return ordinal(formatters[formatterToken](date))
+    }
+  })
+
+  return {
+    formatters: formatters,
+    formattingTokensRegExp: buildFormattingTokensRegExp(formatters)
+  }
+}
+
+function ordinal (number) {
+  var rem100 = number % 100
+  if (rem100 > 20 || rem100 < 10) {
+    switch (rem100 % 10) {
+      case 1:
+        return number + 'st'
+      case 2:
+        return number + 'nd'
+      case 3:
+        return number + 'rd'
+    }
+  }
+  return number + 'th'
+}
+
+module.exports = buildFormatLocale
+
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports) {
+
+var commonFormatterKeys = [
+  'M', 'MM', 'Q', 'D', 'DD', 'DDD', 'DDDD', 'd',
+  'E', 'W', 'WW', 'YY', 'YYYY', 'GG', 'GGGG',
+  'H', 'HH', 'h', 'hh', 'm', 'mm',
+  's', 'ss', 'S', 'SS', 'SSS',
+  'Z', 'ZZ', 'X', 'x'
+]
+
+function buildFormattingTokensRegExp (formatters) {
+  var formatterKeys = []
+  for (var key in formatters) {
+    if (formatters.hasOwnProperty(key)) {
+      formatterKeys.push(key)
+    }
+  }
+
+  var formattingTokens = commonFormatterKeys
+    .concat(formatterKeys)
+    .sort()
+    .reverse()
+  var formattingTokensRegExp = new RegExp(
+    '(\\[[^\\[]*\\])|(\\\\)?' + '(' + formattingTokens.join('|') + '|.)', 'g'
+  )
+
+  return formattingTokensRegExp
+}
+
+module.exports = buildFormattingTokensRegExp
+
+
+/***/ }),
 /* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "good-table table-responsive"
+    staticClass: "good-table"
   }, [_c('div', {
     staticClass: "table-header clearfix"
   }, [(_vm.title) ? _c('h2', {
     staticClass: "table-title pull-left"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "actions pull-right"
-  })]), _vm._v(" "), _c('table', {
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
     ref: "table",
     class: _vm.styleClass
   }, [_c('thead', [(_vm.globalSearch && _vm.externalSearchQuery == null) ? _c('tr', [_c('td', {
@@ -75287,7 +75296,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       row: row,
       index: index
     })], 2)
-  }))]), _vm._v(" "), (_vm.paginate) ? _c('div', {
+  }))])]), _vm._v(" "), (_vm.paginate) ? _c('div', {
     staticClass: "table-footer clearfix"
   }, [_c('div', {
     staticClass: "datatable-length pull-left"
@@ -75392,7 +75401,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/now-ui-kit/FormInput.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\now-ui-kit\\FormInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FormInput.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -75522,7 +75531,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] AuthorizedClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -75776,7 +75785,7 @@ var Component = __webpack_require__(3)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "C:\\Users\\Eunbee\\webapps\\rfidallas\\resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] PersonalAccessTokens.vue: functional components are not supported with templates, they should use render functions.")}
 
