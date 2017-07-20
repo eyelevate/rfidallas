@@ -34,8 +34,6 @@
                         b-error="{{ $errors->first('email') }}">
                     </bootstrap-input>
 
-                    <br/>
-
                     <!-- Password -->
                     <bootstrap-input class="form-group-no-border {{ $errors->has('password') ? ' has-danger' : '' }}" 
                         b-icon="ion-locked" 
@@ -47,8 +45,6 @@
                         b-err="{{ $errors->has('password') }}"
                         b-error="{{ $errors->first('password') }}">
                     </bootstrap-input>
-
-                    <br/>
 
                     <div class="col-12">
                         <label>

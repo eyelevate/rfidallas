@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'email' => $data['email'],
+            'role_id'=> 4, // Default to guest
             'password' => bcrypt($data['password']),
         ]);
     }

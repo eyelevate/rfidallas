@@ -5,7 +5,7 @@
             <div class="input-group-addon" v-if="uIcon">
                 <i class="ion" :class="icon" style="padding-right:3px; font-size:20px;"></i>
             </div>
-            <input id="" :placeholder="bPlaceholder" :type="ty" class="form-control" :name="nm" :value="old" autofocus>
+            <textarea id="" :placeholder="bPlaceholder" :type="ty" class="form-control" :name="nm" :value="old" autofocus></textarea>
             
         </div>
         <span class="help-block text-danger" v-if="err">

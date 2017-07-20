@@ -8,11 +8,11 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('managers_index') }}">Managers</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('employees_index') }}">Employees</a></li>
     <li class="breadcrumb-item active">Edit</li>
 </ol>
 <div class="container-fluid">
-{!! Form::open(['method'=>'patch','route'=>['managers_update',$manager->id]]) !!}
+{!! Form::open(['method'=>'patch','route'=>['employees_update',$employee->id]]) !!}
 	<bootstrap-card use-header="true" use-body="true" use-footer="true">
 		<template slot="header">Edit Form</template>
 		<template slot="body">
@@ -23,7 +23,7 @@
 		        b-placeholder="First Name"
 		        b-name="first_name"
 		        b-type="text"
-		        b-value="{{ old('first_name') ? old('first_name') : $manager->first_name }}"
+		        b-value="{{ old('first_name') ? old('first_name') : $employee->first_name }}"
 		        b-err="{{ $errors->has('first_name') }}"
 		        b-error="{{ $errors->first('first_name') }}">
 		    </bootstrap-input>
@@ -33,7 +33,7 @@
 		        b-placeholder="Last Name"
 		        b-name="last_name"
 		        b-type="text"
-		        b-value="{{ old('last_name') ? old('last_name') : $manager->last_name }}"
+		        b-value="{{ old('last_name') ? old('last_name') : $employee->last_name }}"
 		        b-err="{{ $errors->has('last_name') }}"
 		        b-error="{{ $errors->first('last_name') }}">
 		    </bootstrap-input>
@@ -43,7 +43,7 @@
 		        b-placeholder="Email Address"
 		        b-name="email"
 		        b-type="email"
-		        b-value="{{ old('email') ? old('email') : $manager->email }}"
+		        b-value="{{ old('email') ? old('email') : $employee->email }}"
 		        b-err="{{ $errors->has('email') }}"
 		        b-error="{{ $errors->first('email') }}">
 		    </bootstrap-input>
@@ -53,7 +53,7 @@
 		        b-placeholder="Phone Number"
 		        b-name="phone"
 		        b-type="text"
-		        b-value="{{ old('phone') ? old('phone') : $manager->phone }}"
+		        b-value="{{ old('phone') ? old('phone') : $employee->phone }}"
 		        b-err="{{ $errors->has('phone') }}"
 		        b-error="{{ $errors->first('phone') }}">
 		    </bootstrap-input>
@@ -85,7 +85,7 @@
             </div>
 		</template>
 		<template slot="footer">
-			<a href="{{ route('managers_index') }}" class="btn btn-secondary">Back</a>
+			<a href="{{ route('employees_index') }}" class="btn btn-secondary">Back</a>
 			<button class="btn btn-primary" type="submit">Update</button>
 		</template>
 	</bootstrap-card>

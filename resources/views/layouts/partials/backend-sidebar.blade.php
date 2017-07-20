@@ -21,15 +21,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('customers_index') }}"><i class="icon-user"></i> Customers</a>
                     </li>
+                    
+                    @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('employees_index') }}"><i class="icon-user"></i> Employees</a>
                     </li>
-                    @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1)
+                    @endif
+                    @if(Auth::user()->role_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('managers_index') }}"><i class="icon-user"></i> Managers</a>
                     </li>
-                    @endif
-                    @if(Auth::user()->role_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('partners_index') }}"><i class="icon-user"></i> Partners</a>
                     </li>                
@@ -40,10 +41,25 @@
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> Setup</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome</a>
+                        <a class="nav-link" href="{{ route('cards_index') }}"><i class="icon-puzzle"></i> Credit Cards </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="icons-simple-line-icons.html"><i class="icon-star"></i> Simple Line Icons</a>
+                        <a class="nav-link" href="{{ route('devices_index') }}"><i class="icon-puzzle"></i> Devices </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('fees_index') }}"><i class="icon-puzzle"></i> Fees </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('plans_index') }}"><i class="icon-puzzle"></i> Plans </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('services_index') }}"><i class="icon-puzzle"></i> Services </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('vendors_index') }}"><i class="icon-puzzle"></i> Vendors </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('taxes_index') }}"><i class="icon-puzzle"></i> Sales Tax </a>
                     </li>
                 </ul>
             </li>

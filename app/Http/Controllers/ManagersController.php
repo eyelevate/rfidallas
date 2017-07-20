@@ -14,8 +14,9 @@ class ManagersController extends Controller
      */
     public function index(User $user)
     {
+        $role = 2;
         $columns = $user->prepareTableColumns();
-        $rows = $user->prepareTableRows($user->where('role_id',2)->get(),2);
+        $rows = $user->prepareTableRows($user->where('role_id',$role)->get(),$role);
         return view('managers.index', compact(['columns','rows']));
 
     }
@@ -28,6 +29,7 @@ class ManagersController extends Controller
     public function create()
     {
         //
+        return view('managers.create');
     }
 
     /**
@@ -38,7 +40,29 @@ class ManagersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validate the form
+        $this->validate(request(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        // Create and save the user.
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // Redirect to the previous page.
+
+        flash('You successfully created a new manager.')->success()->important();
+        
+        return redirect()->route('managers_index');
     }
 
     /**
@@ -72,15 +96,14 @@ class ManagersController extends Controller
      */
     public function update(Request $request, User $manager)
     {
-        $this->validate(request(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255',
-            'password' => 'string|min:6|confirmed',
-        ]);
 
         if (trim($request->password == '')) {
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255'
+            ]);
             $manager->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -88,6 +111,13 @@ class ManagersController extends Controller
                 'email' => $request->email
             ]);
         } else {
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
             $manager->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -108,8 +138,12 @@ class ManagersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $manager)
     {
-        //
+        if($manager->delete()) 
+        {
+            flash('You have successfully deleted '.$manager->email.' as a manager.')->success();
+            return redirect()->route('managers_index');
+        }
     }
 }

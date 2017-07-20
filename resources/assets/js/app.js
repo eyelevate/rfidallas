@@ -37,7 +37,9 @@ window.Event = new class {
 Vue.component('bootstrap-card',require('./components/bootstrap/Card.vue'));
 Vue.component('bootstrap-input',require('./components/bootstrap/Input.vue'));
 Vue.component('bootstrap-modal',require('./components/bootstrap/Modal.vue'));
+Vue.component('bootstrap-select',require('./components/bootstrap/Select.vue'));
 Vue.component('bootstrap-table',require('./components/bootstrap/Table.vue'));
+Vue.component('bootstrap-textarea',require('./components/bootstrap/Textarea.vue'));
 
 // Now-ui-kit Components
 Vue.component('now-input',require('./components/now-ui-kit/FormInput.vue'));

@@ -14,18 +14,18 @@
 <!-- Breadcrumb -->	
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('customers_index') }}">Customer</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('employees_index') }}">Employees</a></li>
     <li class="breadcrumb-item active">Create</li>
 </ol>
 
 <div class="container-fluid">
-	<form class="" method="POST" action="{{ route('customers_store') }}">
+	<form class="" method="POST" action="{{ route('employees_store') }}">
 
-	{{ csrf_field() }}
+		{{ csrf_field() }}
 
 		<bootstrap-card use-header = "true" use-body="true" use-footer = "true">
 			
-			<template slot = "header"> Create Customer </template>
+			<template slot = "header"> Create An Employee </template>
 			<template slot = "body">
 			
 
@@ -109,13 +109,13 @@
 	                    b-placeholder="Confirm Password"
 	                    b-name="password_confirmation"
 	                    b-type="password"
-	                    b-value="{{ old('password_confirmation') }}"
-	                    b-err="{{ $errors->has('password_confimration') }}"
-	                    b-error="{{ $errors->first('password_confirmation') }}">
+                        b-value="{{ old('password_confirmation') }}"
+                        b-err="{{ $errors->has('password_confimration') }}"
+                        b-error="{{ $errors->first('password_confirmation') }}">
 	                </bootstrap-input>
-	          
+              
 
-	          
+              
 		        </div>
 			</template>
 
@@ -128,6 +128,10 @@
 		</bootstrap-card>
 	</form>
 </div>
+
+
+
+
 @endsection
 
 @section('modals')

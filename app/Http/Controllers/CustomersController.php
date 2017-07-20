@@ -15,9 +15,10 @@ class CustomersController extends Controller
      */
     public function index(User $user)
     {
+        $role = 4;
         $columns = $user->prepareTableColumns();
-        $customers = $user->prepareTableRows($user->all());
-        return view('customers.index', compact(['columns','customers']));
+        $rows = $user->prepareTableRows($user->where('role_id',$role)->get(), $role);
+        return view('customers.index', compact(['columns','rows']));
     }
 
     /**
@@ -91,8 +92,6 @@ class CustomersController extends Controller
      */
     public function edit(User $customer)
     {
-        
-
         return view('customers.edit', compact('customer'));
     }
 
@@ -103,22 +102,19 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-        //Validate the form
-        $this->validate(request(), [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255',
-            'password' => 'string|min:6|confirmed',
-        ]);
-
+    public function update(Request $request, User $customer)
+    {   
         //Check if the user enters the password.
         if (trim($request->password) == '')
         {
-            $user->save([
+            //Validate the form
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255'
+            ]);
+            $customer->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
@@ -127,7 +123,15 @@ class CustomersController extends Controller
         }
         else
         {
-            $user->save([
+            //Validate the form
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+            $customer->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
@@ -149,11 +153,15 @@ class CustomersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $customer)
     {
-        //
+        if($customer->delete()) 
+        {
+            flash('You have successfully deleted a customer.')->success()->important();
+            return redirect()->route('customers_index');
+        }
     }
 }

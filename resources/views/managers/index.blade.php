@@ -19,7 +19,7 @@
 <div class="container-fluid" style="padding-top:25px;">
 	
 		<bootstrap-card use-header="true" use-body="true" use-footer="true">
-			<template slot="header">Search Results</template>
+			<template slot="header">Manager Search Results</template>
 			<template slot="body">
 				<div class="table-responsive">
 					<bootstrap-table
@@ -47,7 +47,7 @@
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>
 			<template slot="body">
-				Are you sure you wish to delete?
+				Are you sure you wish to delete {{ $row->email }}?
 			</template>
 			<template slot="footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

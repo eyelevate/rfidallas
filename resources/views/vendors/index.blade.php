@@ -14,16 +14,16 @@
 <!-- Breadcrumb -->
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
-    <li class="breadcrumb-item active">Employees</li>
+    <li class="breadcrumb-item active">Vendors</li>
 </ol>
 <div class="container-fluid" style="padding-top:25px;">
 	
 		<bootstrap-card use-header="true" use-body="true" use-footer="true">
-			<template slot="header">Employee Search Results</template>
+			<template slot="header">Vendors Search Results</template>
 			<template slot="body">
 				<div class="table-responsive">
 					<bootstrap-table
-						title="Customer Search Results"
+						title="Vendors Search Results"
 						:columns="{{ $columns }}"
 						:rows="{{ $rows }}"
 						:paginate="true"
@@ -33,7 +33,7 @@
 			    </div>
 			</template>
 			<template slot="footer">
-				<a href="{{ route('employees_create') }}" class="btn btn-primary">Add Employee</a>
+				<a href="{{ route('vendors_create') }}" class="btn btn-primary">Add Vendor</a>
 			</template>
 		</bootstrap-card>
 	
@@ -43,11 +43,11 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
-		{!! Form::open(['method'=>'delete','route'=>['employees_destroy',$row->id]]) !!}
+		{!! Form::open(['method'=>'delete','route'=>['vendors_destroy',$row->id]]) !!}
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>
 			<template slot="body">
-				Are you sure you wish to delete {{ $row->email }}?
+				Are you sure you wish to delete {{ $row->full_name }}?
 			</template>
 			<template slot="footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

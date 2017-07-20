@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PartnersController extends Controller
 {
@@ -11,9 +12,12 @@ class PartnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('partners.index');
+        $role = 1;
+        $columns = $user->prepareTableColumns();
+        $rows = $user->prepareTableRows($user->where('role_id',$role)->get(), $role);
+        return view('partners.index', compact(['columns','rows']));
     }
 
     /**
@@ -23,7 +27,7 @@ class PartnersController extends Controller
      */
     public function create()
     {
-        //
+        return view('partners.create');
     }
 
     /**
@@ -34,7 +38,32 @@ class PartnersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //Validate the form
+        $this->validate(request(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        // Create and save the user.
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // Redirect to the previous page.
+
+        flash('You successfully created a new partner.')->success()->important();
+        
+        return redirect()->route('partners_index');
+
+
     }
 
     /**
@@ -54,9 +83,9 @@ class PartnersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $partner)
     {
-        //
+        return view('partners.edit', compact('partner'));
     }
 
     /**
@@ -66,9 +95,52 @@ class PartnersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, User $partner)
+    {   
+        //Check if the user enters the password.
+        if (trim($request->password) == '')
+        {
+            //Validate the form
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255'
+            ]);
+            $partner->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email
+            ]);
+        }
+        else
+        {
+            //Validate the form
+            $this->validate(request(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+            $partner->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        // Create and save the user.
+
+
+        // Redirect to the previous page.
+        flash('You successfully updated the partner.')->success()->important();
+        
+        return redirect()->route('partners_index');
+
     }
 
     /**
@@ -77,8 +149,12 @@ class PartnersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $partner)
     {
-        //
+        if($partner->delete()) 
+        {
+            flash('You have successfully deleted a partner.')->success()->important();
+            return redirect()->route('partners_index');
+        }
     }
 }
