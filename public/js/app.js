@@ -74437,9 +74437,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['b-icon', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type'],
+	props: ['b-icon', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type', 'use-icon', 'use-label', 'label'],
+
 	data: function data() {
 		return {
 			err: this.bError,
@@ -74447,7 +74449,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			ph: this.bPlaceholder,
 			ty: this.bType,
 			nm: this.bName,
-			old: this.bValue
+			old: this.bValue,
+			uIcon: this.useIcon == "true",
+			uLabel: this.useLabel == "true"
 		};
 	},
 	mounted: function mounted() {}
@@ -74458,13 +74462,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "input-group mb-2 mr-sm-2 mb-sm-0"
-  }, [_c('div', {
-    staticClass: "input-group-addon",
-    staticStyle: {
-      "width": "40px"
-    }
+  return _c('div', {
+    staticClass: "form-group"
+  }, [(_vm.uLabel) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [(_vm.uIcon) ? _c('div', {
+    staticClass: "input-group-addon"
   }, [_c('i', {
     staticClass: "ion",
     class: _vm.icon,
@@ -74472,14 +74475,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "padding-right": "3px",
       "font-size": "20px"
     }
-  })]), _vm._v(" "), _c('input', {
+  })]) : _vm._e(), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
       "id": "",
       "placeholder": _vm.bPlaceholder,
       "type": _vm.ty,
       "name": _vm.nm,
-      "required": "",
       "autofocus": ""
     },
     domProps: {
