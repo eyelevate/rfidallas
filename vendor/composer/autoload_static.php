@@ -20,6 +20,7 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'e23faeee409e941dc9b4c80386209c39' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/functions.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -111,6 +112,7 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'C' => 
         array (
             'Cron\\' => 5,
+            'Collective\\Html\\' => 16,
             'Carbon\\' => 7,
         ),
         'A' => 
@@ -298,6 +300,10 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         array (
             0 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
         ),
+        'Collective\\Html\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelcollective/html/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -362,6 +368,7 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'App\\DeviceHistory' => __DIR__ . '/../..' . '/app/DeviceHistory.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Fee' => __DIR__ . '/../..' . '/app/Fee.php',
+        'App\\Http\\Controllers\\AdminsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminsController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -369,17 +376,22 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'App\\Http\\Controllers\\CardsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CardsController.php',
         'App\\Http\\Controllers\\CompaniesController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompaniesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CustomersController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomersController.php',
         'App\\Http\\Controllers\\DevicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/DevicesController.php',
+        'App\\Http\\Controllers\\EmployeesController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeesController.php',
         'App\\Http\\Controllers\\FeesController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeesController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ManagersController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManagersController.php',
+        'App\\Http\\Controllers\\PartnersController' => __DIR__ . '/../..' . '/app/Http/Controllers/PartnersController.php',
         'App\\Http\\Controllers\\PlansController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlansController.php',
         'App\\Http\\Controllers\\ServicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicesController.php',
         'App\\Http\\Controllers\\TaxesController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaxesController.php',
         'App\\Http\\Controllers\\TransactionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TransactionsController.php',
         'App\\Http\\Controllers\\VendorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckRole' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckRole.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
-        'App\\Http\\Middleware\\FrontendMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/FrontendMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
@@ -398,6 +410,13 @@ class ComposerStaticInit00a0ef05480dd60cebb3e7aafdf2d036
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+        'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
+        'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+        'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
+        'Collective\\Html\\FormFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/FormFacade.php',
+        'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
+        'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
+        'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
         'CreateCardsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_14_214949_create_cards_table.php',
         'CreateCompaniesTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_14_163454_create_companies_table.php',
         'CreateDeviceHistoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_14_201221_create_device_histories_table.php',

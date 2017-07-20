@@ -72,9 +72,10 @@
         <aside class="aside-menu">
             @include('layouts.partials.backend-aside')
         </aside>
+        <!-- Modals -->
+        @yield('modals')
     </div>
-    <!-- Modals -->
-    @yield('modals')
+    
     <!-- Footer -->
     <footer class="app-footer">
         @include('layouts.partials.backend-footer')    
