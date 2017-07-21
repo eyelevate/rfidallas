@@ -12,9 +12,12 @@ class FeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Fee $fee)
     {
-        //
+        $columns = $fee->prepareTableColumns();
+        $rows = $fee->prepareTableRows($fee->all());
+        
+        return view('fees.index', compact(['columns','rows']));
     }
 
     /**
@@ -24,7 +27,7 @@ class FeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('fees.create');
     }
 
     /**
@@ -35,7 +38,21 @@ class FeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validate the form
+        $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string|max:255',
+            'pretax' => 'required|numeric'
+        ]);
+
+        // Create and save the user.
+        Fee::create(request()->all());
+
+        // Redirect to the previous page.
+
+        flash('You successfully created a new fee.')->success();
+        
+        return redirect()->route('fees_index');
     }
 
     /**
@@ -57,7 +74,7 @@ class FeesController extends Controller
      */
     public function edit(Fee $fee)
     {
-        //
+        return view('fees.edit',compact('fee'));
     }
 
     /**
@@ -69,7 +86,15 @@ class FeesController extends Controller
      */
     public function update(Request $request, Fee $fee)
     {
-        //
+        //Validate the form
+        $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string|max:255',
+            'pretax' => 'required|numeric'
+        ]);
+        flash('Successfully updated fee!')->success();
+        $fee->update(request()->all());
+        return redirect()->route('fees_index');
     }
 
     /**
@@ -80,6 +105,10 @@ class FeesController extends Controller
      */
     public function destroy(Fee $fee)
     {
-        //
+        if($fee->delete()) 
+        {
+            flash('You have successfully deleted a fee.')->success();
+            return redirect()->route('fees_index');
+        }
     }
 }

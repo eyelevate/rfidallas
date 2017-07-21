@@ -44,9 +44,6 @@
                         <a class="nav-link" href="{{ route('cards_index') }}"><i class="icon-puzzle"></i> Credit Cards </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('devices_index') }}"><i class="icon-puzzle"></i> Devices </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('fees_index') }}"><i class="icon-puzzle"></i> Fees </a>
                     </li>
                     <li class="nav-item">
@@ -66,6 +63,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="widgets.html"><i class="icon-key"></i> Accessibility </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('assets_index') }}"><i class="icon-screen-smartphone"></i> Assets </a>
+            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Reports</a>
             </li>

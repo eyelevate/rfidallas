@@ -15,14 +15,15 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('asset_id');
             $table->string('vendor_id');
             $table->string('model');
             $table->string('name');
             $table->text('desc')->nullable();
             $table->text('issue')->nullable();
-            $table->decimal('price',11,2);
-            $table->decimal('tax',11,2);
-            $table->decimal('total',11,2);
+            $table->decimal('price',11,2)->nullable();
+            $table->decimal('tax',11,2)->nullable();
+            $table->decimal('total',11,2)->nullable();
             /*
             * Status:
             * 1 - Available

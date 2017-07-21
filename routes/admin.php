@@ -53,13 +53,23 @@ Route::group(['middleware' => ['check:3']], function () {
 	// Admins
     Route::get('/admins','AdminsController@index')->name('admins_index');
     Route::get('/admins/logout','AdminsController@logout')->name('admins_logout');
+    
+    // Assets
+	Route::get('/assets','AssetsController@index')->name('assets_index');
+	Route::get('/assets/create','AssetsController@create')->name('assets_create');
+	Route::delete('/assets/{asset}','AssetsController@destroy')->name('assets_destroy');
+	Route::post('/assets/store','AssetsController@store')->name('assets_store');
+	Route::get('/assets/{asset}/show','AssetsController@show')->name('assets_show');
+	Route::get('/assets/{asset}/edit','AssetsController@edit')->name('assets_edit');
+	Route::patch('/assets/{asset}','AssetsController@update')->name('assets_update');
+
     // Cards
 	Route::get('/cards','CardsController@index')->name('cards_index');
 	Route::get('/cards/create','CardsController@create')->name('cards_create');
 	Route::post('/cards/store','CardsController@store')->name('cards_store');
 	Route::get('/cards/{card}/show','CardsController@show')->name('cards_show');
 	Route::get('/cards/{card}/edit','CardsController@edit')->name('cards_edit');
-	Route::patch('/cards/{card}','CompaniesController@update')->name('cards_update');
+	Route::patch('/cards/{card}','CardsController@update')->name('cards_update');
 	// Companies
 	Route::get('/companies','CompaniesController@index')->name('companies_index');
 	Route::get('/companies/create','CompaniesController@create')->name('companies_create');
@@ -86,10 +96,10 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/devices/{device}/edit','DevicesController@edit')->name('devices_edit');
 	Route::patch('/devices/{device}','DevicesController@update')->name('devices_update');
 
-
 	// Fees
 	Route::get('/fees','FeesController@index')->name('fees_index');
 	Route::get('/fees/create','FeesController@create')->name('fees_create');
+	Route::delete('/fees/{fee}','FeesController@destroy')->name('fees_destroy');
 	Route::post('/fees/store','FeesController@store')->name('fees_store');
 	Route::get('/fees/{fee}/show','FeesController@show')->name('fees_show');
 	Route::get('/fees/{fee}/edit','FeesController@edit')->name('fees_edit');
@@ -106,6 +116,7 @@ Route::group(['middleware' => ['check:3']], function () {
 	// Services
 	Route::get('/services','ServicesController@index')->name('services_index');
 	Route::get('/services/create','ServicesController@create')->name('services_create');
+	Route::delete('/services/{service}','ServicesController@destroy')->name('services_destroy');
 	Route::post('/services/store','ServicesController@store')->name('services_store');
 	Route::get('/services/{service}/show','ServicesController@show')->name('services_show');
 	Route::get('/services/{service}/edit','ServicesController@edit')->name('services_edit');

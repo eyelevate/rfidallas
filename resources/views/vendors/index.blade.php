@@ -18,24 +18,24 @@
 </ol>
 <div class="container-fluid">
 	
-		<bootstrap-card use-header="true" use-body="true" use-footer="true">
-			<template slot="header">Vendors Search Results</template>
-			<template slot="body">
-				<div class="table-responsive">
-					<bootstrap-table
-						title="Vendors Search Results"
-						:columns="{{ $columns }}"
-						:rows="{{ $rows }}"
-						:paginate="true"
-						:global-search="true"
-						:line-numbers="true"/>
-					</bootstrap-table>
-			    </div>
-			</template>
-			<template slot="footer">
-				<a href="{{ route('vendors_create') }}" class="btn btn-primary">Add Vendor</a>
-			</template>
-		</bootstrap-card>
+	<bootstrap-card use-header="true" use-body="true" use-footer="true">
+		<template slot="header">Vendors Search Results</template>
+		<template slot="body">
+			<div class="table-responsive">
+				<bootstrap-table
+					title="Vendors Search Results"
+					:columns="{{ $columns }}"
+					:rows="{{ $rows }}"
+					:paginate="true"
+					:global-search="true"
+					:line-numbers="true"/>
+				</bootstrap-table>
+		    </div>
+		</template>
+		<template slot="footer">
+			<a href="{{ route('vendors_create') }}" class="btn btn-primary">Add Vendor</a>
+		</template>
+	</bootstrap-card>
 	
 </div>
 @endsection

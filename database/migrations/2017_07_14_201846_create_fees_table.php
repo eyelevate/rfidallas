@@ -18,8 +18,6 @@ class CreateFeesTable extends Migration
             $table->string('name');
             $table->string('desc')->nullable();
             $table->decimal('pretax',11,2);
-            $table->decimal('tax',11,2);
-            $table->decimal('total',11,2);
             $table->softDeletes();
             $table->timestamps();
         });
