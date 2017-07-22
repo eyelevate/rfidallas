@@ -24,7 +24,7 @@ class AssetItem extends Model
 
     public function assets() 
     {
-    	return $this->belongsTo(Asset::class);
+    	return $this->belongsTo(Asset::class,'asset_id','id');
     }
 
     public function company()

@@ -113,6 +113,7 @@ class AssetItemsController extends Controller
      */
     public function update(Request $request, AssetItem $assetItem)
     {
+        
         //Validate the form
         $this->validate(request(), [
             'name' => 'required|string|max:255',
@@ -123,9 +124,125 @@ class AssetItemsController extends Controller
             'price' => 'required|numeric',
             'status'=>'required'
         ]);
-        flash('Successfully updated asset item!')->success();
-        $assetItem->update(request()->all());
-        return redirect()->route('assets_index');
+        // Set old asset item before saving for comparison later on
+        $old_assetItem = AssetItem::find($assetItem->id);
+
+        // Check if user changed status back to 1 (Available) or 6 (Returned) ** refer to AssetItemHistory model
+        if ($request->status == 1 || $request->status == 6)
+        {
+            // If returned or available then company ID must be NULL
+            request()->company_id = NULL;
+        }
+
+        $update = $assetItem->update(request()->all());
+        if ($update) {
+            $assetItemHistory = new AssetItemHistory;
+            $assetItemHistory->asset_item_id = $assetItem->id;
+            $assetItemHistory->user_id = Auth::user()->id;
+            $assetItemHistory->type = 9;
+            $statuses = $assetItem->prepareStatusesForSelect();
+        
+            // Start details
+            $detail = [];
+
+            if ($old_assetItem->asset_id != $assetItem->asset_id) { // Check asset id 
+                $asset = Asset::find($assetItem->asset_id);
+                $new_asset_name = $asset->name;
+                array_push($detail,[
+                    'name'=>'Asset Group',
+                    'old'=>'('.$old_assetItem->asset_id.') '.$old_assetItem->assets->name,
+                    'new'=>'('.$assetItem->asset_id.') '.$new_asset_name]
+                );
+            }
+
+            if ($old_assetItem->vendor_id != $assetItem->vendor_id) { // Check vendor id
+                $vendor = Vendor::find($vendor->vendor_id);
+                $new_vendor_name = $vendor->name;
+                array_push($detail,[
+                    'name'=>'Vendor',
+                    'old'=>'('.$old_assetItem->vendor_id.') '.$old_assetItem->vendor->name,
+                    'new'=>'('.$assetItem->vendor_id.') '.$new_vendor_name]
+                );
+            }
+            
+            if ($old_assetItem->company_id != $assetItem->company_id) { // Check company_id
+                $old_company_name = (isset($old_assetItem->company_id)) ? $old_assetItem->company->name :  'None Set';
+                $company = Company::find($assetItem->company_id);
+                $new_company_name = (count($company) > 0) ? $company->name : 'None Set';
+                array_push($detail,[
+                    'name'=>'Company',
+                    'old'=>'('.$old_assetItem->company_id.') '.$old_company_name,
+                    'new'=>'('.$assetItem->company_id.') '.$new_company_name]
+                );
+            }
+
+            if ($old_assetItem->name != $assetItem->name) { // CHeck name
+                array_push($detail,[
+                    'name'=>'Name',
+                    'old'=>$old_assetItem->name,
+                    'new'=>$assetItem->name]
+                );
+            }
+
+            if ($old_assetItem->desc != $assetItem->desc) { // Description
+                array_push($detail,[
+                    'name'=>'Description',
+                    'old'=>$old_assetItem->desc,
+                    'new'=>$assetItem->desc]
+                );
+            }
+
+            if ($old_assetItem->model != $assetItem->model) { // Model
+                array_push($detail,[
+                    'name'=>'Model',
+                    'old'=>$old_assetItem->model,
+                    'new'=>$assetItem->model]
+                );
+            }
+
+            if ($old_assetItem->serial != $assetItem->serial) { // Serial
+                array_push($detail,[
+                    'name'=>'Serial',
+                    'old'=>$old_assetItem->serial,
+                    'new'=>$assetItem->serial]
+                );
+            }
+
+            if ($old_assetItem->price != $assetItem->price) { // Price
+                array_push($detail,[
+                    'name'=>'Price',
+                    'old'=>$old_assetItem->price,
+                    'new'=>$assetItem->price]
+
+                );
+            }
+
+            if ($old_assetItem->status != $assetItem->status) { // Status
+                array_push($detail,[
+                    'name'=>'Status',
+                    'old'=>'('.$old_assetItem->status.') - '.$statuses[$old_assetItem->status],
+                    'new'=>'('.$assetItem->status.') - '.$statuses[$assetItem->status]]
+
+                );
+            }
+
+            if ($old_assetItem->reason != $assetItem->reason) { // Reason
+                array_push($detail,[
+                    'name'=>'Reason',
+                    'old'=>$old_assetItem->reason,
+                    'new'=>$assetItem->reason]
+                );
+            }
+            $assetItemHistory->detail = json_encode($detail);
+            $assetItemHistory->status = 1;
+
+            if ($assetItemHistory->save()) {
+                flash('Successfully updated asset item!')->success();
+                return redirect()->route('assets_index');
+            }
+
+        }
+        
     }
 
     /**

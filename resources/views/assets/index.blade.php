@@ -65,16 +65,16 @@
 				<template slot="header">
 					<ul class="nav nav-tabs card-header-tabs" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+							<a class="nav-link active" data-toggle="tab" href="#overview-{{ $ai->id }}" role="tab">Overview</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#history" role="tab">History</a>
+							<a class="nav-link" data-toggle="tab" href="#history-{{ $ai->id }}" role="tab">History</a>
 						</li>
 					</ul>
 				</template>
 				<template slot="body">
 					<div class="tab-content" style="border:none;">
-						<div class="tab-pane active" id="overview" role="tabpanel">
+						<div class="tab-pane active" id="overview-{{ $ai->id }}" role="tabpanel">
 							<!-- Name -->
 							<bootstrap-readonly
 								use-input="true"
@@ -154,7 +154,7 @@
 								b-label="Status Notes"
 							></bootstrap-readonly>						
 						</div>
-						<div id="history" class="tab-pane">
+						<div id="history-{{ $ai->id }}" class="tab-pane">
 							<div class="list-group">
 								@if (count($ai->assetItemHistory))
 									@foreach($ai->assetItemHistory as $aih)
@@ -164,8 +164,38 @@
 											<h3 class="mb-1"><span class="badge {{ $aih->type_set['status'] }}">{{ $aih->type_set['text'] }}</span></h3>
 											<small>{{ $aih->created_at->diffForHumans() }}</small>
 										</div>
+										@if ($aih->type > 7)
+											@if (json_decode($aih->detail) !== NULL)
+												<ul>
+												@foreach(json_decode($aih->detail) as $detail)
+												<li class="mb-1"><p>{{ $detail->name }}</p>
+												<table class="table table-bordered table-striped table-sm table-hover">
+													<thead>
+														<tr>
+															<th>Original</th>
+															<th>New</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>{{ $detail->old }}</td>
+															<td>{{ $detail->new }}</td>
+														</tr>
+													</tbody>
+												</table>
+												@endforeach
+												</ul>
+											@endif
+										<ul>
+
+										</ul>
+										<small>Edited by: <strong>{{ $aih->user->email }}</strong> : {{ $aih->user->first_name }} {{ $aih->user->last_name }}</small>
+										@else
 										<p class="mb-1">{{ $aih->detail }}</p>
 										<small>Created by: <strong>{{ $aih->user->email }}</strong> : {{ $aih->user->first_name }} {{ $aih->user->last_name }}</small>
+										@endif
+										
+										
 									</a>
 									@endforeach
 								@endif

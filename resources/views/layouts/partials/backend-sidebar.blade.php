@@ -63,10 +63,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="widgets.html"><i class="icon-key"></i> Accessibility </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('assets_index') }}"><i class="icon-screen-smartphone"></i> Assets </a>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-screen-smartphone"></i> Assets</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('assets_index') }}"><i class="icon-puzzle"></i> Manage </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('asset_items_deploy') }}"><i class="icon-puzzle"></i> Deploy </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('asset_items_return') }}"><i class="icon-puzzle"></i> Return </a>
+                    </li>
+                </ul>
             </li>
-            
             <li class="nav-item">
                 <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Reports</a>
             </li>

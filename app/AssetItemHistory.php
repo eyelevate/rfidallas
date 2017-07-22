@@ -20,6 +20,20 @@ class AssetItemHistory extends Model
     	return $this->belongsTo(AssetItem::class,'asset_item_id','id');
     }
 
+    /**
+	* TYPES
+	* 1 - Available
+	* 2 - Deployed To Company
+	* 3 - Issue Created By Member
+	* 4 - Issue Claimed By Admin
+	* 5 - Issue Resolved By Admin
+	* 6 - Returned 
+	* 7 - Other
+	* 8 - New Asset Created 
+	* 8 - Edited 
+	* 9 - Deleted 
+	**/
+
     public function convertTypeToText($type)
     {
     	$status_class = 'badge-warning';
@@ -45,6 +59,17 @@ class AssetItemHistory extends Model
     		case 6: // Returned to Vendor
     			$text = 'Returned to Vendor';
     			$status_class = 'badge-danger'; 
+    			break;
+    		case 8:
+    			$text = 'New Assset Created';
+    			$status_class = 'badge-info';
+    			break;
+    		case 9:
+    			$text = 'Asset Info Edited';
+    			break;
+    		case 10:
+    			$text = 'Asset Deleted';
+    			$status_class = 'badge-danger';
     			break;
     		default: // Other
     			$text = 'Other';
