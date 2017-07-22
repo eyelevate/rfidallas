@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\AssetItem;
+use App\Company;
+use App\Vendor;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 class AssetsController extends Controller
@@ -12,9 +17,15 @@ class AssetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Asset $asset, Company $company, Vendor $vendor, AssetItem $assetItem)
     {
-        //
+        $assets = $asset->prepareTableData($asset->all());
+        $companies = $company->prepareCompanyForSelect($company->orderBy('name','asc')->get());
+        $vendors = $vendor->prepareVendorForSelect($vendor->orderBy('name','asc')->get());
+        $statuses = $assetItem->prepareStatusesForSelect();
+        $columns = $assetItem->prepareTableColumns();
+
+        return view('assets.index',compact(['assets','companies','vendors','statuses','columns']));
     }
 
     /**
@@ -24,7 +35,7 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
     /**
@@ -35,7 +46,20 @@ class AssetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validate the form
+        $this->validate(request(), [
+            'name' => 'required|string|max:255',
+            'desc' => 'required|string|max:255'
+        ]);
+
+        // Create and save the user.
+        Asset::create(request()->all());
+
+        // Redirect to the previous page.
+
+        flash('You successfully created a new asset group.')->success();
+        
+        return redirect()->route('assets_index');
     }
 
     /**

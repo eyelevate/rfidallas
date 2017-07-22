@@ -43,6 +43,112 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
+		<bootstrap-modal id="viewModal-{{ $row->id }}">
+			<template slot="header">View Vendor - {{ $row->name }}</template>
+			<template slot="body">
+				<!-- Name -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->name }}"
+					use-label="true"
+					b-label="Name">	
+				</bootstrap-readonly>
+
+				<!-- Nick Name -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->nick_name }}"
+					use-label="true"
+					b-label="Nick Name"
+				></bootstrap-readonly>
+
+				<!-- Phone -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->phone }}"
+					use-label="true"
+					b-label="Phone"
+				></bootstrap-readonly>
+
+				<!-- Email -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->email }}"
+					use-label="true"
+					b-label="Email"
+				></bootstrap-readonly>
+
+				<!-- Street -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->street }}"
+					use-label="true"
+					b-label="Street"
+				></bootstrap-readonly>
+
+				<!-- Suite -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->suite }}"
+					use-label="true"
+					b-label="suite"
+				></bootstrap-readonly>
+
+				<!-- City -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->city }}"
+					use-label="true"
+					b-label="City"
+				></bootstrap-readonly>
+
+				<!-- State -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->state }}"
+					use-label="true"
+					b-label="State"
+				></bootstrap-readonly>
+
+				<!-- Country -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->country }}"
+					use-label="true"
+					b-label="Country"
+				></bootstrap-readonly>
+
+				<!-- zipcode -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->zipcode }}"
+					use-label="true"
+					b-label="Zipcode"
+				></bootstrap-readonly>
+
+				<!-- Contact Name -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->contact_name }}"
+					use-label="true"
+					b-label="Contact Name"
+				></bootstrap-readonly>
+
+				<!-- Contact Options -->
+				<bootstrap-readonly
+					use-textarea="true"
+					b-value="{{ $row->contact_option }}"
+					use-label="true"
+					b-label="Contact Notes"
+				></bootstrap-readonly>
+				
+			</template>
+			<template slot="footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
+				<a href="{{ route('vendors_edit',$row->id) }}" class="btn btn-primary">Edit</a>
+			</template>
+		</bootstrap-modal>
 		{!! Form::open(['method'=>'delete','route'=>['vendors_destroy',$row->id]]) !!}
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>

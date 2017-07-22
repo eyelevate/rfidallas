@@ -63,6 +63,19 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/assets/{asset}/edit','AssetsController@edit')->name('assets_edit');
 	Route::patch('/assets/{asset}','AssetsController@update')->name('assets_update');
 
+	// Asset Items
+	Route::get('/asset-items','AssetItemsController@index')->name('asset_items_index');
+	Route::get('/asset-items/create','AssetItemsController@create')->name('asset_items_create');
+	Route::delete('/asset-items/{assetItem}','AssetItemsController@destroy')->name('asset_items_destroy');
+	Route::get('/asset-items/deploy','AssetItemsController@deploy')->name('asset_items_deploy');
+	Route::patch('/asset-items/{assetItem}/deploy','AssetItemsController@updateDeploy')->name('asset_items_update_deploy');
+	Route::get('/asset-items/return','AssetItemsController@return')->name('asset_items_return');
+	Route::patch('/asset-items/{assetItem}/return','AssetItemsController@updateReturn')->name('asset_items_update_return');
+	Route::post('/asset-items/store','AssetItemsController@store')->name('asset_items_store');
+	Route::get('/asset-items/{assetItem}/show','AssetItemsController@show')->name('asset_items_show');
+	Route::get('/asset-items/{assetItem}/edit','AssetItemsController@edit')->name('asset_items_edit');
+	Route::patch('/asset-items/{assetItem}','AssetItemsController@update')->name('asset_items_update');
+
     // Cards
 	Route::get('/cards','CardsController@index')->name('cards_index');
 	Route::get('/cards/create','CardsController@create')->name('cards_create');
@@ -87,14 +100,6 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/customers/{customer}/show','CustomersController@show')->name('customers_show');
 	Route::get('/customers/{customer}/edit','CustomersController@edit')->name('customers_edit');
 	Route::patch('/customers/{customer}','CustomersController@update')->name('customers_update');
-
-	// Devices
-	Route::get('/devices','DevicesController@index')->name('devices_index');
-	Route::get('/devices/create','DevicesController@create')->name('devices_create');
-	Route::post('/devices/store','DevicesController@store')->name('devices_store');
-	Route::get('/devices/{device}/show','DevicesController@show')->name('devices_show');
-	Route::get('/devices/{device}/edit','DevicesController@edit')->name('devices_edit');
-	Route::patch('/devices/{device}','DevicesController@update')->name('devices_update');
 
 	// Fees
 	Route::get('/fees','FeesController@index')->name('fees_index');

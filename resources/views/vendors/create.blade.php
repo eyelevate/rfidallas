@@ -31,7 +31,7 @@
 
 	            <div class="content">
 	            	
-	            	<!-- First Name -->
+	            	<!--Name-->
 	                <bootstrap-input class="form-group-no-border {{ $errors->has('name') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "Name"
@@ -44,7 +44,7 @@
 	                    >
 	                </bootstrap-input>
 
-					<!--Last Name -->
+					<!--Nick Name -->
 	              	<bootstrap-input class="form-group-no-border {{ $errors->has('nick_name') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "Nick Name (optional)"

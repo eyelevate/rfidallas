@@ -24,11 +24,16 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="current" role="tabpanel">
 					<h4 class="card-title">Current Tax Rate</h4>
+					@if (isset($current))
 					<h1>
 						<span class="badge badge-default">{{ $current->rate }}</span>
 						<span class="badge badge-info">{{ ($current->rate *100) }}%</span>
 					</h1>
-			      	<p class="card-text"><small class="text-muted">Rate was set: {{ $current->created_at->diffForHumans() }}</small></p>		
+			      	<p class="card-text"><small class="text-muted">Rate was set: {{ $current->created_at->diffForHumans() }}</small></p>	
+			      	@else
+			      		<p class="card-text">No rate has been set.</p>
+
+			      	@endif	
 				</div>
 				<div class="tab-pane" id="history" role="tabpanel">
 					<h4 class="card-title">Tax History</h4>

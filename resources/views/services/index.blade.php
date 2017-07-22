@@ -36,6 +36,39 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
+		<bootstrap-modal id="viewModal-{{ $row->id }}">
+			<template slot="header">View Service - {{ $row->name }}</template>
+			<template slot="body">
+				<!-- Name -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->name }}"
+					use-label="true"
+					b-label="Name">	
+				</bootstrap-readonly>
+
+				<!-- Description -->
+				<bootstrap-readonly
+					use-textarea="true"
+					b-value="{{ $row->desc }}"
+					use-label="true"
+					b-label="Description"
+				></bootstrap-readonly>
+
+				<!-- Subtotal -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->pretax }}"
+					use-label="true"
+					b-label="Subtotal"
+				></bootstrap-readonly>
+			</template>
+			<template slot="footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
+				<a href="{{ route('services_edit',$row->id) }}" class="btn btn-primary">Edit</a>
+			</template>
+		</bootstrap-modal>
 		{!! Form::open(['method'=>'delete','route'=>['services_destroy',$row->id]]) !!}
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>

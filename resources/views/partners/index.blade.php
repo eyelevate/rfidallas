@@ -41,6 +41,53 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
+		<bootstrap-modal id="viewModal-{{ $row->id }}">
+			<template slot="header">View Partner Details - {{ $row->name }}</template>
+			<template slot="body">
+				<!-- First Name -->
+				<div class="form-group">
+			        <label>First Name</label>
+			        <div class="input-group" >
+			            <input type="text" readonly="true" class="form-control" value="{{ $row->first_name }}" style="background-color:#ffffff;"/>
+			            
+			        </div>
+				</div>
+
+				<!-- Last Name -->
+				<div class = "form-group">
+			        <label>Last Name</label>
+			        <div class="input-group" >
+			            <textarea type="text" readonly="true" class="form-control" style="background-color:#ffffff;">{{ $row->last_name }}</textarea>
+			            
+			        </div>
+				</div>
+
+				<!-- Phone -->
+				<div class = "form-group">
+			        <label>Phone</label>
+			        <div class="input-group" >
+			            <textarea type="text" readonly="true" class="form-control" style="background-color:#ffffff;">{{ $row->phone }}</textarea>
+			            
+			        </div>
+				</div>
+				<!-- Email -->
+				<div class = "form-group">
+			        <label>Email</label>
+			        <div class="input-group" >
+			            <textarea type="text" readonly="true" class="form-control" style="background-color:#ffffff;">{{ $row->email }}</textarea>
+			            
+			        </div>
+				</div>
+				
+			</template>
+			<template slot="footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
+				<a href="{{ route('partners_edit',$row->id) }}" class="btn btn-primary">Edit</a>
+			</template>
+		</bootstrap-modal>
+
+
 		{!! Form::open(['method'=>'delete','route'=>['partners_destroy',$row->id]]) !!}
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>

@@ -69,12 +69,8 @@ class Service extends Model
             foreach ($rows as $key => $value) {
 
                 // append last column to table here
-                $last_column = '<div class="btn-group" role="group">';
-                $last_column .= '<button id="btnGroupDrop-'.$value->id.'" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Options</button>';
-                $last_column .= '<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">';
-                $last_column .= '<a class="dropdown-item" href="'.route('services_edit',$value->id).'">Edit</a>';
-                $last_column .= '<a class="dropdown-item text-danger" data-toggle="modal" data-target="#deleteModal-'.$value->id.'" href="#" style="z-index:9999;">Delete</a>';
-                $last_column .= '</div></div>';
+                $last_column = '<a class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#viewModal-'.$value->id.'" href="#">View</a>';
+                $last_column .= '</div>';
                 $rows[$key]['action'] = $last_column;
             }
         }

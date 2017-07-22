@@ -36,6 +36,43 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
+		<bootstrap-modal id="viewModal-{{ $row->id }}">
+			<template slot="header">View Fee - {{ $row->name }}</template>
+			<template slot="body">
+				<!-- Name -->
+				<div class="form-group">
+			        <label>Name</label>
+			        <div class="input-group" >
+			            <input type="text" readonly="true" class="form-control" value="{{ $row->name }}" style="background-color:#ffffff;"/>
+			            
+			        </div>
+				</div>
+
+				<!-- Description -->
+				<div class = "form-group">
+			        <label>Description</label>
+			        <div class="input-group" >
+			            <textarea type="text" readonly="true" class="form-control" style="background-color:#ffffff;">{{ $row->desc }}</textarea>
+			            
+			        </div>
+				</div>
+
+				<!-- Subtotal -->
+				<div class = "form-group">
+			        <label>Subtotal</label>
+			        <div class="input-group" >
+			            <textarea type="text" readonly="true" class="form-control" style="background-color:#ffffff;">{{ $row->pretax }}</textarea>
+			            
+			        </div>
+				</div>
+				
+			</template>
+			<template slot="footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
+				<a href="{{ route('fees_edit',$row->id) }}" class="btn btn-primary">Edit</a>
+			</template>
+		</bootstrap-modal>
 		{!! Form::open(['method'=>'delete','route'=>['fees_destroy',$row->id]]) !!}
 		<bootstrap-modal id="deleteModal-{{ $row->id }}">
 			<template slot="header">Delete Confirmation</template>
