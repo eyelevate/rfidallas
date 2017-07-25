@@ -24,6 +24,7 @@ class CreateAssetItemsTable extends Migration
             $table->string('serial')->nullable();
             $table->decimal('price',11,2)->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->integer('user_id')->nullable();
             $table->text('reason')->nullable();
             $table->softDeletes();
             $table->timestamps();

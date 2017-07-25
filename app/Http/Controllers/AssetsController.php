@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\AssetItem;
+use App\AssetItemHistory;
 use App\Company;
+use App\User;
 use App\Vendor;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class AssetsController extends Controller
 {
@@ -105,5 +108,35 @@ class AssetsController extends Controller
     public function destroy(Asset $asset)
     {
         //
+    }
+
+    public function issues(AssetItem $assetItem, User $user, AssetItemHistory $assetItemHistory)
+    {
+        $generated = $assetItem->where('status',3)->orderBy('id','desc')->get();
+        $claimed = $assetItem->where('status',4)->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        $resolved = $assetItem->where('status',5)->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        $columns = $assetItem->prepareTableIssueColumns();
+        $row_generated = $assetItem->prepareTableIssueRows($generated);
+        $row_claimed = $assetItem->prepareTableIssueRows($claimed);
+        $row_resolved = $assetItem->prepareTableIssueRows($resolved);
+        $admin_columns = $user->prepareTableIssueColumns();
+        $admin_rows = $user->prepareTableIssueRows($user->where('role_id','<',4)
+            ->orderBy('last_name','asc')
+            ->get());
+
+        $resolutions = $assetItemHistory->prepareResolutionStatus();
+
+        return view('assets.issues',compact(
+            'generated',
+            'claimed',
+            'resolved',
+            'columns',
+            'row_generated',
+            'row_claimed',
+            'row_resolved',
+            'admin_columns',
+            'admin_rows',
+            'resolutions')
+        );
     }
 }

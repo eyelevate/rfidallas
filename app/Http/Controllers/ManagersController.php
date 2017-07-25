@@ -56,6 +56,7 @@ class ManagersController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'role_id'=>2
         ]);
 
         // Redirect to the previous page.

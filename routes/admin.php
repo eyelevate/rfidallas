@@ -62,6 +62,7 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/assets/{asset}/show','AssetsController@show')->name('assets_show');
 	Route::get('/assets/{asset}/edit','AssetsController@edit')->name('assets_edit');
 	Route::patch('/assets/{asset}','AssetsController@update')->name('assets_update');
+	Route::get('/assets/issues','AssetsController@issues')->name('assets_issues');
 
 	// Asset Items
 	Route::get('/asset-items','AssetItemsController@index')->name('asset_items_index');
@@ -75,6 +76,9 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/asset-items/{assetItem}/show','AssetItemsController@show')->name('asset_items_show');
 	Route::get('/asset-items/{assetItem}/edit','AssetItemsController@edit')->name('asset_items_edit');
 	Route::patch('/asset-items/{assetItem}','AssetItemsController@update')->name('asset_items_update');
+	Route::patch('/asset-items/{assetItem}/claimed','AssetItemsController@claimed')->name('asset_items_claimed');
+	Route::patch('/asset-items/{assetItem}/complete','AssetItemsController@complete')->name('asset_items_complete');
+	Route::patch('/asset-items/{assetItem}/resolved','AssetItemsController@resolved')->name('asset_items_resolved');
 
     // Cards
 	Route::get('/cards','CardsController@index')->name('cards_index');

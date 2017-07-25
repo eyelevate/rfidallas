@@ -12,8 +12,6 @@
             <small>{{ bError }}</small>
         </span> 
 	</div>
-    
-
 </template>
 
 <script>

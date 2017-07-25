@@ -6,6 +6,7 @@ use App\Asset;
 use App\AssetItem;
 use App\AssetItemHistory;
 use App\Company;
+use App\User;
 use App\Vendor;
 use Auth;
 use Illuminate\Http\Request;
@@ -111,7 +112,7 @@ class AssetItemsController extends Controller
      * @param  \App\AssetItem  $assetItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssetItem $assetItem)
+    public function update(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory)
     {
         
         //Validate the form
@@ -136,111 +137,11 @@ class AssetItemsController extends Controller
 
         $update = $assetItem->update(request()->all());
         if ($update) {
-            $assetItemHistory = new AssetItemHistory;
-            $assetItemHistory->asset_item_id = $assetItem->id;
-            $assetItemHistory->user_id = Auth::user()->id;
-            $assetItemHistory->type = 9;
-            $statuses = $assetItem->prepareStatusesForSelect();
-        
-            // Start details
-            $detail = [];
-
-            if ($old_assetItem->asset_id != $assetItem->asset_id) { // Check asset id 
-                $asset = Asset::find($assetItem->asset_id);
-                $new_asset_name = $asset->name;
-                array_push($detail,[
-                    'name'=>'Asset Group',
-                    'old'=>'('.$old_assetItem->asset_id.') '.$old_assetItem->assets->name,
-                    'new'=>'('.$assetItem->asset_id.') '.$new_asset_name]
-                );
-            }
-
-            if ($old_assetItem->vendor_id != $assetItem->vendor_id) { // Check vendor id
-                $vendor = Vendor::find($vendor->vendor_id);
-                $new_vendor_name = $vendor->name;
-                array_push($detail,[
-                    'name'=>'Vendor',
-                    'old'=>'('.$old_assetItem->vendor_id.') '.$old_assetItem->vendor->name,
-                    'new'=>'('.$assetItem->vendor_id.') '.$new_vendor_name]
-                );
-            }
-            
-            if ($old_assetItem->company_id != $assetItem->company_id) { // Check company_id
-                $old_company_name = (isset($old_assetItem->company_id)) ? $old_assetItem->company->name :  'None Set';
-                $company = Company::find($assetItem->company_id);
-                $new_company_name = (count($company) > 0) ? $company->name : 'None Set';
-                array_push($detail,[
-                    'name'=>'Company',
-                    'old'=>'('.$old_assetItem->company_id.') '.$old_company_name,
-                    'new'=>'('.$assetItem->company_id.') '.$new_company_name]
-                );
-            }
-
-            if ($old_assetItem->name != $assetItem->name) { // CHeck name
-                array_push($detail,[
-                    'name'=>'Name',
-                    'old'=>$old_assetItem->name,
-                    'new'=>$assetItem->name]
-                );
-            }
-
-            if ($old_assetItem->desc != $assetItem->desc) { // Description
-                array_push($detail,[
-                    'name'=>'Description',
-                    'old'=>$old_assetItem->desc,
-                    'new'=>$assetItem->desc]
-                );
-            }
-
-            if ($old_assetItem->model != $assetItem->model) { // Model
-                array_push($detail,[
-                    'name'=>'Model',
-                    'old'=>$old_assetItem->model,
-                    'new'=>$assetItem->model]
-                );
-            }
-
-            if ($old_assetItem->serial != $assetItem->serial) { // Serial
-                array_push($detail,[
-                    'name'=>'Serial',
-                    'old'=>$old_assetItem->serial,
-                    'new'=>$assetItem->serial]
-                );
-            }
-
-            if ($old_assetItem->price != $assetItem->price) { // Price
-                array_push($detail,[
-                    'name'=>'Price',
-                    'old'=>$old_assetItem->price,
-                    'new'=>$assetItem->price]
-
-                );
-            }
-
-            if ($old_assetItem->status != $assetItem->status) { // Status
-                array_push($detail,[
-                    'name'=>'Status',
-                    'old'=>'('.$old_assetItem->status.') - '.$statuses[$old_assetItem->status],
-                    'new'=>'('.$assetItem->status.') - '.$statuses[$assetItem->status]]
-
-                );
-            }
-
-            if ($old_assetItem->reason != $assetItem->reason) { // Reason
-                array_push($detail,[
-                    'name'=>'Reason',
-                    'old'=>$old_assetItem->reason,
-                    'new'=>$assetItem->reason]
-                );
-            }
-            $assetItemHistory->detail = json_encode($detail);
-            $assetItemHistory->status = 1;
-
-            if ($assetItemHistory->save()) {
+            if ($assetItemHistory->newHistory($old_assetItem, $assetItem, 9)) {
                 flash('Successfully updated asset item!')->success();
                 return redirect()->route('assets_index');
             }
-
+            
         }
         
     }
@@ -278,6 +179,79 @@ class AssetItemsController extends Controller
     public function updateReturn(Request $request, AssetItem $assetItem)
     {
 
+    }
+
+    public function claimed(Request $request,AssetItem $assetItem, AssetItemHistory $assetItemHistory)
+    {
+        $status = 4;
+        $user_id = $request->id; 
+        $user = User::find($user_id);
+        $user_full = ucFirst($user->first_name).' '.ucFirst($user->last_name).' ('.$user->email.')';
+        $assigned_to = 'Assigned issue to '.$user_full;
+        $old_assetItem = AssetItem::find($assetItem->id);
+
+        $update = $assetItem->update([
+            'status'=>$status,
+            'user_id'=>$user_id
+        ]);
+
+
+        if ($update) {
+            if ($assetItemHistory->newHistory($old_assetItem, $assetItem, $status)) {
+                flash('Successfully assigned issue to '.$user_full.'!')->success();
+                return redirect()->back();
+            }   
+        }
+
+    }
+
+    public function resolved(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory)
+    {
+        $status = ($request->reason_status == 1) ? 5 : 4;
+        $old_assetItem = AssetItem::find($assetItem->id);
+        $update = $assetItem->update([
+            'status'=>$status
+        ]);
+
+        $resolutions = $assetItemHistory->prepareResolutionStatus();
+        $description = $resolutions[$request->reason_status].' - '.$request->detail;
+
+        if ($update) {
+            if ($assetItemHistory->newHistorySimple($assetItem, $status, $description)) {
+                flash('Successfully updated asset issue!')->success();
+                return redirect()->back();
+            }   
+        }
+    }
+    public function complete(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory)
+    {
+        $status = $request->status;
+        $old_assetItem = AssetItem::find($assetItem->id);
+        $update = $assetItem->update([
+            'status'=>$status
+        ]);
+        switch ($status) {
+            case 1:
+                $description = 'Asset has been returned back to us.';
+                break;
+            case 2:
+                $description = 'Asset issue resolved and re-deployed back to customer.';
+                break;
+            case 6:
+                $description = 'Asset sent back to vendor for refund/repair.';
+                break;
+            
+            default:
+                $description = '';
+                break;
+        }
+
+        if ($update) {
+            if ($assetItemHistory->newHistorySimple($assetItem, $status, $description)) {
+                flash('Successfully updated asset issue!')->success();
+                return redirect()->back();
+            }   
+        }
     }
 
 }

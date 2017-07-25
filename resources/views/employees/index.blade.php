@@ -23,7 +23,6 @@
 			<template slot="body">
 				<div class="table-responsive">
 					<bootstrap-table
-						title="Customer Search Results"
 						:columns="{{ $columns }}"
 						:rows="{{ $rows }}"
 						:paginate="true"

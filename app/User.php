@@ -98,6 +98,32 @@ class User extends Authenticatable
         return json_encode($columns);
     }
 
+    public function prepareTableIssueColumns()
+    {
+
+        $columns =  [
+            [
+                'label'=>'Action',
+                'field'=> 'action',
+                'html'=>true
+            ], [
+                'label'=>'First',
+                'field'=> 'first_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Last',
+                'field'=> 'last_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Email',
+                'field'=> 'email',
+                'filterable'=> true
+            ]
+        ];
+
+        return json_encode($columns);
+    }
+
     public function prepareTableRows($rows, $role = 1)
     {
         
@@ -114,6 +140,29 @@ class User extends Authenticatable
 
         return $rows;
     }
+
+    public function prepareTableIssueRows($rows)
+    {
+        
+
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-employee btn btn-success btn-sm" employee-id="'.$value->id.'" employee-first-name="'.$value->first_name.'" employee-last-name="'.$value->last_name.'" employee-email="'.$value->email.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    static public function countMembers($role_id)
+    {
+        return User::where('role_id',$role_id)->count();
+    }
+
 
 
 }

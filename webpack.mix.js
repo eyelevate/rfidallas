@@ -50,6 +50,8 @@ mix.js('resources/assets/js/views/admins/login.js','public/js/views/admins')
    .js('resources/assets/js/views/admins/index.js','public/js/views/admins')
    .sass('resources/assets/sass/views/admins/general.scss','public/css/views/admins');
 
+// Assets
+mix.js('resources/assets/js/views/assets/issues.js','public/js/views/assets');
 // Auth
 mix.js('resources/assets/js/views/auth/login.js','public/js/views/auth')
    .js('resources/assets/js/views/auth/register.js','public/js/views/auth');

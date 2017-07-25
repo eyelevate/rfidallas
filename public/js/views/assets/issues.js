@@ -60,30 +60,65 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 284);
+/******/ 	return __webpack_require__(__webpack_require__.s = 282);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 284:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(285);
+module.exports = __webpack_require__(283);
 
 
 /***/ }),
 
-/***/ 285:
+/***/ 283:
 /***/ (function(module, exports) {
 
 var app = new Vue({
-	el: '#bootstrap-root',
-	data: {},
+	el: '#root',
+	props: [],
+	data: {
+		eEmail: '',
+		eFirstName: '',
+		eLastName: '',
+		eId: ''
+	},
 	methods: {},
 	computed: {},
-	created: function created() {},
-	mounted: function mounted() {}
+	created: function created() {
+		console.log('1st');
+	},
+	mounted: function mounted() {
+		console.log('2nd');
+	}
 });
+
+$(document).ready(function () {
+	issues.events();
+});
+
+issues = {
+	events: function events() {
+		$(document).on("click", ".select-employee", function () {
+			var id = $(this).attr('employee-id');
+			var email = $(this).attr('employee-email');
+			var first_name = $(this).attr('employee-first-name');
+			var last_name = $(this).attr('employee-last-name');
+			var string = email + ' (' + first_name + ' ' + last_name + ')';
+			var tr = $(this).parents('tr:first');
+			var tbody = $(this).parents('tbody:first');
+			var element = $(this).parents('.modalA:first');
+			// remove all previous instances of a table row class
+			tbody.find('tr').removeClass('table-info');
+			tr.addClass('table-info');
+
+			element.find('.claimedConfirmedInput').val(string);
+			element.find('.claimedInput').val(id);
+		});
+	}
+};
 
 /***/ })
 

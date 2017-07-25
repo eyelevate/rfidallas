@@ -68,7 +68,7 @@
 							<a class="nav-link active" data-toggle="tab" href="#overview-{{ $ai->id }}" role="tab">Overview</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#history-{{ $ai->id }}" role="tab">History</a>
+							<a class="nav-link" data-toggle="tab" href="#history-{{ $ai->id }}" role="tab">History <span class="badge badge-info">{{ count($ai->assetItemHistory) }}</span></a>
 						</li>
 					</ul>
 				</template>
@@ -161,36 +161,34 @@
 
 									<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
-											<h3 class="mb-1"><span class="badge {{ $aih->type_set['status'] }}">{{ $aih->type_set['text'] }}</span></h3>
+											<h3 class="mb-1"><span class="badge {{ $aih->convertTypeToText($aih->type)['status'] }}">{{ $aih->convertTypeToText($aih->type)['text'] }}</span></h3>
 											<small>{{ $aih->created_at->diffForHumans() }}</small>
 										</div>
-										@if ($aih->type > 7)
-											@if (json_decode($aih->detail) !== NULL)
-												<ul>
-												@foreach(json_decode($aih->detail) as $detail)
-												<li class="mb-1"><p>{{ $detail->name }}</p>
-												<table class="table table-bordered table-striped table-sm table-hover">
-													<thead>
-														<tr>
-															<th>Original</th>
-															<th>New</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>{{ $detail->old }}</td>
-															<td>{{ $detail->new }}</td>
-														</tr>
-													</tbody>
-												</table>
-												@endforeach
-												</ul>
-											@endif
-										<ul>
+										@if (is_string($aih->detail) && is_array(json_decode($aih->detail, true)) && (json_last_error() == JSON_ERROR_NONE))
 
-										</ul>
-										<small>Edited by: <strong>{{ $aih->user->email }}</strong> : {{ $aih->user->first_name }} {{ $aih->user->last_name }}</small>
+											<ul>
+											@foreach(json_decode($aih->detail) as $detail)
+											<li class="mb-1"><p>{{ $detail->name }}</p>
+											<table class="table table-bordered table-striped table-sm table-hover">
+												<thead>
+													<tr>
+														<th>Original</th>
+														<th>New</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>{{ $detail->old }}</td>
+														<td>{{ $detail->new }}</td>
+													</tr>
+												</tbody>
+											</table>
+											@endforeach
+											</ul>
+	
+											<small>Edited by: <strong>{{ $aih->user->email }}</strong> : {{ $aih->user->first_name }} {{ $aih->user->last_name }}</small>
 										@else
+											<ul></ul>
 										<p class="mb-1">{{ $aih->detail }}</p>
 										<small>Created by: <strong>{{ $aih->user->email }}</strong> : {{ $aih->user->first_name }} {{ $aih->user->last_name }}</small>
 										@endif
