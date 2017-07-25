@@ -74585,10 +74585,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: [],
-    mounted: function mounted() {
-        console.log('Mounted modal');
-    }
+	props: ['b-size'],
+	data: function data() {
+		return {
+			size: this.bSize != '' ? this.bSize : ''
+		};
+	},
+	mounted: function mounted() {
+		console.log('Mounted modal');
+	}
 });
 
 /***/ }),
@@ -74606,6 +74611,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "modal-dialog",
+    class: _vm.size,
     attrs: {
       "role": "document"
     }
@@ -75791,8 +75797,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Fee;
 use App\Plan;
+use App\Service;
 use Illuminate\Http\Request;
 
 class PlansController extends Controller
@@ -12,9 +14,11 @@ class PlansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Plan $plan)
     {
-        //
+        $columns = $plan->prepareTableColumns();
+        $rows = $plan->prepareTableRows($plan->orderBy('name','asc')->get());
+        return view('plans.index',compact(['columns','rows']));
     }
 
     /**
@@ -22,9 +26,13 @@ class PlansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Plan $plan, Fee $fee, Service $service)
     {
-        //
+        $fee_columns = $fee->prepareTableSelectColumns();
+        $fee_rows = $fee->prepareTableSelectRows($fee->orderBy('name','asc')->get());
+        $service_columns = $service->prepareTableSelectColumns();
+        $service_rows = $service->prepareTableSelectRows($service->orderBy('name','asc')->get());
+        return view('plans.create',compact(['fee_columns','fee_rows','service_columns','service_rows']));
     }
 
     /**

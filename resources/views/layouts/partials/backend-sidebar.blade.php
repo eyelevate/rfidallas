@@ -43,7 +43,7 @@
                         <a class="nav-link" href="{{ route('customers_index') }}"><i class="icon-arrow-right-circle"></i> Customers <span class="badge badge-info">{{ $customer_count }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('companies_index') }}"><i class="icon-arrow-right-circle"></i> Companies </a>
+                        <a class="nav-link" href="{{ route('companies_index') }}"><i class="icon-arrow-right-circle"></i> Companies <span class="badge badge-info">{{ $companies_count }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('cards_index') }}"><i class="icon-arrow-right-circle"></i> Credit Cards </a>
@@ -56,16 +56,16 @@
                 <ul class="nav-dropdown-items">
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('fees_index') }}"><i class="icon-arrow-right-circle"></i> Fees </a>
+                        <a class="nav-link" href="{{ route('fees_index') }}"><i class="icon-arrow-right-circle"></i> Fees <span class="badge badge-info">{{ $fee_count }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('plans_index') }}"><i class="icon-arrow-right-circle"></i> Plans </a>
+                        <a class="nav-link" href="{{ route('plans_index') }}"><i class="icon-arrow-right-circle"></i> Plans <span class="badge badge-info">{{ $plan_count }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('services_index') }}"><i class="icon-arrow-right-circle"></i> Services </a>
+                        <a class="nav-link" href="{{ route('services_index') }}"><i class="icon-arrow-right-circle"></i> Services <span class="badge badge-info">{{ $service_count }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('vendors_index') }}"><i class="icon-arrow-right-circle"></i> Vendors </a>
+                        <a class="nav-link" href="{{ route('vendors_index') }}"><i class="icon-arrow-right-circle"></i> Vendors <span class="badge badge-info">{{ $vendor_count }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('taxes_index') }}"><i class="icon-arrow-right-circle"></i> Sales Tax </a>

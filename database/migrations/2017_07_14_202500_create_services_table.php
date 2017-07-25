@@ -17,10 +17,21 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('desc')->nullable();
-            $table->decimal('pretax',11,2);
+            $table->decimal('hourly',11,2)->nullable();
+            $table->decimal('daily',11,2)->nullable();
+            $table->decimal('weekly',11,2)->nullable();
+            $table->decimal('monthly',11,2)->nullable();
+            $table->decimal('yearly',11,2)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::create('plan_service', function (Blueprint $table) {
+            $table->integer('plan_id');
+            $table->integer('service_id');
+            $table->primary(['plan_id','service_id']);
+        });
+
     }
 
     /**
@@ -31,5 +42,6 @@ class CreateServicesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('services');
+        Schema::dropIfExists('plan_service');
     }
 }

@@ -138,4 +138,9 @@ class Vendor extends Model
 
         return $rows;
     }
+
+    static public function countVendors()
+    {
+        return Vendor::count();
+    }
 }

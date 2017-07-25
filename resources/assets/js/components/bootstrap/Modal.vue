@@ -1,7 +1,7 @@
 <template>
 	<!-- Modal -->
 	<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog" :class="size" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">
@@ -29,7 +29,13 @@
 <script>
     export default {
     	props:[
+    		'b-size'
     	],
+    	data(){
+    		return {
+    			size: (this.bSize != '') ?  this.bSize : ''
+    		}
+    	},
         mounted() {
             console.log('Mounted modal')
         }

@@ -42,7 +42,11 @@ class ServicesController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'desc' => 'required|string|max:255',
-            'pretax' => 'required|numeric'
+            'hourly' => 'required|numeric',
+            'daily' => 'required|numeric',
+            'weekly' => 'required|numeric',
+            'monthly' => 'required|numeric',
+            'yearly' => 'required|numeric',
         ]);
 
         // Create and save the user.
@@ -90,7 +94,11 @@ class ServicesController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'desc' => 'required|string|max:255',
-            'pretax' => 'required|numeric'
+            'hourly' => 'required|numeric',
+            'daily' => 'required|numeric',
+            'weekly' => 'required|numeric',
+            'monthly' => 'required|numeric',
+            'yearly' => 'required|numeric',
         ]);
         flash('Successfully updated service!')->success();
         $service->update(request()->all());

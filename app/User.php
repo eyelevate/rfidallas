@@ -98,15 +98,11 @@ class User extends Authenticatable
         return json_encode($columns);
     }
 
-    public function prepareTableIssueColumns()
+    public function prepareTableSelectColumns()
     {
 
         $columns =  [
             [
-                'label'=>'Action',
-                'field'=> 'action',
-                'html'=>true
-            ], [
                 'label'=>'First',
                 'field'=> 'first_name',
                 'filterable'=> true
@@ -115,9 +111,17 @@ class User extends Authenticatable
                 'field'=> 'last_name',
                 'filterable'=> true
             ], [
+                'label'=>'Phone',
+                'field'=> 'phone',
+                'filterable'=> true
+            ], [
                 'label'=>'Email',
                 'field'=> 'email',
                 'filterable'=> true
+            ], [
+                'label'=>'Action',
+                'field'=> 'action',
+                'html'=>true 
             ]
         ];
 
@@ -141,7 +145,7 @@ class User extends Authenticatable
         return $rows;
     }
 
-    public function prepareTableIssueRows($rows)
+    public function prepareTableSelectRows($rows)
     {
         
 

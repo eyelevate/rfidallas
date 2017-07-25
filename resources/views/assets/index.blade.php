@@ -61,7 +61,7 @@
 	@foreach($assets as $asset)
 		@if (count($asset->assetItems))
 			@foreach($asset->assetItems as $ai)
-			<bootstrap-modal id="viewModal-{{ $ai->id }}">
+			<bootstrap-modal id="viewModal-{{ $ai->id }}" b-size="modal-lg">
 				<template slot="header">
 					<ul class="nav nav-tabs card-header-tabs" role="tablist">
 						<li class="nav-item">
@@ -208,7 +208,7 @@
 			</bootstrap-modal>
 
 			{!! Form::open(['method'=>'delete','route'=>['asset_items_destroy',$ai->id]]) !!}
-			<bootstrap-modal id="deleteModal-{{ $ai->id }}">
+			<bootstrap-modal id="deleteModal-{{ $ai->id }}" b-size="modal-lg">
 				<template slot="header">Delete Confirmation</template>
 				<template slot="body">
 					Are you sure you wish to delete {{ $ai->name }}?

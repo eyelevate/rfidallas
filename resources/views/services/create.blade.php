@@ -58,17 +58,68 @@
 	                </bootstrap-textarea>
 
 
-					<!-- Subtotal -->
-	              	<bootstrap-input class="form-group-no-border {{ $errors->has('pretax') ? ' has-danger' : '' }}" 
+					<!-- Hourly -->
+	              	<bootstrap-input class="form-group-no-border {{ $errors->has('hourly') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
-	 					label = "Subtotal"
+	 					label = "Hourly Rate"
 	                    b-placeholder="0.00"
-	                    b-name="pretax"
+	                    b-name="hourly"
 	                    b-type="text"
-	                    b-value="{{ old('pretax') }}"
-	                    b-err="{{ $errors->has('pretax') }}"
-	                    b-error="{{ $errors->first('pretax') }}"
-	                    
+	                    b-value="{{ old('hourly') }}"
+	                    b-err="{{ $errors->has('hourly') }}"
+	                    b-error="{{ $errors->first('hourly') }}"
+	                    >
+	                </bootstrap-input>
+
+	                <!-- Daily -->
+	              	<bootstrap-input class="form-group-no-border {{ $errors->has('daily') ? ' has-danger' : '' }}" 
+	                    use-label = "true"
+	 					label = "Daily Rate"
+	                    b-placeholder="0.00"
+	                    b-name="daily"
+	                    b-type="text"
+	                    b-value="{{ old('daily') }}"
+	                    b-err="{{ $errors->has('daily') }}"
+	                    b-error="{{ $errors->first('daily') }}"
+	                    >
+	                </bootstrap-input>
+
+	                <!-- Weekly -->
+	              	<bootstrap-input class="form-group-no-border {{ $errors->has('weekly') ? ' has-danger' : '' }}" 
+	                    use-label = "true"
+	 					label = "Weekly Rate"
+	                    b-placeholder="0.00"
+	                    b-name="weekly"
+	                    b-type="text"
+	                    b-value="{{ old('weekly') }}"
+	                    b-err="{{ $errors->has('weekly') }}"
+	                    b-error="{{ $errors->first('weekly') }}"
+	                    >
+	                </bootstrap-input>
+
+	                <!-- Monthly -->
+	              	<bootstrap-input class="form-group-no-border {{ $errors->has('monthly') ? ' has-danger' : '' }}" 
+	                    use-label = "true"
+	 					label = "Monthly Rate"
+	                    b-placeholder="0.00"
+	                    b-name="monthly"
+	                    b-type="text"
+	                    b-value="{{ old('monthly') }}"
+	                    b-err="{{ $errors->has('monthly') }}"
+	                    b-error="{{ $errors->first('monthly') }}"
+	                    >
+	                </bootstrap-input>
+
+	                <!-- Yearly -->
+	              	<bootstrap-input class="form-group-no-border {{ $errors->has('yearly') ? ' has-danger' : '' }}" 
+	                    use-label = "true"
+	 					label = "Yearly Rate"
+	                    b-placeholder="0.00"
+	                    b-name="yearly"
+	                    b-type="text"
+	                    b-value="{{ old('yearly') }}"
+	                    b-err="{{ $errors->has('yearly') }}"
+	                    b-error="{{ $errors->first('yearly') }}"
 	                    >
 	                </bootstrap-input>
 	          

@@ -22,7 +22,8 @@ class AssetItem extends Model
         'reason',
         'vendor_id',
         'asset_id',
-        'user_id'
+        'user_id',
+        'company_id'
     ];
 
     public function assets() 

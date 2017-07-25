@@ -76,7 +76,7 @@
 			</template>
 
 			<template slot = "footer">
-				<a href="{{ route('vendors_index') }}" class="btn btn-secondary">Back</a>
+				<a href="{{ route('fees_index') }}" class="btn btn-secondary">Back</a>
 				<button type="submit" class = "btn btn-primary">Save</button>
 			</template>
 

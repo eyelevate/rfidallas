@@ -83,7 +83,7 @@
 @if (isset($row_generated))
 	@foreach ($row_generated as $rg)
 	{!! Form::open(['method'=>'patch','route'=>['asset_items_claimed',$rg->id]]) !!}
-	<bootstrap-modal id="generatedModal-{{ $rg->id }}" class="modalA">
+	<bootstrap-modal id="generatedModal-{{ $rg->id }}" class="modalA" b-size="modal-lg">
 		<template slot="header">Claim Issue</template>
 		<template slot="body">
 			<h6><span class="badge badge-info">1</span> Send Issue To: <small>Keep empty to select yourself</small></h6>
@@ -111,7 +111,7 @@
 @if (isset($row_claimed))
 	@foreach ($row_claimed as $rc)
 	{!! Form::open(['method'=>'patch','route'=>['asset_items_resolved',$rc->id]]) !!}
-	<bootstrap-modal id="claimedModal-{{ $rc->id }}" class="modalB">
+	<bootstrap-modal id="claimedModal-{{ $rc->id }}" class="modalB" b-size="modal-lg">
 		<template slot="header">
 			<ul class="nav nav-tabs card-header-tabs" role="tablist">
 				<li class="nav-item">
@@ -193,7 +193,7 @@
 @if (isset($row_resolved))
 	@foreach ($row_resolved as $rr)
 	
-	<bootstrap-modal id="resolvedModal-{{ $rr->id }}" class="modalD">
+	<bootstrap-modal id="resolvedModal-{{ $rr->id }}" class="modalC" b-size="modal-lg">
 		<template slot="header">Resolved Issues</template>
 		<template slot="body">
 			{!! Form::open(['method'=>'patch','route'=>['asset_items_complete',$rr->id]]) !!}

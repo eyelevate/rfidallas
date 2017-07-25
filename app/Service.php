@@ -17,7 +17,11 @@ class Service extends Model
     protected $fillable = [
         'name', 
         'desc',
-        'pretax'
+        'hourly',
+        'daily',
+        'weekly',
+        'monthly',
+        'yearly'
     ];
 
 
@@ -35,8 +39,24 @@ class Service extends Model
                 'field'=> 'desc',
                 'filterable'=> true
             ], [
-                'label'=>'Subtotal',
-                'field'=> 'pretax',
+                'label'=>'Hourly',
+                'field'=> 'hourly',
+                'filterable'=> true
+            ], [
+                'label'=>'Daily',
+                'field'=> 'daily',
+                'filterable'=> true
+            ], [
+                'label'=>'Weekly',
+                'field'=> 'weekly',
+                'filterable'=> true
+            ], [
+                'label'=>'Monthly',
+                'field'=> 'monthly',
+                'filterable'=> true
+            ], [
+                'label'=>'Yearly',
+                'field'=> 'yearly',
                 'filterable'=> true
             ], [
                 'label'=>'Created',
@@ -45,15 +65,31 @@ class Service extends Model
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
                 'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
             ], [
-                'label'=>'Updated',
-                'field'=> 'updated_at',
-                'type'=>'date',
-                'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
-            ], [
                 'label'=>'Action',
                 'field'=> 'action',
                 'html'=>true
+            ]
+        ];
+
+        return json_encode($columns);
+    }
+
+    public function prepareTableSelectColumns()
+    {
+
+        $columns =  [
+            [
+                'label'=>'Name',
+                'field'=> 'first_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Description',
+                'field'=> 'last_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Action',
+                'field'=> 'action',
+                'html'=>true 
             ]
         ];
 
@@ -76,5 +112,27 @@ class Service extends Model
         }
 
         return $rows;
+    }
+
+    public function prepareTableSelectRows($rows)
+    {
+        
+
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    static public function countServices()
+    {
+        return Service::count();
     }
 }

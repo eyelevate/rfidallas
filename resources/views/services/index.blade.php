@@ -55,12 +55,44 @@
 					b-label="Description"
 				></bootstrap-readonly>
 
-				<!-- Subtotal -->
+				<!-- Hourly -->
 				<bootstrap-readonly
 					use-input="true"
-					b-value="{{ $row->pretax }}"
+					b-value="{{ $row->hourly }}"
 					use-label="true"
-					b-label="Subtotal"
+					b-label="Hourly"
+				></bootstrap-readonly>
+
+				<!-- Daily -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->daily }}"
+					use-label="true"
+					b-label="Daily"
+				></bootstrap-readonly>
+
+				<!-- Weekly -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->weekly }}"
+					use-label="true"
+					b-label="Weekly"
+				></bootstrap-readonly>
+
+				<!-- Monthly -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->monthly }}"
+					use-label="true"
+					b-label="Monthly"
+				></bootstrap-readonly>
+
+				<!-- Yearly -->
+				<bootstrap-readonly
+					use-input="true"
+					b-value="{{ $row->yearly }}"
+					use-label="true"
+					b-label="Yearly"
 				></bootstrap-readonly>
 			</template>
 			<template slot="footer">

@@ -17,13 +17,17 @@ class CreatePlansTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('desc')->nullable();
-            $table->decimal('price',11,2);
-            /*
-            * Plan types:
-            * 1 - monthly, 
-            * 2 - annual
-            */
-            $table->tinyInteger('type')->default(1);
+            $table->decimal('pre',11,2)->nullable();
+            $table->decimal('price',11,2)->nullable();
+            $table->decimal('post',11,2)->nullable();
+            $table->decimal('cancel',11,2)->nullable();
+            $table->boolean('hourly')->default(false);
+            $table->boolean('daily')->default(false);
+            $table->boolean('weekly')->default(false);
+            $table->boolean('monthly')->default(false);
+            $table->boolean('yearly')->default(false);
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
             $table->tinyInteger('status');
             $table->softDeletes();
             $table->timestamps();

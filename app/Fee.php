@@ -61,6 +61,32 @@ class Fee extends Model
         return json_encode($columns);
     }
 
+    public function prepareTableSelectColumns()
+    {
+
+        $columns =  [
+            [
+                'label'=>'Name',
+                'field'=> 'first_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Description',
+                'field'=> 'last_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Subtotal',
+                'field'=> 'pretax',
+                'filterable'=> true
+            ], [
+                'label'=>'Action',
+                'field'=> 'action',
+                'html'=>true 
+            ]
+        ];
+
+        return json_encode($columns);
+    }
+
     public function prepareTableRows($rows)
     {
         
@@ -77,5 +103,27 @@ class Fee extends Model
         }
 
         return $rows;
+    }
+
+    public function prepareTableSelectRows($rows)
+    {
+        
+
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    static public function countFees()
+    {
+        return Fee::count();
     }
 }
