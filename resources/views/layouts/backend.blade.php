@@ -30,6 +30,7 @@
     <!-- Main styles for this application -->
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/themes/coreui/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/views/admins/general.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css">
     @yield('styles')
 </head>
 
@@ -91,6 +92,8 @@
     <script type="text/javascript" src="{{ mix('/js/views/admins/general.js') }}"></script>
     <!-- Page specific scripts -->
     <script type="text/javascript" src="{{ mix('/js/themes/coreui/coreui.js') }}"></script>
+    <!-- Bootstrap Datepicker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     @yield('scripts')
 </body>
 

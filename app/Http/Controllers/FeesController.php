@@ -111,4 +111,26 @@ class FeesController extends Controller
             return redirect()->route('fees_index');
         }
     }
+
+    public function retrieve(Request $request, Fee $fee)
+    {
+        $fees = $fee->find($request->fee_id);
+
+        return response()->json($fees);
+    }
+
+    public function totals(Request $request, Fee $fee)
+    {
+        $fee_ids = [];
+        $fees = $request->fees;
+        if (count($fees) > 0 ){
+            foreach ($fees as $fee) {
+                array_push($fee_ids, $fee->id);
+            }
+        }
+
+        $sum = $fee->whereIn('id',$fee_ids)->sum('pretax');
+
+        return response()->json($sum);
+    }
 }

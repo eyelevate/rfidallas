@@ -5,6 +5,7 @@
     "/css/themes/coreui/style.css": "/css/themes/coreui/style.css",
     "/css/themes/ionicons/ionicons.css": "/css/themes/ionicons/ionicons.css",
     "/css/views/admins/general.css": "/css/views/admins/general.css",
+    "/js/views/plans/create.js": "/js/views/plans/create.js",
     "/js/views/companies/create.js": "/js/views/companies/create.js",
     "/js/views/auth/register.js": "/js/views/auth/register.js",
     "/js/views/auth/login.js": "/js/views/auth/login.js",

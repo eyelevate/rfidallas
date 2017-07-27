@@ -80,11 +80,31 @@ class Service extends Model
         $columns =  [
             [
                 'label'=>'Name',
-                'field'=> 'first_name',
+                'field'=> 'name',
                 'filterable'=> true
             ], [
                 'label'=>'Description',
-                'field'=> 'last_name',
+                'field'=> 'desc',
+                'filterable'=> true
+            ], [
+                'label'=>'Hourly',
+                'field'=> 'hourly',
+                'filterable'=> true
+            ], [
+                'label'=>'Daily',
+                'field'=> 'daily',
+                'filterable'=> true
+            ], [
+                'label'=>'Weekly',
+                'field'=> 'weekly',
+                'filterable'=> true
+            ], [
+                'label'=>'Monthly',
+                'field'=> 'monthly',
+                'filterable'=> true
+            ], [
+                'label'=>'Yearly',
+                'field'=> 'yearly',
                 'filterable'=> true
             ], [
                 'label'=>'Action',
@@ -122,7 +142,7 @@ class Service extends Model
         if (isset($rows)) {
             foreach ($rows as $key => $value) {
                 // append last column to table here
-                $last_column = '<button type="button" class="select-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column = '<button type="button" class="select-service btn btn-success btn-sm" service-id="'.$value->id.'">Select</button>';
                 $last_column .= '</div>';
                 $rows[$key]['action'] = $last_column;
             }

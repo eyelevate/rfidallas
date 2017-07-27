@@ -18010,11 +18010,11 @@ module.exports = getISOYear
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(135);
-__webpack_require__(265);
-__webpack_require__(266);
-__webpack_require__(267);
 __webpack_require__(268);
-module.exports = __webpack_require__(269);
+__webpack_require__(269);
+__webpack_require__(270);
+__webpack_require__(271);
+module.exports = __webpack_require__(272);
 
 
 /***/ }),
@@ -18073,17 +18073,18 @@ window.Event = new (function () {
 Vue.component('bootstrap-card', __webpack_require__(229));
 Vue.component('bootstrap-input', __webpack_require__(232));
 Vue.component('bootstrap-modal', __webpack_require__(235));
-Vue.component('bootstrap-readonly', __webpack_require__(238));
-Vue.component('bootstrap-select', __webpack_require__(241));
-Vue.component('bootstrap-table', __webpack_require__(244));
-Vue.component('bootstrap-textarea', __webpack_require__(249));
+Vue.component('bootstrap-radio', __webpack_require__(238));
+Vue.component('bootstrap-readonly', __webpack_require__(241));
+Vue.component('bootstrap-select', __webpack_require__(244));
+Vue.component('bootstrap-table', __webpack_require__(247));
+Vue.component('bootstrap-textarea', __webpack_require__(252));
 
 // Now-ui-kit Components
-Vue.component('now-input', __webpack_require__(252));
+Vue.component('now-input', __webpack_require__(255));
 
 // Passport Components
-Vue.component('passport-authorized-clients', __webpack_require__(255));
-Vue.component('passport-personal-access-tokens', __webpack_require__(260));
+Vue.component('passport-authorized-clients', __webpack_require__(258));
+Vue.component('passport-personal-access-tokens', __webpack_require__(263));
 
 /***/ }),
 /* 136 */
@@ -74448,20 +74449,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['b-icon', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type', 'use-icon', 'use-label', 'label'],
+	props: ['b-icon-pre', 'b-icon-post', 'b-placeholder', 'b-name', 'b-value', 'b-value', 'b-error', 'b-err', 'b-type', 'use-icon-pre', 'use-icon-post', 'use-label', 'label', 'b-input-id'],
 
 	data: function data() {
 		return {
 			err: this.bError,
-			icon: this.bIcon,
+			iconPre: this.bIconPre,
+			iconPost: this.bIconPost,
 			ph: this.bPlaceholder,
 			ty: this.bType,
 			nm: this.bName,
 			old: this.bValue,
-			uIcon: this.useIcon == "true",
-			uLabel: this.useLabel == "true"
+			uIconPre: this.useIconPre == "true",
+			uIconPost: this.useIconPost == "true",
+			uLabel: this.useLabel == "true",
+			uId: this.bInputId
 		};
 	},
 	mounted: function mounted() {}
@@ -74476,11 +74482,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [(_vm.uLabel) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "input-group"
-  }, [(_vm.uIcon) ? _c('div', {
+  }, [(_vm.uIconPre) ? _c('div', {
     staticClass: "input-group-addon"
   }, [_c('i', {
     staticClass: "ion",
-    class: _vm.icon,
+    class: _vm.iconPre,
     staticStyle: {
       "padding-right": "3px",
       "font-size": "20px"
@@ -74488,7 +74494,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })]) : _vm._e(), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
-      "id": "",
+      "id": _vm.uId,
       "placeholder": _vm.bPlaceholder,
       "type": _vm.ty,
       "name": _vm.nm,
@@ -74497,7 +74503,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "value": _vm.old
     }
-  })]), _vm._v(" "), (_vm.err) ? _c('span', {
+  }), _vm._v(" "), (_vm.uIconPost) ? _c('div', {
+    staticClass: "input-group-addon"
+  }, [_c('i', {
+    staticClass: "ion",
+    class: _vm.iconPost
+  })]) : _vm._e()]), _vm._v(" "), (_vm.err) ? _c('span', {
     staticClass: "help-block text-danger"
   }, [_c('small', [_vm._v(_vm._s(_vm.bError))])]) : _vm._e()])
 },staticRenderFns: []}
@@ -74679,6 +74690,96 @@ var Component = __webpack_require__(2)(
   /* moduleIdentifier (server only) */
   null
 )
+Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/bootstrap/Radio.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Radio.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e2dc7204", Component.options)
+  } else {
+    hotAPI.reload("data-v-e2dc7204", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 239 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['b-error', 'b-err', 'use-label', 'label'],
+
+	data: function data() {
+		return {
+			err: this.bError,
+			uLabel: this.useLabel == "true"
+		};
+	},
+	mounted: function mounted() {}
+});
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('fieldset', [(_vm.uLabel) ? _c('label', [_vm._v(_vm._s(_vm.label))]) : _vm._e(), _vm._v(" "), _c('div', {
+    staticClass: "form-check"
+  }, [_vm._t("radio")], 2), _vm._v(" "), (_vm.err) ? _c('span', {
+    staticClass: "help-block text-danger"
+  }, [_c('small', [_vm._v(_vm._s(_vm.bError))])]) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e2dc7204", module.exports)
+  }
+}
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(242),
+  /* template */
+  __webpack_require__(243),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
 Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/bootstrap/ReadOnly.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ReadOnly.vue: functional components are not supported with templates, they should use render functions.")}
@@ -74703,7 +74804,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 239 */
+/* 242 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74734,7 +74835,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 240 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -74773,15 +74874,15 @@ if (false) {
 }
 
 /***/ }),
-/* 241 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(242),
+  __webpack_require__(245),
   /* template */
-  __webpack_require__(243),
+  __webpack_require__(246),
   /* styles */
   null,
   /* scopeId */
@@ -74813,7 +74914,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 242 */
+/* 245 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74847,7 +74948,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 243 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -74868,19 +74969,19 @@ if (false) {
 }
 
 /***/ }),
-/* 244 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(245)
+  __webpack_require__(248)
 }
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(247),
+  __webpack_require__(250),
   /* template */
-  __webpack_require__(248),
+  __webpack_require__(251),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -74912,13 +75013,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 245 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(246);
+var content = __webpack_require__(249);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -74938,7 +75039,7 @@ if(false) {
 }
 
 /***/ }),
-/* 246 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -74946,13 +75047,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-51dfcd51]{\n  text-align: right;\n}\n.left-align[data-v-51dfcd51]{\n  text-align: left;\n}\n.pull-left[data-v-51dfcd51]{\n  float:  left !important;\n}\n.pull-right[data-v-51dfcd51]{\n  float:  right !important;\n}\n.clearfix[data-v-51dfcd51]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table specific styles\n************************************************/\ntable[data-v-51dfcd51]{\n  border-collapse: collapse;\n  background-color: transparent;\n  margin-bottom:  20px;\n}\n.table[data-v-51dfcd51]{\n  width: 100%;\n  max-width: 100%;\n}\n.table.table-striped tbody tr[data-v-51dfcd51]:nth-of-type(odd) {\n  background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-51dfcd51], .table-bordered th[data-v-51dfcd51] {\n  border: 1px solid #DDD;\n}\n.table td[data-v-51dfcd51], .table th[data-v-51dfcd51]:not(.line-numbers) {\n  padding: .75rem 1.5rem .75rem .75rem;\n  vertical-align: top;\n  border-top: 1px solid #ddd;\n}\n.table.condensed td[data-v-51dfcd51], .table.condensed th[data-v-51dfcd51] {\n  padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-51dfcd51], .table.condensed thead th[data-v-51dfcd51] {\n  vertical-align: bottom;\n  border-bottom:  2px solid #ddd;\n  padding-right: 1.5rem;\n  background-color: rgba(35,41,53,0.03);\n}\ntr.clickable[data-v-51dfcd51] {\n  cursor: pointer;\n}\n.table input[data-v-51dfcd51]{\n  display: block;\n  width: calc(100% - 24px);\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n  box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-51dfcd51],\ntable th.sorting-desc[data-v-51dfcd51] {\n  color: rgba(0, 0, 0, 0.66);\n  position: relative;\n}\ntable th.sorting[data-v-51dfcd51]:after,\ntable th.sorting-asc[data-v-51dfcd51]:after  {\n  font-family: 'Material Icons';\n  position:  absolute;\n  height:  0px;\n  width:  0px;\n  content: '';\n  display: none;\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-bottom: 6px solid rgba(0, 0, 0, 0.66);\n  margin-top:  6px;\n  margin-left:  5px;\n}\ntable th.sorting[data-v-51dfcd51]:hover:after{\n  display: inline-block;\n  border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-51dfcd51]:after,\ntable th.sorting-desc[data-v-51dfcd51]:after {\n  display: inline-block;\n}\ntable th.sorting-desc[data-v-51dfcd51]:after {\n  border-top:  6px solid rgba(0, 0, 0, 0.66);\n  border-left: 6px solid transparent;\n  border-right: 6px solid transparent;\n  border-bottom: none;\n  margin-top:  8px;\n}\n\n/* Table header specific styles\n************************************************/\n.table-header[data-v-51dfcd51]{\n  padding:  .75rem;\n}\n.table-header .table-title[data-v-51dfcd51]{\n  margin:  0px;\n  font-size: 18px;\n}\n\n\n/* Table footer specific styles\n************************************************/\n.table-footer[data-v-51dfcd51]{\n  /* background-color: rgba(35,41,53, 0.03); */\n  background-color: rgba(35,41,53,0.05);\n  border: 1px solid #DDD;\n  margin-bottom:  2rem;\n  margin-top:  -20px;\n  padding:  1rem;\n  border-bottom-right-radius: 5px;\n  border-bottom-left-radius: 5px;\n  font-size: 14px;\n  color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-51dfcd51]{\n  display: inline-block;\n}\n.pagination-controls>*[data-v-51dfcd51]{\n  display: inline-block;\n}\n.pagination-controls a[data-v-51dfcd51]{\n  text-decoration: none;\n  color: rgba(0, 0, 0, 0.66);\n  font-size: 14px;\n  font-weight: 600;\n  opacity: 0.8;\n}\n.pagination-controls a[data-v-51dfcd51]:hover{\n  opacity: 1;\n}\n.pagination-controls a span[data-v-51dfcd51]{\n  display: inline-block;\n  vertical-align: middle;\n}\n.pagination-controls .info[data-v-51dfcd51]{\n  margin:  0px 15px;\n  font-size: 13px;\n  font-weight: bold;\n  color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-51dfcd51]{\n  width:  24px;\n  height:  24px;\n  border-radius: 15%;\n/* border:  1px solid rgba(35,41,53,0.2);\nbackground-color: #fff; */\nposition:  relative;\nmargin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-51dfcd51]::after{\n  content:  '';\n  position:  absolute;\n  display:  block;\n  left:  50%;\n  top:  50%;\n  margin-top:  -6px;\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-51dfcd51]::after{\n  border-right:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-51dfcd51]::after{\n  border-left:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.table-footer select[data-v-51dfcd51] {\n  display: inline-block;\n  background-color: transparent;\n  width: auto;\n  padding: 0;\n  border: 0;\n  border-radius: 0;\n  height: auto;\n  font-size: 14px;\n  margin-left: 8px;\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n.table-footer .perpage-count[data-v-51dfcd51]{\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n.pagination-controls .info[data-v-51dfcd51]{\n    display:  none;\n}\n}\n\n/* Global Search  \n**********************************************/\n.global-search[data-v-51dfcd51]{\n  position:  relative;\n  padding-left: 40px;\n}\n.global-search-icon[data-v-51dfcd51]{\n  position:  absolute;\n  left:  0px;\n  max-width:  32px;\n}\n.global-search-icon > img[data-v-51dfcd51]{\n  max-width:  100%;\n  margin-top:  8px;\n  opacity: 0.5;\n}\ntable .global-search-input[data-v-51dfcd51]{\n  width:  calc(100% - 30px);\n}\n\n/* Line numbers \n**********************************************/\ntable th.line-numbers[data-v-51dfcd51], .table.condensed th.line-numbers[data-v-51dfcd51]{\n  background-color: rgba(35,41,53,0.05);\n  padding-left:  3px;\n  padding-right:  3px;\n  word-wrap: break-word;\n  width: 45px;\n  text-align: center;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-51dfcd51]{\n    text-align: right;\n}\n.left-align[data-v-51dfcd51]{\n    text-align: left;\n}\n.pull-left[data-v-51dfcd51]{\n    float:  left !important;\n}\n.pull-right[data-v-51dfcd51]{\n    float:  right !important;\n}\n.clearfix[data-v-51dfcd51]::after {\n    display: block;\n    content: \"\";\n    clear: both;\n}\n\n/* Table specific styles\n************************************************/\ntable[data-v-51dfcd51]{\n    border-collapse: collapse;\n    background-color: transparent;\n    margin-bottom:  20px;\n}\n.table[data-v-51dfcd51]{\n    width: 100%;\n    max-width: 100%;\n}\n.table.table-striped tbody tr[data-v-51dfcd51]:nth-of-type(odd) {\n    background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-51dfcd51], .table-bordered th[data-v-51dfcd51] {\n    border: 1px solid #DDD;\n}\n.table td[data-v-51dfcd51], .table th[data-v-51dfcd51]:not(.line-numbers) {\n    padding: .75rem 1.5rem .75rem .75rem;\n    vertical-align: top;\n    border-top: 1px solid #ddd;\n}\n.table.condensed td[data-v-51dfcd51], .table.condensed th[data-v-51dfcd51] {\n    padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-51dfcd51], .table.condensed thead th[data-v-51dfcd51] {\n    vertical-align: bottom;\n    border-bottom:  2px solid #ddd;\n    padding-right: 1.5rem;\n    background-color: rgba(35,41,53,0.03);\n}\ntr.clickable[data-v-51dfcd51] {\n    cursor: pointer;\n}\n.table input[data-v-51dfcd51]{\n    display: block;\n    width: calc(100% - 24px);\n    height: 34px;\n    padding: 6px 12px;\n    font-size: 14px;\n    line-height: 1.42857143;\n    color: #555;\n    background-color: #fff;\n    background-image: none;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-51dfcd51],\ntable th.sorting-desc[data-v-51dfcd51] {\n    color: rgba(0, 0, 0, 0.66);\n    position: relative;\n}\ntable th.sorting[data-v-51dfcd51]:after,\ntable th.sorting-asc[data-v-51dfcd51]:after  {\n    font-family: 'Material Icons';\n    position:  absolute;\n    height:  0px;\n    width:  0px;\n    content: '';\n    display: none;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: 6px solid rgba(0, 0, 0, 0.66);\n    margin-top:  6px;\n    margin-left:  5px;\n}\ntable th.sorting[data-v-51dfcd51]:hover:after{\n    display: inline-block;\n    border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-51dfcd51]:after,\ntable th.sorting-desc[data-v-51dfcd51]:after {\n    display: inline-block;\n}\ntable th.sorting-desc[data-v-51dfcd51]:after {\n    border-top:  6px solid rgba(0, 0, 0, 0.66);\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: none;\n    margin-top:  8px;\n}\n\n/* Table header specific styles\n************************************************/\n.table-header[data-v-51dfcd51]{\n    padding:  .75rem;\n}\n.table-header .table-title[data-v-51dfcd51]{\n    margin:  0px;\n    font-size: 18px;\n}\n\n\n/* Table footer specific styles\n************************************************/\n.table-footer[data-v-51dfcd51]{\n    /* background-color: rgba(35,41,53, 0.03); */\n    background-color: rgba(35,41,53,0.05);\n    border: 1px solid #DDD;\n    margin-bottom:  2rem;\n    margin-top:  -20px;\n    padding:  1rem;\n    border-bottom-right-radius: 5px;\n    border-bottom-left-radius: 5px;\n    font-size: 14px;\n    color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-51dfcd51]{\n    display: inline-block;\n}\n.pagination-controls>*[data-v-51dfcd51]{\n    display: inline-block;\n}\n.pagination-controls a[data-v-51dfcd51]{\n    text-decoration: none;\n    color: rgba(0, 0, 0, 0.66);\n    font-size: 14px;\n    font-weight: 600;\n    opacity: 0.8;\n}\n.pagination-controls a[data-v-51dfcd51]:hover{\n    opacity: 1;\n}\n.pagination-controls a span[data-v-51dfcd51]{\n    display: inline-block;\n    vertical-align: middle;\n}\n.pagination-controls .info[data-v-51dfcd51]{\n    margin:  0px 15px;\n    font-size: 13px;\n    font-weight: bold;\n    color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-51dfcd51]{\n    width:  24px;\n    height:  24px;\n    border-radius: 15%;\n/* border:  1px solid rgba(35,41,53,0.2);\nbackground-color: #fff; */\nposition:  relative;\nmargin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-51dfcd51]::after{\n    content:  '';\n    position:  absolute;\n    display:  block;\n    left:  50%;\n    top:  50%;\n    margin-top:  -6px;\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-51dfcd51]::after{\n    border-right:  6px solid rgba(0, 0, 0, 0.66);\n    margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-51dfcd51]::after{\n    border-left:  6px solid rgba(0, 0, 0, 0.66);\n    margin-left:  -3px;\n}\n.table-footer select[data-v-51dfcd51] {\n    display: inline-block;\n    background-color: transparent;\n    width: auto;\n    padding: 0;\n    border: 0;\n    border-radius: 0;\n    height: auto;\n    font-size: 14px;\n    margin-left: 8px;\n    color:  rgba(0, 0, 0, 0.55);\n    font-weight: bold;\n}\n.table-footer .perpage-count[data-v-51dfcd51]{\n    color:  rgba(0, 0, 0, 0.55);\n    font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\n    /* on small screens hide the info */\n.pagination-controls .info[data-v-51dfcd51]{\n        display:  none;\n}\n}\n\n/* Global Search  \n**********************************************/\n.global-search[data-v-51dfcd51]{\n    position:  relative;\n    padding-left: 40px;\n}\n.global-search-icon[data-v-51dfcd51]{\n    position:  absolute;\n    left:  0px;\n    max-width:  32px;\n}\n.global-search-icon > img[data-v-51dfcd51]{\n    max-width:  100%;\n    margin-top:  8px;\n    opacity: 0.5;\n}\ntable .global-search-input[data-v-51dfcd51]{\n    width:  calc(100% - 30px);\n}\n\n/* Line numbers \n**********************************************/\ntable th.line-numbers[data-v-51dfcd51], .table.condensed th.line-numbers[data-v-51dfcd51]{\n    background-color: rgba(35,41,53,0.05);\n    padding-left:  3px;\n    padding-right:  3px;\n    word-wrap: break-word;\n    width: 45px;\n    text-align: center;\n}\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 247 */
+/* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75054,516 +75155,519 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'vue-good-table',
-  props: {
-    styleClass: { default: 'table table-bordered' },
-    title: '',
-    columns: {},
-    rows: {},
-    onClick: {},
-    perPage: {},
-    sortable: { default: true },
-    paginate: { default: false },
-    lineNumbers: { default: false },
-    defaultSortBy: { default: null },
+    name: 'vue-good-table',
+    props: {
+        styleClass: { default: 'table table-bordered' },
+        title: '',
+        columns: {},
+        rows: {},
+        onClick: {},
+        perPage: {},
+        sortable: { default: true },
+        paginate: { default: false },
+        lineNumbers: { default: false },
+        defaultSortBy: { default: null },
 
-    // search
-    globalSearch: { default: false },
-    searchTrigger: { default: null },
-    externalSearchQuery: { default: null },
+        // search
+        globalSearch: { default: false },
+        searchTrigger: { default: null },
+        externalSearchQuery: { default: null },
 
-    // text options
-    globalSearchPlaceholder: { default: 'Search Table' },
-    nextText: { default: 'Next' },
-    prevText: { default: 'Prev' },
-    rowsPerPageText: { default: 'Rows per page:' }
-  },
-
-  data: function data() {
-    return {
-      currentPage: 1,
-      currentPerPage: 10,
-      sortColumn: -1,
-      sortType: 'asc',
-      globalSearchTerm: '',
-      columnFilters: {},
-      filteredRows: [],
-      timer: null,
-      forceSearch: false,
-      sortChanged: false
-    };
-  },
-
-  methods: {
-    nextPage: function nextPage() {
-      if (this.currentPerPage == -1) return;
-      if (this.processedRows.length > this.currentPerPage * this.currentPage) ++this.currentPage;
-    },
-    previousPage: function previousPage() {
-
-      if (this.currentPage > 1) --this.currentPage;
-    },
-    onTableLength: function onTableLength(e) {
-      this.currentPerPage = e.target.value;
-    },
-    sort: function sort(index) {
-      if (!this.sortable) return;
-      if (this.sortColumn === index) {
-        this.sortType = this.sortType === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortType = 'asc';
-        this.sortColumn = index;
-      }
-      this.sortChanged = true;
-    },
-    click: function click(row, index) {
-      if (this.onClick) this.onClick(row, index);
-    },
-    searchTable: function searchTable() {
-      if (this.searchTrigger == 'enter') {
-        this.forceSearch = true;
-        this.sortChanged = true;
-      }
+        // text options
+        globalSearchPlaceholder: { default: 'Search Table' },
+        nextText: { default: 'Next' },
+        prevText: { default: 'Prev' },
+        rowsPerPageText: { default: 'Rows per page:' }
     },
 
-
-    // field can be: 
-    // 1. function 
-    // 2. regular property - ex: 'prop'
-    // 3. nested property path - ex: 'nested.prop'
-    collect: function collect(obj, field) {
-
-      //utility function to get nested property
-      function dig(obj, selector) {
-        var result = obj;
-        var splitter = selector.split('.');
-        for (var i = 0; i < splitter.length; i++) {
-          if (typeof result === 'undefined') return undefined;else result = result[splitter[i]];
-        }return result;
-      }
-
-      if (typeof field === 'function') return field(obj);else if (typeof field === 'string') return dig(obj, field);else return undefined;
-    },
-    collectFormatted: function collectFormatted(obj, column) {
-      //helper functions within collect
-      function formatDecimal(v) {
-        return parseFloat(Math.round(v * 100) / 100).toFixed(2);
-      }
-
-      function formatPercent(v) {
-        return parseFloat(v * 100).toFixed(2) + '%';
-      }
-
-      function formatDate(v) {
-        // convert to string
-        v = v + '';
-
-        // convert to date
-        return __WEBPACK_IMPORTED_MODULE_1_date_fns_format___default()(__WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default()(v, column.inputFormat), column.outputFormat);
-      }
-
-      var value = this.collect(obj, column.field);
-
-      if (!value) return '';
-      //lets format the resultant data
-      switch (column.type) {
-        case 'decimal':
-          return formatDecimal(value);
-        case 'percentage':
-          return formatPercent(value);
-        case 'date':
-          return formatDate(value);
-        default:
-          return value;
-      }
+    data: function data() {
+        return {
+            currentPage: 1,
+            currentPerPage: 10,
+            sortColumn: -1,
+            sortType: 'asc',
+            globalSearchTerm: '',
+            columnFilters: {},
+            filteredRows: [],
+            timer: null,
+            forceSearch: false,
+            sortChanged: false
+        };
     },
 
+    methods: {
+        nextPage: function nextPage() {
+            if (this.currentPerPage == -1) return;
+            if (this.processedRows.length > this.currentPerPage * this.currentPage) ++this.currentPage;
+        },
+        previousPage: function previousPage() {
 
-    // Get the necessary style-classes for the given column
-    //--------------------------------------------------------
-    columnHeaderClass: function columnHeaderClass(column, index) {
-      var classString = '';
-      if (this.sortable) {
-        classString += 'sorting ';
-      }
-      if (index === this.sortColumn) {
-        if (this.sortType === 'desc') {
-          classString += 'sorting-desc ';
-        } else {
-          classString += 'sorting-asc ';
-        }
-      }
-      classString += this.getDataStyle(index, 'th');
-      return classString;
-    },
-
-    // given column index, we can figure out what style classes
-    // to apply to this data
-    //---------------------------------------------------------
-    getDataStyle: function getDataStyle(index, type) {
-      var classString = '';
-      if (typeof type !== 'undefined' && this.columns[index].hasOwnProperty(type + 'Class')) {
-        classString = this.columns[index][type + 'Class'];
-      } else {
-        switch (this.columns[index].type) {
-          case 'number':
-          case 'percentage':
-          case 'decimal':
-          case 'date':
-            classString = 'right-align ';
-            break;
-          default:
-            classString = 'left-align ';
-            break;
-        }
-      }
-      return classString;
-    },
+            if (this.currentPage > 1) --this.currentPage;
+        },
+        onTableLength: function onTableLength(e) {
+            this.currentPerPage = e.target.value;
+        },
+        sort: function sort(index) {
+            if (!this.sortable) return;
+            if (this.sortColumn === index) {
+                this.sortType = this.sortType === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.sortType = 'asc';
+                this.sortColumn = index;
+            }
+            this.sortChanged = true;
+        },
+        click: function click(row, index) {
+            if (this.onClick) this.onClick(row, index);
+        },
+        searchTable: function searchTable() {
+            if (this.searchTrigger == 'enter') {
+                this.forceSearch = true;
+                this.sortChanged = true;
+            }
+        },
+        addPreFee: function addPreFee(id) {
+            console.log(id);
+        },
 
 
-    //since vue doesn't detect property addition and deletion, we 
-    // need to create helper function to set property etc
-    updateFilters: function updateFilters(column, value) {
-      var _this = this;
-      if (this.timer) clearTimeout(this.timer);
-      this.timer = setTimeout(function () {
-        _this.$set(_this.columnFilters, column.field, value);
-      }, 400);
-    },
+        // field can be: 
+        // 1. function 
+        // 2. regular property - ex: 'prop'
+        // 3. nested property path - ex: 'nested.prop'
+        collect: function collect(obj, field) {
+
+            //utility function to get nested property
+            function dig(obj, selector) {
+                var result = obj;
+                var splitter = selector.split('.');
+                for (var i = 0; i < splitter.length; i++) {
+                    if (typeof result === 'undefined') return undefined;else result = result[splitter[i]];
+                }return result;
+            }
+
+            if (typeof field === 'function') return field(obj);else if (typeof field === 'string') return dig(obj, field);else return undefined;
+        },
+        collectFormatted: function collectFormatted(obj, column) {
+            //helper functions within collect
+            function formatDecimal(v) {
+                return parseFloat(Math.round(v * 100) / 100).toFixed(2);
+            }
+
+            function formatPercent(v) {
+                return parseFloat(v * 100).toFixed(2) + '%';
+            }
+
+            function formatDate(v) {
+                // convert to string
+                v = v + '';
+
+                // convert to date
+                return __WEBPACK_IMPORTED_MODULE_1_date_fns_format___default()(__WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default()(v, column.inputFormat), column.outputFormat);
+            }
+
+            var value = this.collect(obj, column.field);
+
+            if (!value) return '';
+            //lets format the resultant data
+            switch (column.type) {
+                case 'decimal':
+                    return formatDecimal(value);
+                case 'percentage':
+                    return formatPercent(value);
+                case 'date':
+                    return formatDate(value);
+                default:
+                    return value;
+            }
+        },
 
 
-    //method to filter rows 
-    filterRows: function filterRows() {
-      var _this2 = this;
-
-      var computedRows = JSON.parse(JSON.stringify(this.rows));
-      if (this.hasFilterRow) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = this.columns[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var col = _step.value;
-
-            if (col.filterable && this.columnFilters[col.field]) {
-              computedRows = computedRows.filter(function (row) {
-
-                switch (col.type) {
-                  case 'number':
-                  case 'percentage':
-                  case 'decimal':
-                    //in case of numeric value we need to do an exact
-                    //match for now`
-                    return row[col.field] == _this2.columnFilters[col.field];
-                  default:
-                    //text value lets test starts with
-                    return row[col.field].toLowerCase().startsWith(_this2.columnFilters[col.field].toLowerCase());
+        // Get the necessary style-classes for the given column
+        //--------------------------------------------------------
+        columnHeaderClass: function columnHeaderClass(column, index) {
+            var classString = '';
+            if (this.sortable) {
+                classString += 'sorting ';
+            }
+            if (index === this.sortColumn) {
+                if (this.sortType === 'desc') {
+                    classString += 'sorting-desc ';
+                } else {
+                    classString += 'sorting-asc ';
                 }
-              });
             }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
+            classString += this.getDataStyle(index, 'th');
+            return classString;
+        },
+
+        // given column index, we can figure out what style classes
+        // to apply to this data
+        //---------------------------------------------------------
+        getDataStyle: function getDataStyle(index, type) {
+            var classString = '';
+            if (typeof type !== 'undefined' && this.columns[index].hasOwnProperty(type + 'Class')) {
+                classString = this.columns[index][type + 'Class'];
+            } else {
+                switch (this.columns[index].type) {
+                    case 'number':
+                    case 'percentage':
+                    case 'decimal':
+                    case 'date':
+                        classString = 'right-align ';
+                        break;
+                    default:
+                        classString = 'left-align ';
+                        break;
+                }
             }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
+            return classString;
+        },
+
+
+        //since vue doesn't detect property addition and deletion, we 
+        // need to create helper function to set property etc
+        updateFilters: function updateFilters(column, value) {
+            var _this = this;
+            if (this.timer) clearTimeout(this.timer);
+            this.timer = setTimeout(function () {
+                _this.$set(_this.columnFilters, column.field, value);
+            }, 400);
+        },
+
+
+        //method to filter rows 
+        filterRows: function filterRows() {
+            var _this2 = this;
+
+            var computedRows = JSON.parse(JSON.stringify(this.rows));
+            if (this.hasFilterRow) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.columns[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var col = _step.value;
+
+                        if (col.filterable && this.columnFilters[col.field]) {
+                            computedRows = computedRows.filter(function (row) {
+
+                                switch (col.type) {
+                                    case 'number':
+                                    case 'percentage':
+                                    case 'decimal':
+                                        //in case of numeric value we need to do an exact
+                                        //match for now`
+                                        return row[col.field] == _this2.columnFilters[col.field];
+                                    default:
+                                        //text value lets test starts with
+                                        return row[col.field].toLowerCase().startsWith(_this2.columnFilters[col.field].toLowerCase());
+                                }
+                            });
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
             }
-          }
+            this.filteredRows = computedRows;
+        },
+        getCurrentIndex: function getCurrentIndex(index) {
+            return (this.currentPage - 1) * this.currentPerPage + index + 1;
         }
-      }
-      this.filteredRows = computedRows;
-    },
-    getCurrentIndex: function getCurrentIndex(index) {
-      return (this.currentPage - 1) * this.currentPerPage + index + 1;
-    }
-  },
-
-  watch: {
-    columnFilters: {
-      handler: function handler(newObj) {
-        this.filterRows();
-      },
-      deep: true
-    },
-    rows: {
-      handler: function handler(newObj) {
-        this.filterRows();
-      },
-      deep: true
-    },
-    perPage: function perPage() {
-      if (this.perPage) {
-        this.currentPerPage = this.perPage;
-      } else {
-        //reset to default
-        this.currentPerPage = 10;
-      }
-    }
-  },
-
-  computed: {
-    searchTerm: function searchTerm() {
-      return this.externalSearchQuery != null ? this.externalSearchQuery : this.globalSearchTerm;
     },
 
-
-    // 
-    globalSearchAllowed: function globalSearchAllowed() {
-      if (this.globalSearch && !!this.globalSearchTerm && this.searchTrigger != 'enter') {
-        return true;
-      }
-
-      if (this.externalSearchQuery != null && this.searchTrigger != 'enter') {
-        return true;
-      }
-
-      if (this.forceSearch) {
-        this.forceSearch = false;
-        return true;
-      }
-
-      return false;
-    },
-
-
-    // to create a filter row, we need to 
-    // make sure that there is atleast 1 column
-    // that requires filtering
-    hasFilterRow: function hasFilterRow() {
-      if (!this.globalSearch) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = this.columns[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var col = _step2.value;
-
-            if (col.filterable) {
-              return true;
+    watch: {
+        columnFilters: {
+            handler: function handler(newObj) {
+                this.filterRows();
+            },
+            deep: true
+        },
+        rows: {
+            handler: function handler(newObj) {
+                this.filterRows();
+            },
+            deep: true
+        },
+        perPage: function perPage() {
+            if (this.perPage) {
+                this.currentPerPage = this.perPage;
+            } else {
+                //reset to default
+                this.currentPerPage = 10;
             }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
         }
-      }
-      return false;
     },
 
+    computed: {
+        searchTerm: function searchTerm() {
+            return this.externalSearchQuery != null ? this.externalSearchQuery : this.globalSearchTerm;
+        },
 
-    // this is done everytime sortColumn 
-    // or sort type changes 
-    //----------------------------------------
-    processedRows: function processedRows() {
-      var _this3 = this;
 
-      var computedRows = this.filteredRows;
+        // 
+        globalSearchAllowed: function globalSearchAllowed() {
+            if (this.globalSearch && !!this.globalSearchTerm && this.searchTrigger != 'enter') {
+                return true;
+            }
 
-      // take care of the global filter here also
-      if (this.globalSearchAllowed) {
-        var filteredRows = [];
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+            if (this.externalSearchQuery != null && this.searchTrigger != 'enter') {
+                return true;
+            }
 
-        try {
-          for (var _iterator3 = this.rows[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var row = _step3.value;
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
+            if (this.forceSearch) {
+                this.forceSearch = false;
+                return true;
+            }
+
+            return false;
+        },
+
+
+        // to create a filter row, we need to 
+        // make sure that there is atleast 1 column
+        // that requires filtering
+        hasFilterRow: function hasFilterRow() {
+            if (!this.globalSearch) {
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = this.columns[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var col = _step2.value;
+
+                        if (col.filterable) {
+                            return true;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+            }
+            return false;
+        },
+
+
+        // this is done everytime sortColumn 
+        // or sort type changes 
+        //----------------------------------------
+        processedRows: function processedRows() {
+            var _this3 = this;
+
+            var computedRows = this.filteredRows;
+
+            // take care of the global filter here also
+            if (this.globalSearchAllowed) {
+                var filteredRows = [];
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                    for (var _iterator3 = this.rows[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var row = _step3.value;
+                        var _iteratorNormalCompletion4 = true;
+                        var _didIteratorError4 = false;
+                        var _iteratorError4 = undefined;
+
+                        try {
+                            for (var _iterator4 = this.columns[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                                var col = _step4.value;
+
+                                if (String(this.collectFormatted(row, col)).toLowerCase().includes(this.searchTerm.toLowerCase())) {
+                                    filteredRows.push(row);
+                                    break;
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError4 = true;
+                            _iteratorError4 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                    _iterator4.return();
+                                }
+                            } finally {
+                                if (_didIteratorError4) {
+                                    throw _iteratorError4;
+                                }
+                            }
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
+                        }
+                    } finally {
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
+                        }
+                    }
+                }
+
+                computedRows = filteredRows;
+            }
+
+            //taking care of sort here only if sort has changed
+            if (this.sortable !== false && (
+
+            // if search trigger is enter then we only sort 
+            // when enter is hit
+            this.searchTrigger != 'enter' || this.sortChanged)) {
+
+                this.sortChanged = false;
+
+                computedRows = computedRows.sort(function (x, y) {
+                    if (!_this3.columns[_this3.sortColumn]) return 0;
+
+                    var cook = function cook(x) {
+                        x = _this3.collect(x, _this3.columns[_this3.sortColumn].field);
+
+                        if (typeof x === 'string') {
+                            x = x.toLowerCase();
+                            if (_this3.columns[_this3.sortColumn].type == 'number') x = x.indexOf('.') >= 0 ? parseFloat(x) : parseInt(x);
+                        }
+
+                        //take care of dates too. 
+                        if (_this3.columns[_this3.sortColumn].type === 'date') {
+                            x = __WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default()(x + '', _this3.columns[_this3.sortColumn].inputFormat);
+                        }
+
+                        return x;
+                    };
+
+                    x = cook(x);
+                    y = cook(y);
+
+                    return (x < y ? -1 : x > y ? 1 : 0) * (_this3.sortType === 'desc' ? -1 : 1);
+                });
+            }
+
+            // if the filtering is event based, we need to maintain filter
+            // rows
+            if (this.searchTrigger == 'enter') {
+                this.filteredRows = computedRows;
+            }
+
+            return computedRows;
+        },
+        paginated: function paginated() {
+            var paginatedRows = this.processedRows;
+
+            if (this.paginate) {
+                var pageStart = (this.currentPage - 1) * this.currentPerPage;
+
+                // in case of filtering we might be on a page that is
+                // not relevant anymore
+                // also, if setting to all, current page will not be valid
+                if (pageStart >= this.processedRows.length || this.currentPerPage == -1) {
+                    this.currentPage = 1;
+                    pageStart = 0;
+                }
+
+                //calculate page end now
+                var pageEnd = paginatedRows.length + 1;
+
+                //if the setting is set to 'all'
+                if (this.currentPerPage != -1) {
+                    pageEnd = this.currentPage * this.currentPerPage;
+                }
+
+                paginatedRows = paginatedRows.slice(pageStart, pageEnd);
+            }
+            return paginatedRows;
+        },
+        paginatedInfo: function paginatedInfo() {
+            var infoStr = '';
+            infoStr += (this.currentPage - 1) * this.currentPerPage ? (this.currentPage - 1) * this.currentPerPage : 1;
+            infoStr += ' - ';
+            infoStr += Math.min(this.processedRows.length, this.currentPerPage * this.currentPage);
+            infoStr += ' of ';
+            infoStr += this.processedRows.length;
+            if (this.currentPerPage == -1) {
+                return '1 - ' + this.processedRows.length + ' of ' + this.processedRows.length;
+            }
+            return infoStr;
+        }
+    },
+
+    mounted: function mounted() {
+        this.filteredRows = JSON.parse(JSON.stringify(this.rows));
+        if (this.perPage) {
+            this.currentPerPage = this.perPage;
+        }
+
+        //take care of default sort on mount
+        if (this.defaultSortBy) {
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
 
             try {
-              for (var _iterator4 = this.columns[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                var col = _step4.value;
+                for (var _iterator5 = this.columns.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var _ref = _step5.value;
 
-                if (String(this.collectFormatted(row, col)).toLowerCase().includes(this.searchTerm.toLowerCase())) {
-                  filteredRows.push(row);
-                  break;
+                    var _ref2 = _slicedToArray(_ref, 2);
+
+                    var index = _ref2[0];
+                    var col = _ref2[1];
+
+                    if (col.field === this.defaultSortBy.field) {
+                        this.sortColumn = index;
+                        this.sortType = this.defaultSortBy.type || 'asc';
+                        this.sortChanged = true;
+                        break;
+                    }
                 }
-              }
             } catch (err) {
-              _didIteratorError4 = true;
-              _iteratorError4 = err;
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
             } finally {
-              try {
-                if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                  _iterator4.return();
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
                 }
-              } finally {
-                if (_didIteratorError4) {
-                  throw _iteratorError4;
-                }
-              }
             }
-          }
-        } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
         }
-
-        computedRows = filteredRows;
-      }
-
-      //taking care of sort here only if sort has changed
-      if (this.sortable !== false && (
-
-      // if search trigger is enter then we only sort 
-      // when enter is hit
-      this.searchTrigger != 'enter' || this.sortChanged)) {
-
-        this.sortChanged = false;
-
-        computedRows = computedRows.sort(function (x, y) {
-          if (!_this3.columns[_this3.sortColumn]) return 0;
-
-          var cook = function cook(x) {
-            x = _this3.collect(x, _this3.columns[_this3.sortColumn].field);
-
-            if (typeof x === 'string') {
-              x = x.toLowerCase();
-              if (_this3.columns[_this3.sortColumn].type == 'number') x = x.indexOf('.') >= 0 ? parseFloat(x) : parseInt(x);
-            }
-
-            //take care of dates too. 
-            if (_this3.columns[_this3.sortColumn].type === 'date') {
-              x = __WEBPACK_IMPORTED_MODULE_0_date_fns_parse___default()(x + '', _this3.columns[_this3.sortColumn].inputFormat);
-            }
-
-            return x;
-          };
-
-          x = cook(x);
-          y = cook(y);
-
-          return (x < y ? -1 : x > y ? 1 : 0) * (_this3.sortType === 'desc' ? -1 : 1);
-        });
-      }
-
-      // if the filtering is event based, we need to maintain filter
-      // rows
-      if (this.searchTrigger == 'enter') {
-        this.filteredRows = computedRows;
-      }
-
-      return computedRows;
-    },
-    paginated: function paginated() {
-      var paginatedRows = this.processedRows;
-
-      if (this.paginate) {
-        var pageStart = (this.currentPage - 1) * this.currentPerPage;
-
-        // in case of filtering we might be on a page that is
-        // not relevant anymore
-        // also, if setting to all, current page will not be valid
-        if (pageStart >= this.processedRows.length || this.currentPerPage == -1) {
-          this.currentPage = 1;
-          pageStart = 0;
-        }
-
-        //calculate page end now
-        var pageEnd = paginatedRows.length + 1;
-
-        //if the setting is set to 'all'
-        if (this.currentPerPage != -1) {
-          pageEnd = this.currentPage * this.currentPerPage;
-        }
-
-        paginatedRows = paginatedRows.slice(pageStart, pageEnd);
-      }
-      return paginatedRows;
-    },
-    paginatedInfo: function paginatedInfo() {
-      var infoStr = '';
-      infoStr += (this.currentPage - 1) * this.currentPerPage ? (this.currentPage - 1) * this.currentPerPage : 1;
-      infoStr += ' - ';
-      infoStr += Math.min(this.processedRows.length, this.currentPerPage * this.currentPage);
-      infoStr += ' of ';
-      infoStr += this.processedRows.length;
-      if (this.currentPerPage == -1) {
-        return '1 - ' + this.processedRows.length + ' of ' + this.processedRows.length;
-      }
-      return infoStr;
     }
-  },
-
-  mounted: function mounted() {
-    this.filteredRows = JSON.parse(JSON.stringify(this.rows));
-    if (this.perPage) {
-      this.currentPerPage = this.perPage;
-    }
-
-    //take care of default sort on mount
-    if (this.defaultSortBy) {
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
-
-      try {
-        for (var _iterator5 = this.columns.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var _ref = _step5.value;
-
-          var _ref2 = _slicedToArray(_ref, 2);
-
-          var index = _ref2[0];
-          var col = _ref2[1];
-
-          if (col.field === this.defaultSortBy.field) {
-            this.sortColumn = index;
-            this.sortType = this.defaultSortBy.type || 'asc';
-            this.sortChanged = true;
-            break;
-          }
-        }
-      } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion5 && _iterator5.return) {
-            _iterator5.return();
-          }
-        } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
-          }
-        }
-      }
-    }
-  }
 });
 
 /***/ }),
-/* 248 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -75752,15 +75856,15 @@ if (false) {
 }
 
 /***/ }),
-/* 249 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(250),
+  __webpack_require__(253),
   /* template */
-  __webpack_require__(251),
+  __webpack_require__(254),
   /* styles */
   null,
   /* scopeId */
@@ -75792,7 +75896,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 250 */
+/* 253 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75833,7 +75937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 251 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -75875,15 +75979,15 @@ if (false) {
 }
 
 /***/ }),
-/* 252 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(253),
+  __webpack_require__(256),
   /* template */
-  __webpack_require__(254),
+  __webpack_require__(257),
   /* styles */
   null,
   /* scopeId */
@@ -75915,7 +76019,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 253 */
+/* 256 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75955,7 +76059,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 254 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -76001,19 +76105,19 @@ if (false) {
 }
 
 /***/ }),
-/* 255 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(256)
+  __webpack_require__(259)
 }
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(258),
+  __webpack_require__(261),
   /* template */
-  __webpack_require__(259),
+  __webpack_require__(262),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -76045,13 +76149,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 256 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(257);
+var content = __webpack_require__(260);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -76071,7 +76175,7 @@ if(false) {
 }
 
 /***/ }),
-/* 257 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -76085,7 +76189,7 @@ exports.push([module.i, "\n.action-link[data-v-ee2b4488] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 258 */
+/* 261 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76209,7 +76313,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 259 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -76255,19 +76359,19 @@ if (false) {
 }
 
 /***/ }),
-/* 260 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(261)
+  __webpack_require__(264)
 }
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(263),
+  __webpack_require__(266),
   /* template */
-  __webpack_require__(264),
+  __webpack_require__(267),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -76299,13 +76403,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 261 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(262);
+var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -76325,7 +76429,7 @@ if(false) {
 }
 
 /***/ }),
-/* 262 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -76339,7 +76443,7 @@ exports.push([module.i, "\n.action-link[data-v-4c7344ff] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 263 */
+/* 266 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76665,7 +76769,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 264 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -76865,24 +76969,6 @@ if (false) {
 }
 
 /***/ }),
-/* 265 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 266 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 267 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
 /* 268 */
 /***/ (function(module, exports) {
 
@@ -76890,6 +76976,24 @@ if (false) {
 
 /***/ }),
 /* 269 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 272 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

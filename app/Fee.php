@@ -67,11 +67,11 @@ class Fee extends Model
         $columns =  [
             [
                 'label'=>'Name',
-                'field'=> 'first_name',
+                'field'=> 'name',
                 'filterable'=> true
             ], [
                 'label'=>'Description',
-                'field'=> 'last_name',
+                'field'=> 'desc',
                 'filterable'=> true
             ], [
                 'label'=>'Subtotal',
@@ -113,7 +113,41 @@ class Fee extends Model
         if (isset($rows)) {
             foreach ($rows as $key => $value) {
                 // append last column to table here
-                $last_column = '<button type="button" class="select-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column = '<button type="button" class="select-pre-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    // Post rows
+    public function prepareTableSelectPostRows($rows)
+    {
+    
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-post-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    // Cancel rows
+    public function prepareTableSelectCancelRows($rows)
+    {
+    
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-cancel-fee btn btn-success btn-sm" fee-id="'.$value->id.'" fee-name="'.$value->name.'" fee-price="'.$value->price.'">Select</button>';
                 $last_column .= '</div>';
                 $rows[$key]['action'] = $last_column;
             }

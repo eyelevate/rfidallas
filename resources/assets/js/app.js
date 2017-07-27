@@ -37,6 +37,7 @@ window.Event = new class {
 Vue.component('bootstrap-card',require('./components/bootstrap/Card.vue'));
 Vue.component('bootstrap-input',require('./components/bootstrap/Input.vue'));
 Vue.component('bootstrap-modal',require('./components/bootstrap/Modal.vue'));
+Vue.component('bootstrap-radio',require('./components/bootstrap/Radio.vue'));
 Vue.component('bootstrap-readonly',require('./components/bootstrap/ReadOnly.vue'));
 Vue.component('bootstrap-select',require('./components/bootstrap/Select.vue'));
 Vue.component('bootstrap-table',require('./components/bootstrap/Table.vue'));

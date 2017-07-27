@@ -58,3 +58,6 @@ mix.js('resources/assets/js/views/auth/login.js','public/js/views/auth')
 
 // Companies
 mix.js('resources/assets/js/views/companies/create.js','public/js/views/companies');
+
+// Plans
+mix.js('resources/assets/js/views/plans/create.js','public/js/views/plans');

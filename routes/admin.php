@@ -113,14 +113,18 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/fees/{fee}/show','FeesController@show')->name('fees_show');
 	Route::get('/fees/{fee}/edit','FeesController@edit')->name('fees_edit');
 	Route::patch('/fees/{fee}','FeesController@update')->name('fees_update');
+	Route::post('/fees/retrieve','FeesController@retrieve')->name('fees_retrieve');
+	Route::post('/fees/totals','FeesController@totals')->name('fees_totals');
 
 	// Plans
 	Route::get('/plans','PlansController@index')->name('plans_index');
 	Route::get('/plans/create','PlansController@create')->name('plans_create');
+	Route::delete('/plans/{plan}','PlansController@destroy')->name('plans_destroy');
 	Route::post('/plans/store','PlansController@store')->name('plans_store');
 	Route::get('/plans/{plan}/show','PlansController@show')->name('plans_show');
 	Route::get('/plans/{plan}/edit','PlansController@edit')->name('plans_edit');
 	Route::patch('/plans/{plan}','PlansController@update')->name('plans_update');
+
 
 	// Services
 	Route::get('/services','ServicesController@index')->name('services_index');
@@ -130,6 +134,7 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/services/{service}/show','ServicesController@show')->name('services_show');
 	Route::get('/services/{service}/edit','ServicesController@edit')->name('services_edit');
 	Route::patch('/services/{service}','ServicesController@update')->name('services_update');
+	Route::post('/services/retrieve','ServicesController@retrieve')->name('services_retrieve');
 
 	// Taxes
 	Route::get('/taxes','TaxesController@index')->name('taxes_index');

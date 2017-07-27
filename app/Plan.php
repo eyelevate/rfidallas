@@ -44,6 +44,11 @@ class Plan extends Model
     	return $this->belongsToMany(Fee::class,'post_fee_plan');
     }
 
+    public function serviceFees()
+    {
+        return $this->belongsToMany(Service::class,'plan_service');   
+    }
+
     public function planSchedule()
     {
     	return $this->hasMany(PlanSchedule::class);

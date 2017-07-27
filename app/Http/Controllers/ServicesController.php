@@ -119,4 +119,11 @@ class ServicesController extends Controller
             return redirect()->route('services_index');
         }
     }
+
+    public function retrieve(Request $request, Service $service)
+    {
+        $services = $service->find($request->service_id);
+
+        return response()->json($services);
+    }
 }

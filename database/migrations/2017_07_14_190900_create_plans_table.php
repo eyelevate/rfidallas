@@ -28,7 +28,7 @@ class CreatePlansTable extends Migration
             $table->boolean('yearly')->default(false);
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

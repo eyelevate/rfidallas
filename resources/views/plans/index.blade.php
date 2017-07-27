@@ -36,7 +36,7 @@
 @section('modals')
 @if (count($rows) > 0)
 	@foreach($rows as $row)
-		<bootstrap-modal id="viewModal-{{ $row->id }}">
+		<bootstrap-modal id="viewModal-{{ $row->id }}" b-size="modal-lg">
 			<template slot="header">View Plan - {{ $row->name }}</template>
 			<template slot="body">
 				<!-- Name -->
@@ -88,72 +88,37 @@
 				></bootstrap-readonly>
 
 				<fieldset class="form-group">
-					<legend>Allow Subscription Hourly?</legend>
+					<label>Allow Subscription Hourly?</label>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->hourly == true ? 'checked' : '' }} disabled> 
-							Yes
-						</label>
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->hourly== true ? '' : 'checked' }} disabled> 
-							No
-						</label>
+						{{ Form::select('hourly',[0=>'No',1=>'Yes'],$row->hourly,['class'=>'custom-select','disabled'=>'true','style'=>'background-color:#ffffff;']) }}
 					</div>
 				</fieldset>
 
 				<fieldset class="form-group">
-					<legend>Allow Subscription Daily?</legend>
+					<label>Allow Subscription Daily?</label>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->daily == true ? 'checked' : '' }} disabled> 
-							Yes
-						</label>
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->daily == true ? '' : 'checked' }} disabled> 
-							No
-						</label>
+						{{ Form::select('hourly',[0=>'No',1=>'Yes'],$row->daily,['class'=>'custom-select','disabled'=>'true','style'=>'background-color:#ffffff;']) }}
 					</div>
 				</fieldset>
 
 				<fieldset class="form-group">
-					<legend>Allow Subscription Weekly?</legend>
+					<label>Allow Subscription Weekly?</label>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->weekly == true ? 'checked' : '' }} disabled> 
-							Yes
-						</label>
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->weekly == true ? '' : 'checked' }} disabled> 
-							No
-						</label>
+						{{ Form::select('hourly',[0=>'No',1=>'Yes'],$row->weekly,['class'=>'custom-select','disabled'=>'true','style'=>'background-color:#ffffff;']) }}
 					</div>
 				</fieldset>
 
 				<fieldset class="form-group">
-					<legend>Allow Subscription Monthly?</legend>
+					<label>Allow Subscription Monthly?</label>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->monthly == true ? 'checked' : '' }} disabled> 
-							Yes
-						</label>
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->monthly == true ? '' : 'checked' }} disabled> 
-							No
-						</label>
+						{{ Form::select('hourly',[0=>'No',1=>'Yes'],$row->monthly,['class'=>'custom-select','disabled'=>'true','style'=>'background-color:#ffffff;']) }}
 					</div>
 				</fieldset>
 
 				<fieldset class="form-group">
-					<legend>Allow Subscription Yearly?</legend>
+					<label>Allow Subscription Yearly?</label>
 					<div class="form-check">
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->yearly == true ? 'checked' : '' }} disabled> 
-							Yes
-						</label>
-						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" {{ $row->yearly == true ? '' : 'checked' }} disabled> 
-							No
-						</label>
+						{{ Form::select('hourly',[0=>'No',1=>'Yes'],$row->yearly,['class'=>'custom-select','disabled'=>'true','style'=>'background-color:#ffffff;']) }}
 					</div>
 				</fieldset>
 
@@ -176,7 +141,7 @@
 			<template slot="footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
-				<a href="{{ route('services_edit',$row->id) }}" class="btn btn-primary">Edit</a>
+				<a href="{{ route('plans_edit',$row->id) }}" class="btn btn-primary">Edit</a>
 			</template>
 		</bootstrap-modal>
 		{!! Form::open(['method'=>'delete','route'=>['plans_destroy',$row->id]]) !!}
