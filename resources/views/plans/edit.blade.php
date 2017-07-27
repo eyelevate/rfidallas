@@ -5,7 +5,7 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ mix('/js/views/plans/create.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/views/plans/edit.js') }}"></script>
 @endsection
 
 @section('content')
@@ -13,10 +13,10 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
     <li class="breadcrumb-item"><a href="{{ route('plans_index') }}">Plans</a></li>
-    <li class="breadcrumb-item active">Create</li>
+    <li class="breadcrumb-item active">Edit</li>
 </ol>
 
-<div class="container-fluid">
+<div class="container-fluid" >
 	{!! Form::open(['method'=>'patch','route'=>['plans_update',$plan->id]]) !!}
 
 		<bootstrap-card use-header = "true" use-body="true" use-footer = "true">
@@ -65,7 +65,8 @@
 								</span>
 	                    	</div>
 	                    	<div id="pre-fee-plan">
-	                    		<div class="pre-fee-plan-row" v-for="pre in preFee">
+	                    		<div class="pre-fee-plan-row" v-for="pre in preFee" >
+
 	                    			<input type="hidden" :name="pre.inputName" v-model="pre.id"/>	
 	                    		</div>
 	                    	</div>
@@ -111,7 +112,7 @@
 								</span>
 	                    	</div>
 	                    	<div id="post-fee-plan">
-	                    		<div class="post-fee-plan-row" v-for="post in postFee">
+	                    		<div class="post-fee-plan-row" v-for="post in postFee" >
 	                    			<input type="hidden" :name="post.inputName" v-model="post.id"/>	
 	                    		</div>
 	                    	</div>
@@ -209,33 +210,33 @@
 	                </bootstrap-select>
 	                <hr/>
 	                <!-- Start -->
-	                <bootstrap-input class="form-group-no-border {{ $errors->has('start_date') ? ' has-danger' : '' }}" 
+	                <bootstrap-input class="form-group-no-border {{ $errors->has('start') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "Start Date"
 	 					use-icon-post="true"
 	 					b-icon-post="icon-calendar"
 	                    b-placeholder="MM/DD/YYYY"
-	                    b-name="start_date"
+	                    b-name="start"
 	                    b-type="text"
-	                    b-value="{{ old('start_date') }}"
-	                    b-err="{{ $errors->has('start_date') }}"
-	                    b-error="{{ $errors->first('start_date') }}"
+	                    b-value="{{ old('start') ? old('start') : $plan->start }}"
+	                    b-err="{{ $errors->has('start') }}"
+	                    b-error="{{ $errors->first('start') }}"
 	                    b-input-id="start-date"
 	                    >
 	                </bootstrap-input>
 
 	                <!-- End -->
-	                <bootstrap-input class="form-group-no-border {{ $errors->has('end_date') ? ' has-danger' : '' }}" 
+	                <bootstrap-input class="form-group-no-border {{ $errors->has('end') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "End Date"
 	 					use-icon-post="true"
 	 					b-icon-post="icon-calendar"
 	                    b-placeholder="MM/DD/YYYY"
-	                    b-name="end_date"
+	                    b-name="end"
 	                    b-type="text"
-	                    b-value="{{ old('end_date') }}"
-	                    b-err="{{ $errors->has('end_date') }}"
-	                    b-error="{{ $errors->first('end_date') }}"
+	                    b-value="{{ old('end') ? old('end') : $plan->end }}"
+	                    b-err="{{ $errors->has('end') }}"
+	                    b-error="{{ $errors->first('end') }}"
 	                    b-input-id="end-date"
 	                    >
 	                </bootstrap-input>
@@ -516,4 +517,12 @@
 		<button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
 	</template>
 </bootstrap-modal>
+@endsection
+@section('variables')
+<div class="hide">
+	{{ Form::hidden('serviceFees',json_encode($plan->serviceFees),['id'=>'get-service-fee-data']) }}
+	{{ Form::hidden('cancelFees',json_encode($plan->cancelFees),['id'=>'get-cancel-fee-data']) }}
+	{{ Form::hidden('preFees',json_encode($plan->preFees),['id'=>'get-pre-fee-data']) }}
+	{{ Form::hidden('postFees',json_encode($plan->postFees),['id'=>'get-post-fee-data']) }}
+</div>
 @endsection

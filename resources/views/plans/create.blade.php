@@ -145,134 +145,99 @@
 	                </bootstrap-select>
 	                <hr/>
 	                <!-- Hourly -->
-	                <bootstrap-radio class="form-group-no-border {{ $errors->has('hourly') ? ' has-danger' : '' }}"
+	                <bootstrap-select class="form-group-no-border {{ $errors->has('hourly') ? ' has-danger' : '' }}"
 	                	use-label="true"
 	                	label="Allow Hourly Charges?"
 	                	b-err="{{ $errors->has('hourly') }}"
 	                	b-error="{{ $errors->first('cancel') }}"
 	                >
-	                	<template slot="radio">
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="hourly" checked value="1"/> 
-	                			Yes
-	                		</label>
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="hourly" value="0"/> 
-	                			No
-	                		</label>
+	                	<template slot="select">
+	                		{{ Form::select('hourly',[0=>'No',1=>'Yes'],old('hourly'),['class'=>'custom-select']) }}
 	                	</template>
 
-	                </bootstrap-radio>
+	                </bootstrap-select>
 	                <hr/>
 	                <!-- Daily -->
-	                <bootstrap-radio class="form-group-no-border {{ $errors->has('daily') ? ' has-danger' : '' }}"
+	                <bootstrap-select class="form-group-no-border {{ $errors->has('daily') ? ' has-danger' : '' }}"
 	                	use-label="true"
 	                	label="Allow Daily Charges?"
 	                	b-err="{{ $errors->has('daily') }}"
 	                	b-error="{{ $errors->first('daily') }}"
 	                >
-	                	<template slot="radio">
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="daily" checked value="1"/> 
-	                			Yes
-	                		</label>
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="daily" value="0"/> 
-	                			No
-	                		</label>
+	                	<template slot="select">
+	                		{{ Form::select('daily',[0=>'No',1=>'Yes'],old('daily'),['class'=>'custom-select']) }}
 	                	</template>
 
-	                </bootstrap-radio>
+	                </bootstrap-select>
 	                <hr/>
 	                <!-- Weekly -->
-	                <bootstrap-radio class="form-group-no-border {{ $errors->has('weekly') ? ' has-danger' : '' }}"
+	                <bootstrap-select class="form-group-no-border {{ $errors->has('weekly') ? ' has-danger' : '' }}"
 	                	use-label="true"
 	                	label="Allow Weekly Charges?"
 	                	b-err="{{ $errors->has('weekly') }}"
 	                	b-error="{{ $errors->first('weekly') }}"
 	                >
-	                	<template slot="radio">
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="weekly" checked value="1"/> 
-	                			Yes
-	                		</label>
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="weekly" value="0"/> 
-	                			No
-	                		</label>
+	                	<template slot="select">
+	                		{{ Form::select('weekly',[0=>'No',1=>'Yes'],old('weekly'),['class'=>'custom-select']) }}
 	                	</template>
 
-	                </bootstrap-radio>
+	                </bootstrap-select>
 	                <hr/>
 
 	                <!-- Monthly -->
-	                <bootstrap-radio class="form-group-no-border {{ $errors->has('monthly') ? ' has-danger' : '' }}"
+	                <bootstrap-select class="form-group-no-border {{ $errors->has('monthly') ? ' has-danger' : '' }}"
 	                	use-label="true"
 	                	label="Allow Monthly Charges?"
 	                	b-err="{{ $errors->has('monthly') }}"
 	                	b-error="{{ $errors->first('monthly') }}"
 	                >
-	                	<template slot="radio">
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="monthly" checked value="1"/> 
-	                			Yes
-	                		</label>
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="monthly" value="0"/> 
-	                			No
-	                		</label>
+	                	<template slot="select">
+	                		{{ Form::select('monthly',[0=>'No',1=>'Yes'],old('monthly'),['class'=>'custom-select']) }}
 	                	</template>
 
-	                </bootstrap-radio>
+	                </bootstrap-select>
 	                <hr/>
 	                <!-- Yearly -->
-	                <bootstrap-radio class="form-group-no-border {{ $errors->has('yearly') ? ' has-danger' : '' }}"
+	                <bootstrap-select class="form-group-no-border {{ $errors->has('yearly') ? ' has-danger' : '' }}"
 	                	use-label="true"
 	                	label="Allow Yearly Charges?"
 	                	b-err="{{ $errors->has('yearly') }}"
 	                	b-error="{{ $errors->first('yearly') }}"
 	                >
-	                	<template slot="radio">
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="yearly" checked value="1"/> 
-	                			Yes
-	                		</label>
-	                		<label class="form-check-label col-12">
-	                			<input type="radio" class="form-check-input" name="yearly" value="0"/> 
-	                			No
-	                		</label>
+	                	<template slot="select">
+	                		{{ Form::select('yearly',[0=>'No',1=>'Yes'],old('yearly'),['class'=>'custom-select']) }}
 	                	</template>
 
-	                </bootstrap-radio>
+	                </bootstrap-select>
 	                <hr/>
 	                <!-- Start -->
-	                <bootstrap-input class="form-group-no-border {{ $errors->has('start_date') ? ' has-danger' : '' }}" 
+	                <bootstrap-input class="form-group-no-border {{ $errors->has('start') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "Start Date"
 	 					use-icon-post="true"
 	 					b-icon-post="icon-calendar"
 	                    b-placeholder="MM/DD/YYYY"
-	                    b-name="start_date"
+	                    b-name="start"
 	                    b-type="text"
-	                    b-value="{{ old('start_date') }}"
-	                    b-err="{{ $errors->has('start_date') }}"
-	                    b-error="{{ $errors->first('start_date') }}"
+	                    b-value="{{ old('start') }}"
+	                    b-err="{{ $errors->has('start') }}"
+	                    b-error="{{ $errors->first('start') }}"
 	                    b-input-id="start-date"
 	                    >
 	                </bootstrap-input>
 
 	                <!-- End -->
-	                <bootstrap-input class="form-group-no-border {{ $errors->has('end_date') ? ' has-danger' : '' }}" 
+	                <bootstrap-input class="form-group-no-border {{ $errors->has('end') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "End Date"
 	 					use-icon-post="true"
 	 					b-icon-post="icon-calendar"
 	                    b-placeholder="MM/DD/YYYY"
-	                    b-name="end_date"
+	                    b-name="end"
 	                    b-type="text"
-	                    b-value="{{ old('end_date') }}"
-	                    b-err="{{ $errors->has('end_date') }}"
-	                    b-error="{{ $errors->first('end_date') }}"
+	                    b-value="{{ old('end') }}"
+	                    b-err="{{ $errors->has('end') }}"
+	                    b-error="{{ $errors->first('end') }}"
 	                    b-input-id="end-date"
 	                    >
 	                </bootstrap-input>

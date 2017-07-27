@@ -95,6 +95,8 @@
     <!-- Bootstrap Datepicker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     @yield('scripts')
+    @yield('variables')
+    
 </body>
 
 </html>
