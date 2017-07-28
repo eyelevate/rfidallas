@@ -115,10 +115,10 @@ class AssetsController extends Controller
         $generated = $assetItem->where('status',3)->orderBy('id','desc')->get();
         $claimed = $assetItem->where('status',4)->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
         $resolved = $assetItem->where('status',5)->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
-        $columns = $assetItem->prepareTableSelectColumns();
-        $row_generated = $assetItem->prepareTableSelectRows($generated);
-        $row_claimed = $assetItem->prepareTableSelectRows($claimed);
-        $row_resolved = $assetItem->prepareTableSelectRows($resolved);
+        $columns = $assetItem->prepareTableIssueColumns();
+        $row_generated = $assetItem->prepareTableIssueRows($generated);
+        $row_claimed = $assetItem->prepareTableIssueRows($claimed);
+        $row_resolved = $assetItem->prepareTableIssueRows($resolved);
         $admin_columns = $user->prepareTableSelectColumns();
         $admin_rows = $user->prepareTableSelectRows($user->where('role_id','<',4)
             ->orderBy('last_name','asc')
