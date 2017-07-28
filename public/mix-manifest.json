@@ -11,6 +11,7 @@
     "/js/views/auth/register.js": "/js/views/auth/register.js",
     "/js/views/auth/login.js": "/js/views/auth/login.js",
     "/js/views/assets/issues.js": "/js/views/assets/issues.js",
+    "/js/views/assets/deploy.js": "/js/views/assets/deploy.js",
     "/js/views/admins/login.js": "/js/views/admins/login.js",
     "/js/views/admins/index.js": "/js/views/admins/index.js",
     "/js/views/admins/general.js": "/js/views/admins/general.js",

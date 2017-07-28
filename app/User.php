@@ -44,7 +44,7 @@ class User extends Authenticatable
     {
         // companies may have many devices
         // one device may be applied to one company
-        return $this->belongsToMany(Company::class);
+        return $this->hasMany(Company::class);
     }
 
     public function cards()
@@ -154,6 +154,23 @@ class User extends Authenticatable
             foreach ($rows as $key => $value) {
                 // append last column to table here
                 $last_column = '<button type="button" class="select-employee btn btn-success btn-sm" employee-id="'.$value->id.'" employee-first-name="'.$value->first_name.'" employee-last-name="'.$value->last_name.'" employee-email="'.$value->email.'">Select</button>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    public function prepareTableSelectDeployRows($rows)
+    {
+        
+
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // append last column to table here
+                $last_column = '<button type="button" class="select-customer btn btn-info btn-sm" customer-id="'.$value->id.'">Find Company</button>';
                 $last_column .= '</div>';
                 $rows[$key]['action'] = $last_column;
             }

@@ -56,8 +56,8 @@
 	                <bootstrap-select class="form-group-no-border {{ $errors->has('pre') ? ' has-danger' : '' }}"
 	                    use-label = "true"
 	 					label = "Pre service fees (Any fee issued before plan starts)"
-	                    b-err="{{ $errors->has('user_id') }}"
-	                    b-error="{{ $errors->first('user_id') }}"
+	                    b-err="{{ $errors->has('pre') }}"
+	                    b-error="{{ $errors->first('pre') }}"
 	                    >
 	                    <template slot="select">
 	                    	<div class="input-group">

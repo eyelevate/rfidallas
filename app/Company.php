@@ -107,6 +107,56 @@ class Company extends Model
         return json_encode($columns);
     }
 
+    public function prepareTableSelectColumns()
+    {
+
+        $columns =  [
+            [
+                'label'=>'Name',
+                'field'=> 'full_name',
+                'filterable'=> true
+            ], [
+                'label'=>'Owner',
+                'field'=> 'owners',
+                'filterable'=>true
+            ], [
+                'label'=>'Street',
+                'field'=> 'street',
+                'filterable'=> true
+            ], [
+                'label'=>'Suite',
+                'field'=> 'suite',
+                'filterable'=> true
+            ], [
+                'label'=>'City',
+                'field'=> 'city',
+                'filterable'=> true
+            ], [
+                'label'=>'State',
+                'field'=> 'state',
+                'filterable'=> true
+            ], [
+                'label'=>'Zipcode',
+                'field'=> 'zipcode',
+                'filterable'=> true
+            ], [
+                'label'=>'Phone',
+                'field'=> 'phone',
+                'filterable'=> true
+            ], [
+                'label'=>'Email',
+                'field'=> 'email',
+                'filterable'=> true
+            ], [
+                'label'=>'Action',
+                'field'=> 'action',
+                'html'=>true
+            ]
+        ];
+
+        return json_encode($columns);
+    }
+
     public function prepareTableRows($rows)
     {
         
@@ -142,6 +192,49 @@ class Company extends Model
 
                 // append last column to table here
                 $last_column = '<a class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#viewModal-'.$value->id.'" href="#">View</a>';
+                $last_column .= '</div>';
+                $rows[$key]['action'] = $last_column;
+            }
+        }
+
+        return $rows;
+    }
+
+    public function prepareTableSelectRows($rows)
+    {
+        
+
+        // check if exists
+        if (isset($rows)) {
+            foreach ($rows as $key => $value) {
+                // owner field
+                $users = $value->users;
+                
+                $owner = $users->email.' ('.$users->first_name.' '.$users->last_name.')';
+                $rows[$key]['owners'] = $owner;
+
+                $name = $value->name;
+                $nick_name = $value->nick_name;
+                $street = $value->street;
+                $suite = $value->suite;
+                $city = $value->city;
+                $country = $value->country;
+                $state = $value->state;
+                $zipcode = $value->zipcode;
+                // create full name here
+                $rows[$key]['full_name'] = (empty((array)$nick_name) || is_null($nick_name)) ? $name : $name.' ('.$nick_name.')';
+
+                // create address column here
+                $full_address = $street.' '.$suite.' '.$city.', '.$state.' '.$country.' '.$zipcode;
+
+                if(empty((array)$suite) || is_null($suite)) {
+                    $full_address = $street.' '.$city.', '.$state.' '.$country.' '.$zipcode;
+                }
+
+                $rows[$key]['full_address'] = $full_address;
+
+                // append last column to table here
+                $last_column = '<button type="button" company-id="'.$value->id.'" class="select-company btn btn-success btn-sm">Select</button>';
                 $last_column .= '</div>';
                 $rows[$key]['action'] = $last_column;
             }

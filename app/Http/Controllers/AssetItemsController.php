@@ -161,14 +161,62 @@ class AssetItemsController extends Controller
     }
 
 
-    public function deploy(AssetItem $assetItem)
+    public function deploy(AssetItem $assetItem, User $user, Company $company)
     {
-        return view('asset_items.deploy',compact(['assetItem']));
+        $user_columns = $user->prepareTableSelectColumns();
+        $user_rows = $user->prepareTableSelectDeployRows($user->where('role_id',4)->orderBy('last_name')->get());
+        $company_columns = $company->prepareTableSelectColumns();
+        $company_rows = $company->prepareTableSelectRows($company->orderBy('name','asc')->get());
+        return view('asset_items.deploy',compact(['user_columns','user_rows','company_columns','company_rows']));
     }
 
-    public function updateDeploy(Request $request, AssetItem $assetItem)
+    public function updateDeploy(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory, Company $company)
     {
+        $ais = $assetItem->where('serial',$request->serial)->get();
+        $companies = $company->find($request->company_id);
+        $status = ['status'=>'fail','data'=>[]];
+        if (count($ais) > 0) {
+            foreach ($ais as $ai) {
+                $aitem = $assetItem->find($ai->id);
+                $aitem->status = 2;
+                $aitem->company_id = $request->company_id;
+                if ($aitem->save()) {
+                    $aitem->company_name = $companies->name;
+                    // update the asset item history
+                    $assetItemHistory->asset_item_id = $ai->id;
+                    $assetItemHistory->user_id = Auth::user()->id;
+                    $assetItemHistory->type = 2;
+                    $assetItemHistory->detail = "Deployed asset to ".$companies->name." (".$companies->nick_name.")";
+                    $assetItemHistory->status = 1;
+                    if ($assetItemHistory->save()) {
+                        return response()->json(['status'=>'success','data'=>$aitem]);
+                    }
+                }
+            }
+        }
 
+        return response()->json($status);
+    }
+
+    public function undoDeploy(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory) {
+        $asset_item_id = $request->asset_id;
+        $ais = $assetItem->find($asset_item_id);
+        $ais->company_id = NULL;
+        $ais->status = 1;
+        $status = ['status'=>'fail','reason'=>'No such asset item, please contact administrator.'];
+        if ($ais->save()) {
+            // Update the asset item history
+            $assetItemHistory->asset_item_id = $asset_item_id;
+            $assetItemHistory->user_id = Auth::user()->id;
+            $assetItemHistory->type = 1;
+            $assetItemHistory->detail = 'Undo deployment made by employee';
+            $assetItemHistory->status = 1;
+            if ($assetItemHistory->save()) {
+                return response()->json(['status'=>'success','data'=>$ais]);
+            }
+
+        }
+        return response()->json($status);
     }
 
     public function return(AssetItem $assetItem)

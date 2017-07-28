@@ -21,6 +21,7 @@ class Plan extends Model
         'price',
         'post',
         'cancel',
+        'hourly',
         'daily',
         'weekly',
         'monthly',
@@ -28,6 +29,16 @@ class Plan extends Model
         'start',
         'end',
         'status'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start',
+        'end'
     ];
 
     public function cancelFees()
@@ -84,19 +95,19 @@ class Plan extends Model
                 'filterable'=> true
             ], [
                 'label'=>'Start',
-                'field'=> 'hourly',
+                'field'=> 'start',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
+                'outputFormat'=> 'MM/DD/YY'
             ], [
                 'label'=>'End',
-                'field'=> 'hourly',
+                'field'=> 'end',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
+                'outputFormat'=> 'MM/DD/YY'
             ], [
                 'label'=>'Status',
-                'field'=> 'Status',
+                'field'=> 'status',
                 'filterable'=> true
             ], [
                 'label'=>'Created',
@@ -153,16 +164,16 @@ class Plan extends Model
                 'field'=> 'start',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
+                'outputFormat'=> 'MM/DD/YY'
             ], [
                 'label'=>'End',
                 'field'=> 'end',
                 'type'=>'date',
                 'inputFormat'=> 'YYYY-MM-DD HH:MM:SS',
-                'outputFormat'=> 'MM/DD/YY hh:mm:ssa'
+                'outputFormat'=> 'MM/DD/YY'
             ], [
                 'label'=>'Status',
-                'field'=> 'Status',
+                'field'=> 'status',
                 'filterable'=> true
             ], [
                 'label'=>'Created',
