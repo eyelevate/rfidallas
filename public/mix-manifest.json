@@ -10,6 +10,7 @@
     "/js/views/companies/create.js": "/js/views/companies/create.js",
     "/js/views/auth/register.js": "/js/views/auth/register.js",
     "/js/views/auth/login.js": "/js/views/auth/login.js",
+    "/js/views/assets/return.js": "/js/views/assets/return.js",
     "/js/views/assets/issues.js": "/js/views/assets/issues.js",
     "/js/views/assets/deploy.js": "/js/views/assets/deploy.js",
     "/js/views/admins/login.js": "/js/views/admins/login.js",

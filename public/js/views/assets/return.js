@@ -60,26 +60,100 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 291);
+/******/ 	return __webpack_require__(__webpack_require__.s = 289);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 291:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(292);
+module.exports = __webpack_require__(290);
 
 
 /***/ }),
 
-/***/ 292:
+/***/ 290:
 /***/ (function(module, exports) {
 
 var app = new Vue({
-	el: '#bootstrap-root',
-	data: {},
-	methods: {},
+	el: '#root',
+
+	data: function data() {
+		return {
+			serial: '',
+			serials: [],
+			assets: []
+		};
+	},
+
+	methods: {
+		serialSubmit: function serialSubmit() {
+			var _this = this;
+
+			serial = this.serial;
+			serials = this.serials;
+			if (!serials.includes(serial)) {
+
+				// get fee info from server and post it to form
+				axios.post('/asset-items/update/return', { serial: this.serial }).then(function (response) {
+					var status = response.data.status;
+					if (status == 'fail') {
+						alert('No such serial number exists in our system. Please try again or create the asset.');
+					} else {
+						_this.assets.push(response.data.data);
+						_this.serials.push(_this.serial);
+						_this.serial = '';
+					}
+				});
+			} else {
+				alert('You have already returned this asset in this session. Please move on to the next asset.');
+			}
+		},
+		undoAsset: function undoAsset(asset_id) {
+			var _this2 = this;
+
+			console.log('youu clicked here');
+			// get company id of last issued item
+			assets = this.assets;
+			last_company_id = '';
+			if (assets.length > 0) {
+				assets.forEach(function (v, k) {
+					if (String(v.id) == String(asset_id)) {
+						last_company_id = v.company_id;
+					}
+				});
+			}
+
+			// get fee info from server and post it to form
+			axios.post('/asset-items/undo/return', { asset_id: asset_id, company_id: last_company_id }).then(function (response) {
+				var status = response.data.status;
+				if (status == 'fail') {
+					alert(response.data.reason);
+				} else {
+					// remove assets
+					assets = _this2.assets;
+					if (assets.length > 0) {
+						assets.forEach(function (v, k) {
+							if (String(v.id) == String(asset_id)) {
+								assets.splice(k, 1);
+							}
+						});
+					}
+					_this2.assets = assets;
+					var serial_index = _this2.serials.indexOf(response.data.data.serial);
+					if (serial_index > -1) {
+						_this2.serials.splice(serial_index, 1);
+					}
+					// remove serials
+					_this2.serial = '';
+
+					// remove parent tr
+					_this2.$parent.tr.$remove();
+				}
+			});
+		}
+	},
 	computed: {},
 	created: function created() {},
 	mounted: function mounted() {}

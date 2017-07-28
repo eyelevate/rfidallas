@@ -209,7 +209,7 @@ class AssetItemsController extends Controller
             $assetItemHistory->asset_item_id = $asset_item_id;
             $assetItemHistory->user_id = Auth::user()->id;
             $assetItemHistory->type = 1;
-            $assetItemHistory->detail = 'Undo deployment made by employee';
+            $assetItemHistory->detail = 'Undo deployment, made by employee';
             $assetItemHistory->status = 1;
             if ($assetItemHistory->save()) {
                 return response()->json(['status'=>'success','data'=>$ais]);
@@ -224,9 +224,60 @@ class AssetItemsController extends Controller
         return view('asset_items.return',compact(['assetItem']));
     }
 
-    public function updateReturn(Request $request, AssetItem $assetItem)
-    {
+    public function updateReturn(Request $request, AssetItem $assetItem, Company $companies, AssetItemHistory $assetItemHistory)
+    {   
+        $ais = $assetItem->where('serial',$request->serial)->get();
+        $status = ['status'=>'fail','data'=>[]];
+        if (count($ais) > 0) {
+            foreach ($ais as $ai) {
+                $aitem = $assetItem->find($ai->id);
+                $old_item = $assetItem->find($ai->id); // keep record of old data before we push new data incase user wants to undo           
 
+                $aitem->status = 1;
+                $aitem->company_id = NULL;
+                if ($aitem->save()) {
+                    $company = $companies->find($old_item->company_id);
+                    $aitem->company_name = $company->name;
+                    $company_full_name = (isset($company->nick_name)) ? $company->name.' ('.$company->nick_name.')' : $company->name;
+                    // update the asset item history
+                    $assetItemHistory->asset_item_id = $ai->id;
+                    $assetItemHistory->user_id = Auth::user()->id;
+                    $assetItemHistory->type = 1;
+                    $assetItemHistory->detail = "Returned asset from ".$company_full_name;
+                    $assetItemHistory->status = 1;
+                    if ($assetItemHistory->save()) {
+                        return response()->json(['status'=>'success','data'=>$old_item]);
+                    }
+                }
+            }
+        }
+
+        return response()->json($status);
+    }
+
+    public function undoReturn(Request $request, AssetItem $assetItem, AssetItemHistory $assetItemHistory, Company $company) {
+        $comp = $company->find($request->company_id);
+        $company_name = (isset($comp->nick_name)) ? $comp->name.' ('.$comp->nick_name.')' : $comp->name;
+        $status = ['status'=>'fail','reason'=>'No such asset item, please contact administrator.'];
+
+        if ($assetItem->where('id',$request->asset_id)->exists()) {
+            $ai = $assetItem->find($request->asset_id);
+            $ai->company_id = $request->company_id;
+            $ai->status = 2;
+            if ($ai->save()) {
+                // update the asset item history
+                $assetItemHistory->asset_item_id = $ai->id;
+                $assetItemHistory->user_id = Auth::user()->id;
+                $assetItemHistory->type = 2;
+                $assetItemHistory->detail = "Re-deployed asset to ".$company_name.", made by employee.";
+                $assetItemHistory->status = 1;
+                if ($assetItemHistory->save()) {
+                    return response()->json(['status'=>'success','data'=>$ai]);
+                }
+            }
+        }
+        return response()->json($status);
+        
     }
 
     public function claimed(Request $request,AssetItem $assetItem, AssetItemHistory $assetItemHistory)

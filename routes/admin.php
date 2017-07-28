@@ -72,7 +72,8 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::post('/asset-items/update/deploy','AssetItemsController@updateDeploy')->name('asset_items_update_deploy');
 	Route::post('/asset-items/undo/deploy','AssetItemsController@undoDeploy')->name('asset_items_undo_deploy');
 	Route::get('/asset-items/return','AssetItemsController@return')->name('asset_items_return');
-	Route::patch('/asset-items/{assetItem}/return','AssetItemsController@updateReturn')->name('asset_items_update_return');
+	Route::post('/asset-items/update/return','AssetItemsController@updateReturn')->name('asset_items_update_return');
+	Route::post('/asset-items/undo/return','AssetItemsController@undoReturn')->name('asset_items_undo_return');
 	Route::post('/asset-items/store','AssetItemsController@store')->name('asset_items_store');
 	Route::get('/asset-items/{assetItem}/show','AssetItemsController@show')->name('asset_items_show');
 	Route::get('/asset-items/{assetItem}/edit','AssetItemsController@edit')->name('asset_items_edit');

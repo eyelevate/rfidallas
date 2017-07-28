@@ -52,7 +52,8 @@ mix.js('resources/assets/js/views/admins/login.js','public/js/views/admins')
 
 // Assets
 mix.js('resources/assets/js/views/assets/issues.js','public/js/views/assets')
-   .js('resources/assets/js/views/assets/deploy.js','public/js/views/assets');
+   .js('resources/assets/js/views/assets/deploy.js','public/js/views/assets')
+   .js('resources/assets/js/views/assets/return.js','public/js/views/assets');
 // Auth
 mix.js('resources/assets/js/views/auth/login.js','public/js/views/auth')
    .js('resources/assets/js/views/auth/register.js','public/js/views/auth');
