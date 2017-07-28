@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,13 @@ class AdminsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('admins.index');
+        $customers = $user->getOnlineByRole($user->allOnline(),4);
+        $employees = $user->getOnlineByRole($user->allOnline(),3);
+        $managers = $user->getOnlineByRole($user->allOnline(),2);
+        $partners = $user->getOnlineByRole($user->allOnline(),1);
+        return view('admins.index',compact('customers','employees','managers','partners'));
     }
 
     public function login()

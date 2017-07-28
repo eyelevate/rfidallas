@@ -16,6 +16,7 @@
     "/js/views/admins/login.js": "/js/views/admins/login.js",
     "/js/views/admins/index.js": "/js/views/admins/index.js",
     "/js/views/admins/general.js": "/js/views/admins/general.js",
+    "/js/views/admins/charts.js": "/js/views/admins/charts.js",
     "/js/themes/now-ui-kit/now-ui-kit.js": "/js/themes/now-ui-kit/now-ui-kit.js",
     "/js/themes/coreui/main.js": "/js/themes/coreui/main.js",
     "/js/themes/coreui/coreui.js": "/js/themes/coreui/coreui.js",

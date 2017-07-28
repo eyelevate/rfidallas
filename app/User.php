@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable, SoftDeletes;
+    use HasApiTokens, Notifiable, SoftDeletes, \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -182,6 +182,18 @@ class User extends Authenticatable
     static public function countMembers($role_id)
     {
         return User::where('role_id',$role_id)->count();
+    }
+
+    public function getOnlineByRole($data, $role_id)
+    {
+        if (isset($data)) {
+            foreach ($data as $key => $value) {
+                if ($role_id != $value->role_id) {
+                    unset($data[$key]);
+                }
+            }
+        }
+        return $data;
     }
 
 

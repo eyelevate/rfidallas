@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
@@ -321,4 +322,97 @@ class Job extends Model
 
     	return $countries;
     }
+
+    public function prepareChartData($type) {
+    	$user = new User;
+    	 //Main navigation
+
+		$panelIconOpened = 'icon-arrow-up';
+		$panelIconClosed = 'icon-arrow-down';
+
+		//Default colours
+		$brandPrimary =  '#20a8d8';
+		$brandSuccess =  '#4dbd74';
+		$brandInfo =     '#63c2de';
+		$brandWarning =  '#f8cb00';
+		$brandDanger =   '#f86c6b';
+
+		$grayDark =      '#2a2c36';
+		$gray =          '#55595c';
+		$grayLight =     '#818a91';
+		$grayLighter =   '#d1d4d7';
+		$grayLightest =  '#f8f9fa';
+    	$data = [];
+    	switch ($type) {
+            case 'admins-index':
+                
+            	// Customers
+                $customers_logged_in = count($user->getOnlineByRole($user->allOnline(),4));
+                $customers = $user->where('role_id',4)->count() - $customers_logged_in;
+                $data['chart1'] = [
+                    'type'=>'pie',
+                    'labels'=>['Logged In','Not Logged In'],
+                    'datasets'=> [
+                    	'label'=>'Customers Logged In',
+                    	'backgroundColor'=> $brandPrimary,
+				        'borderColor' => 'rgba(255,255,255,.55)',
+				        'data'=> [$customers_logged_in,$customers]
+
+                    ]
+                ];
+                // Employees
+                $employees_logged_in = count($user->getOnlineByRole($user->allOnline(),3));
+                $employees = $user->where('role_id',3)->count() - $employees_logged_in;
+                $data['chart2'] = [
+                    'type'=>'pie',
+                    'labels'=>['Logged In','Not Logged In'],
+                    'datasets'=> [
+                    	'label'=>'Employees Logged In',
+                    	'backgroundColor'=> $brandPrimary,
+				        'borderColor' => 'rgba(255,255,255,.55)',
+				        'data'=> [$employees_logged_in,$employees]
+
+                    ]
+                ];
+
+                // Managers
+                $managers_logged_in = count($user->getOnlineByRole($user->allOnline(),2));
+                $managers = $user->where('role_id',2)->count() - $managers_logged_in;
+                $data['chart3'] = [
+                    'type'=>'pie',
+                    'labels'=>['Logged In','Not Logged In'],
+                    'datasets'=> [
+                    	'label'=>'Managers Logged In',
+                    	'backgroundColor'=> $brandPrimary,
+				        'borderColor' => 'rgba(255,255,255,.55)',
+				        'data'=> [$managers_logged_in,$managers]
+
+                    ]
+                ];
+
+                // Partners
+                $partners_logged_in = count($user->getOnlineByRole($user->allOnline(),1));
+                $partners = $user->where('role_id',1)->count() - $partners_logged_in;
+                $data['chart4'] = [
+                    'type'=>'pie',
+                    'labels'=>['Logged In','Not Logged In'],
+                    'datasets'=> [
+                    	'label'=>'Partners Logged In',
+                    	'backgroundColor'=> $brandPrimary,
+				        'borderColor' => 'rgba(255,255,255,.55)',
+				        'data'=> [$partners_logged_in,$partners]
+
+                    ]
+                ];
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+        return $data;
+    }
+
+
 }

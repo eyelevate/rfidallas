@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 277);
+/******/ 	return __webpack_require__(__webpack_require__.s = 282);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 277:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(278);
+module.exports = __webpack_require__(283);
 
 
 /***/ }),
 
-/***/ 278:
+/***/ 283:
 /***/ (function(module, exports) {
 
 $(function () {
@@ -92,59 +92,61 @@ $(function () {
   }
 
   //Cards with Charts
-  var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  var data = {
-    labels: labels,
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: $.brandPrimary,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [65, 59, 84, 84, 51, 55, 40]
-    }]
-  };
-  var options = {
-    maintainAspectRatio: false,
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent'
-        }
+  // var labels = ['January','February','March','April','May','June','July'];
+  // var data = {
+  //   labels: labels,
+  //   datasets: [
+  //     {
+  //       label: 'My First dataset',
+  //       backgroundColor: $.brandPrimary,
+  //       borderColor: 'rgba(255,255,255,.55)',
+  //       data: [65, 59, 84, 84, 51, 55, 40]
+  //     },
+  //   ]
+  // };
+  // var options = {
+  //   maintainAspectRatio: false,
+  //   legend: {
+  //     display: false
+  //   },
+  //   scales: {
+  //     xAxes: [{
+  //       gridLines: {
+  //         color: 'transparent',
+  //         zeroLineColor: 'transparent'
+  //       },
+  //       ticks: {
+  //         fontSize: 2,
+  //         fontColor: 'transparent',
+  //       }
 
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: Math.min.apply(Math, data.datasets[0].data) - 5,
-          max: Math.max.apply(Math, data.datasets[0].data) + 5
-        }
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4
-      }
-    }
-  };
-  var ctx = $('#card-chart1');
-  var cardChart1 = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: options
-  });
+  //     }],
+  //     yAxes: [{
+  //       display: false,
+  //       ticks: {
+  //         display: false,
+  //         min: Math.min.apply(Math, data.datasets[0].data) - 5,
+  //         max: Math.max.apply(Math, data.datasets[0].data) + 5,
+  //       }
+  //     }],
+  //   },
+  //   elements: {
+  //     line: {
+  //       borderWidth: 1
+  //     },
+  //     point: {
+  //       radius: 4,
+  //       hitRadius: 10,
+  //       hoverRadius: 4,
+  //     },
+  //   }
+  // };
+  // var ctx = $('#card-chart1');
+  // var cardChart1 = new Chart(ctx, {
+  //   type: 'line',
+  //   data: data,
+  //   options: options
+  // });
 
   var data = {
     labels: labels,

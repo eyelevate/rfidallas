@@ -48,6 +48,7 @@ mix.copyDirectory('resources/assets/img/themes/vue-good-table','public/img/theme
 mix.js('resources/assets/js/views/admins/login.js','public/js/views/admins')
    .js('resources/assets/js/views/admins/general.js','public/js/views/admins')
    .js('resources/assets/js/views/admins/index.js','public/js/views/admins')
+   .js('resources/assets/js/views/admins/charts.js','public/js/views/admins')
    .sass('resources/assets/sass/views/admins/general.scss','public/css/views/admins');
 
 // Assets

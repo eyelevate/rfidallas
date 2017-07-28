@@ -91,6 +91,10 @@ class ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd
         array (
             'Illuminate\\' => 11,
         ),
+        'H' => 
+        array (
+            'HighIdeas\\UsersOnline\\' => 22,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -260,6 +264,10 @@ class ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'HighIdeas\\UsersOnline\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/highideas/laravel-users-online/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -371,6 +379,7 @@ class ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Fee' => __DIR__ . '/../..' . '/app/Fee.php',
         'App\\Http\\Controllers\\AdminsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminsController.php',
+        'App\\Http\\Controllers\\ApisController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApisController.php',
         'App\\Http\\Controllers\\AssetItemHistoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/AssetItemHistoryController.php',
         'App\\Http\\Controllers\\AssetItemsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AssetItemsController.php',
         'App\\Http\\Controllers\\AssetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AssetsController.php',
@@ -1040,6 +1049,11 @@ class ComposerStaticInit10213d279de1dfedab2cacfc7c6821fd
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'HighIdeas\\UsersOnline\\Listeners\\LogoutListener' => __DIR__ . '/..' . '/highideas/laravel-users-online/src/Listeners/LogoutListener.php',
+        'HighIdeas\\UsersOnline\\Middleware\\UsersOnline' => __DIR__ . '/..' . '/highideas/laravel-users-online/src/Middleware/UsersOnline.php',
+        'HighIdeas\\UsersOnline\\Providers\\UsersOnlineEventServiceProvider' => __DIR__ . '/..' . '/highideas/laravel-users-online/src/Providers/UsersOnlineEventServiceProvider.php',
+        'HighIdeas\\UsersOnline\\Traits\\UsersOnlineTrait' => __DIR__ . '/..' . '/highideas/laravel-users-online/src/Traits/UsersOnlineTrait.php',
+        'HighIdeas\\UsersOnline\\UsersOnlineServiceProvider' => __DIR__ . '/..' . '/highideas/laravel-users-online/src/UsersOnlineServiceProvider.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
         'Illuminate\\Auth\\Access\\HandlesAuthorization' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/HandlesAuthorization.php',

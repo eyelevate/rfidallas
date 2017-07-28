@@ -1,7 +1,8 @@
 @extends('layouts.backend')
 @section('scripts')
-<script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script> --}}
 <script type="text/javascript" src="{{ mix('/js/views/admins/index.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/views/admins/charts.js') }}"></script>
 @endsection
 @section('content')
 <!-- Breadcrumb -->
@@ -20,13 +21,12 @@
                                 <i class="icon-settings"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="{{ route('customers_index') }}">Manage</a>
+                                <a class="dropdown-item" href="{{ route('customers_create') }}">Create</a>
                             </div>
                         </div>
-                        <h4 class="mb-0">9.823</h4>
-                        <p>Members Online</p>
+                        <h4 class="mb-0">{{ count($customers) }}</h4>
+                        <p>Customers Online</p>
                         <div class="chart-wrapper px-3" style="height:70px;">
                             <canvas id="card-chart1" class="chart" height="70"></canvas>
                         </div>
@@ -39,11 +39,17 @@
             <div class="col-sm-6 col-lg-3">
                 <bootstrap-card class="card-inverse card-info" body-class="pb-0" use-body="true">
                     <template slot="body">
-                        <button type="button" class="btn btn-transparent active p-0 float-right">
-                            <i class="icon-location-pin"></i>
-                        </button>
-                        <h4 class="mb-0">9.823</h4>
-                        <p>Members online</p>
+                        <div class="btn-group float-right">
+                            <button type="button" class="btn btn-transparent active dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-settings"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('employees_index') }}">Manage</a>
+                                <a class="dropdown-item" href="{{ route('employees_create') }}">Create</a>
+                            </div>
+                        </div>
+                        <h4 class="mb-0">{{ count($employees) }}</h4>
+                        <p>Employees online</p>
                         
                         <div class="chart-wrapper px-3" style="height:70px;">
                             <canvas id="card-chart2" class="chart" height="70"></canvas>
@@ -62,13 +68,12 @@
                                 <i class="icon-settings"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="{{ route('managers_index') }}">Manage</a>
+                                <a class="dropdown-item" href="{{ route('managers_create') }}">Create</a>
                             </div>
                         </div>
-                        <h4 class="mb-0">9.823</h4>
-                        <p>Members online</p>
+                        <h4 class="mb-0">{{ count($managers) }}</h4>
+                        <p>Managers online</p>
                         <div class="chart-wrapper px-3" style="height:70px;">
                             <canvas id="card-chart3" class="chart" height="70"></canvas>
                         </div>
@@ -86,13 +91,12 @@
                                 <i class="icon-settings"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="{{ route('partners_index') }}">Partners</a>
+                                <a class="dropdown-item" href="{{ route('partners_create') }}">Create</a>
                             </div>
                         </div>
-                        <h4 class="mb-0">9.823</h4>
-                        <p>Members online</p>
+                        <h4 class="mb-0">{{ count($partners) }}</h4>
+                        <p>Partners online</p>
                         <div class="chart-wrapper px-3" style="height:70px;">
                             <canvas id="card-chart4" class="chart" height="70"></canvas>
                         </div>

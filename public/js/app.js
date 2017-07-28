@@ -4535,6 +4535,103 @@ return hooks;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4841,103 +4938,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -5576,7 +5576,7 @@ function applyToTag (styleElement, obj) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var normalizeHeaderName = __webpack_require__(145);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -5780,7 +5780,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var settle = __webpack_require__(146);
 var buildURL = __webpack_require__(148);
 var parseHeaders = __webpack_require__(149);
@@ -18010,11 +18010,11 @@ module.exports = getISOYear
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(135);
-__webpack_require__(268);
-__webpack_require__(269);
-__webpack_require__(270);
-__webpack_require__(271);
-module.exports = __webpack_require__(272);
+__webpack_require__(273);
+__webpack_require__(274);
+__webpack_require__(275);
+__webpack_require__(276);
+module.exports = __webpack_require__(277);
 
 
 /***/ }),
@@ -18083,8 +18083,9 @@ Vue.component('bootstrap-textarea', __webpack_require__(252));
 Vue.component('now-input', __webpack_require__(255));
 
 // Passport Components
-Vue.component('passport-authorized-clients', __webpack_require__(258));
-Vue.component('passport-personal-access-tokens', __webpack_require__(263));
+Vue.component('passport-clients', __webpack_require__(258));
+Vue.component('passport-authorized-clients', __webpack_require__(263));
+Vue.component('passport-personal-access-tokens', __webpack_require__(268));
 
 /***/ }),
 /* 136 */
@@ -49056,7 +49057,7 @@ module.exports = __webpack_require__(141);
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(143);
 var defaults = __webpack_require__(6);
@@ -49143,7 +49144,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(6);
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(153);
 var dispatchRequest = __webpack_require__(154);
 var isAbsoluteURL = __webpack_require__(156);
@@ -49425,7 +49426,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -49505,7 +49506,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -49580,7 +49581,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Parse headers into an object
@@ -49624,7 +49625,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -49742,7 +49743,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -49802,7 +49803,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -49861,7 +49862,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 var transformData = __webpack_require__(155);
 var isCancel = __webpack_require__(13);
 var defaults = __webpack_require__(6);
@@ -49947,7 +49948,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(1);
+var utils = __webpack_require__(2);
 
 /**
  * Transform the data for a request or a response
@@ -62881,7 +62882,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(210)
 }
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(213),
   /* template */
@@ -74281,7 +74282,7 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(230),
   /* template */
@@ -74383,7 +74384,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(233),
   /* template */
@@ -74525,7 +74526,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(236),
   /* template */
@@ -74678,7 +74679,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(239),
   /* template */
@@ -74768,7 +74769,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(242),
   /* template */
@@ -74878,7 +74879,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(245),
   /* template */
@@ -74977,7 +74978,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(248)
 }
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(250),
   /* template */
@@ -75860,7 +75861,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(253),
   /* template */
@@ -75983,7 +75984,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(256),
   /* template */
@@ -76113,11 +76114,717 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(259)
 }
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(261),
   /* template */
   __webpack_require__(262),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-5a781317",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/wondochoung/Documents/webapps/rfidallas/resources/assets/js/components/passport/Clients.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a781317", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a781317", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(260);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("4ce6c5fb", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a781317\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5a781317\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.action-link[data-v-5a781317] {\n    cursor: pointer;\n}\n.m-b-none[data-v-5a781317] {\n    margin-bottom: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 261 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    /*
+     * The component's data.
+     */
+    data: function data() {
+        return {
+            clients: [],
+
+            createForm: {
+                errors: [],
+                name: '',
+                redirect: ''
+            },
+
+            editForm: {
+                errors: [],
+                name: '',
+                redirect: ''
+            }
+        };
+    },
+
+
+    /**
+     * Prepare the component (Vue 1.x).
+     */
+    ready: function ready() {
+        this.prepareComponent();
+    },
+
+
+    /**
+     * Prepare the component (Vue 2.x).
+     */
+    mounted: function mounted() {
+        this.prepareComponent();
+    },
+
+
+    methods: {
+        /**
+         * Prepare the component.
+         */
+        prepareComponent: function prepareComponent() {
+            this.getClients();
+
+            $('#modal-create-client').on('shown.bs.modal', function () {
+                $('#create-client-name').focus();
+            });
+
+            $('#modal-edit-client').on('shown.bs.modal', function () {
+                $('#edit-client-name').focus();
+            });
+        },
+
+
+        /**
+         * Get all of the OAuth clients for the user.
+         */
+        getClients: function getClients() {
+            var _this = this;
+
+            axios.get('/oauth/clients').then(function (response) {
+                _this.clients = response.data;
+            });
+        },
+
+
+        /**
+         * Show the form for creating new clients.
+         */
+        showCreateClientForm: function showCreateClientForm() {
+            $('#modal-create-client').modal('show');
+        },
+
+
+        /**
+         * Create a new OAuth client for the user.
+         */
+        store: function store() {
+            this.persistClient('post', '/oauth/clients', this.createForm, '#modal-create-client');
+        },
+
+
+        /**
+         * Edit the given client.
+         */
+        edit: function edit(client) {
+            this.editForm.id = client.id;
+            this.editForm.name = client.name;
+            this.editForm.redirect = client.redirect;
+
+            $('#modal-edit-client').modal('show');
+        },
+
+
+        /**
+         * Update the client being edited.
+         */
+        update: function update() {
+            this.persistClient('put', '/oauth/clients/' + this.editForm.id, this.editForm, '#modal-edit-client');
+        },
+
+
+        /**
+         * Persist the client to storage using the given form.
+         */
+        persistClient: function persistClient(method, uri, form, modal) {
+            var _this2 = this;
+
+            form.errors = [];
+
+            axios[method](uri, form).then(function (response) {
+                _this2.getClients();
+
+                form.name = '';
+                form.redirect = '';
+                form.errors = [];
+
+                $(modal).modal('hide');
+            }).catch(function (error) {
+                if (_typeof(error.response.data) === 'object') {
+                    form.errors = _.flatten(_.toArray(error.response.data));
+                } else {
+                    form.errors = ['Something went wrong. Please try again.'];
+                }
+            });
+        },
+
+
+        /**
+         * Destroy the given client.
+         */
+        destroy: function destroy(client) {
+            var _this3 = this;
+
+            axios.delete('/oauth/clients/' + client.id).then(function (response) {
+                _this3.getClients();
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('bootstrap-card', {
+    attrs: {
+      "use-header": "true",
+      "use-body": "true",
+      "use-footer": "true"
+    }
+  }, [_c('template', {
+    slot: "header"
+  }, [_c('div', {
+    staticStyle: {
+      "display": "flex",
+      "justify-content": "space-between",
+      "align-items": "center"
+    }
+  }, [_c('span', [_vm._v("\n                    OAuth Clients\n                ")])])]), _vm._v(" "), _c('template', {
+    slot: "body"
+  }, [(_vm.clients.length === 0) ? _c('p', {
+    staticClass: "m-b-none"
+  }, [_vm._v("\n                You have not created any OAuth clients.\n            ")]) : _vm._e(), _vm._v(" "), (_vm.clients.length > 0) ? _c('table', {
+    staticClass: "table table-borderless m-b-none"
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Client ID")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Secret")]), _vm._v(" "), _c('th'), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.clients), function(client) {
+    return _c('tr', [_c('td', {
+      staticStyle: {
+        "vertical-align": "middle"
+      }
+    }, [_vm._v("\n                            " + _vm._s(client.id) + "\n                        ")]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "vertical-align": "middle"
+      }
+    }, [_vm._v("\n                            " + _vm._s(client.name) + "\n                        ")]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "vertical-align": "middle"
+      }
+    }, [_c('code', [_vm._v(_vm._s(client.secret))])]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "vertical-align": "middle"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-sm btn-info",
+      on: {
+        "click": function($event) {
+          _vm.edit(client)
+        }
+      }
+    }, [_vm._v("\n                                Edit\n                            ")])]), _vm._v(" "), _c('td', {
+      staticStyle: {
+        "vertical-align": "middle"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-sm btn-danger",
+      on: {
+        "click": function($event) {
+          _vm.destroy(client)
+        }
+      }
+    }, [_vm._v("\n                                Delete\n                            ")])])])
+  }))]) : _vm._e()]), _vm._v(" "), _c('template', {
+    slot: "footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-sm",
+    on: {
+      "click": _vm.showCreateClientForm
+    }
+  }, [_vm._v("Create New Client")])])], 2), _vm._v(" "), _c('bootstrap-modal', {
+    attrs: {
+      "id": "modal-create-client",
+      "b-size": "modal-lg",
+      "role": "dialog"
+    }
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("Create Client")]), _vm._v(" "), _c('template', {
+    slot: "body"
+  }, [(_vm.createForm.errors.length > 0) ? _c('div', {
+    staticClass: "alert alert-danger"
+  }, [_c('p', [_c('strong', [_vm._v("Whoops!")]), _vm._v(" Something went wrong!")]), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.createForm.errors), function(error) {
+    return _c('li', [_vm._v("\n                        " + _vm._s(error) + "\n                    ")])
+  }))]) : _vm._e(), _vm._v(" "), _c('form', {
+    staticClass: "form-horizontal",
+    attrs: {
+      "role": "form"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Name")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.name),
+      expression: "createForm.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "create-client-name",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.createForm.name)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.store($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('small', {
+    staticClass: "help-block"
+  }, [_vm._v("\n                        Something your users will recognize and trust.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Redirect URL")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.createForm.redirect),
+      expression: "createForm.redirect"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "redirect"
+    },
+    domProps: {
+      "value": (_vm.createForm.redirect)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.store($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.createForm.redirect = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('small', {
+    staticClass: "help-block"
+  }, [_vm._v("\n                        Your application's authorization callback URL.\n                    ")])])])]), _vm._v(" "), _c('template', {
+    slot: "footer"
+  }, [_c('button', {
+    staticClass: "btn btn-secondary",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Close")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.store
+    }
+  }, [_vm._v("\n                Create\n            ")])])], 2), _vm._v(" "), _c('bootstrap-modal', {
+    attrs: {
+      "id": "modal-edit-client",
+      "b-size": "modal-lg",
+      "tabindex": "-1",
+      "role": "dialog"
+    }
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("\n            Edit Client\n        ")]), _vm._v(" "), _c('template', {
+    slot: "body"
+  }, [(_vm.editForm.errors.length > 0) ? _c('div', {
+    staticClass: "alert alert-danger"
+  }, [_c('p', [_c('strong', [_vm._v("Whoops!")]), _vm._v(" Something went wrong!")]), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.editForm.errors), function(error) {
+    return _c('li', [_vm._v("\n                        " + _vm._s(error) + "\n                    ")])
+  }))]) : _vm._e(), _vm._v(" "), _c('form', {
+    staticClass: "form-horizontal",
+    attrs: {
+      "role": "form"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Name")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editForm.name),
+      expression: "editForm.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "id": "edit-client-name",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.editForm.name)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.update($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editForm.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('small', {
+    staticClass: "help-block"
+  }, [_vm._v("\n                        Something your users will recognize and trust.\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label"
+  }, [_vm._v("Redirect URL")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editForm.redirect),
+      expression: "editForm.redirect"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "redirect"
+    },
+    domProps: {
+      "value": (_vm.editForm.redirect)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.update($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editForm.redirect = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('small', {
+    staticClass: "help-block"
+  }, [_vm._v("\n                        Your application's authorization callback URL.\n                    ")])])])]), _vm._v(" "), _c('template', {
+    slot: "footer"
+  }, [_c('button', {
+    staticClass: "btn btn-secondary",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Close")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.update
+    }
+  }, [_vm._v("\n                Save Changes\n            ")])])], 2)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5a781317", module.exports)
+  }
+}
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(264)
+}
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(266),
+  /* template */
+  __webpack_require__(267),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -76149,13 +76856,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 259 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(260);
+var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -76175,7 +76882,7 @@ if(false) {
 }
 
 /***/ }),
-/* 260 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -76189,11 +76896,15 @@ exports.push([module.i, "\n.action-link[data-v-ee2b4488] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 261 */
+/* 266 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -76313,19 +77024,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 262 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.tokens.length > 0) ? _c('div', [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Authorized Applications")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_c('table', {
+  return _c('div', [_c('bootstrap-card', {
+    attrs: {
+      "use-header": "true",
+      "use-body": "true",
+      "use-footer": "true"
+    }
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("\n            Authorized Applications\n        ")]), _vm._v(" "), _c('template', {
+    slot: "body"
+  }, [(_vm.tokens.length > 0) ? _c('div', [_c('table', {
     staticClass: "table table-borderless m-b-none"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Scopes")]), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "vertical-align": "middle"
@@ -76338,18 +77053,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "vertical-align": "middle"
       }
-    }, [_c('a', {
-      staticClass: "action-link text-danger",
+    }, [_c('button', {
+      staticClass: "btn btn-link btn-danger",
       on: {
         "click": function($event) {
           _vm.revoke(token)
         }
       }
     }, [_vm._v("\n                                    Revoke\n                                ")])])])
-  }))])])])]) : _vm._e()])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Scopes")]), _vm._v(" "), _c('th')])])
-}]}
+  }))])]) : _vm._e()]), _vm._v(" "), _c('template', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-secondary",
+    attrs: {
+      "href": "/apis"
+    }
+  }, [_vm._v("Back")])])], 2)], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -76359,19 +77079,19 @@ if (false) {
 }
 
 /***/ }),
-/* 263 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(264)
+  __webpack_require__(269)
 }
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(266),
+  __webpack_require__(271),
   /* template */
-  __webpack_require__(267),
+  __webpack_require__(272),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -76403,13 +77123,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(265);
+var content = __webpack_require__(270);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -76429,7 +77149,7 @@ if(false) {
 }
 
 /***/ }),
-/* 265 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -76443,40 +77163,13 @@ exports.push([module.i, "\n.action-link[data-v-4c7344ff] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 266 */
+/* 271 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -76769,32 +77462,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 267 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_c('div', {
-    staticStyle: {
-      "display": "flex",
-      "justify-content": "space-between",
-      "align-items": "center"
+  return _c('div', [_c('div', [_c('bootstrap-card', {
+    attrs: {
+      "use-header": "true",
+      "use-body": "true",
+      "use-footer": "true"
     }
-  }, [_c('span', [_vm._v("\n                        Personal Access Tokens\n                    ")]), _vm._v(" "), _c('a', {
-    staticClass: "action-link",
-    on: {
-      "click": _vm.showCreateTokenForm
-    }
-  }, [_vm._v("\n                        Create New Token\n                    ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("\n                Personal Access Tokens\n            ")]), _vm._v(" "), _c('template', {
+    slot: "body"
   }, [(_vm.tokens.length === 0) ? _c('p', {
     staticClass: "m-b-none"
   }, [_vm._v("\n                    You have not created any personal access tokens.\n                ")]) : _vm._e(), _vm._v(" "), (_vm.tokens.length > 0) ? _c('table', {
     staticClass: "table table-borderless m-b-none"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th')])]), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "vertical-align": "middle"
@@ -76803,31 +77489,38 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "vertical-align": "middle"
       }
-    }, [_c('a', {
-      staticClass: "action-link text-danger",
+    }, [_c('button', {
+      staticClass: "btn btn-sm btn-danger",
       on: {
         "click": function($event) {
           _vm.revoke(token)
         }
       }
     }, [_vm._v("\n                                    Delete\n                                ")])])])
-  }))]) : _vm._e()])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade",
+  }))]) : _vm._e()]), _vm._v(" "), _c('template', {
+    slot: "footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
     attrs: {
-      "id": "modal-create-token",
+      "type": "button",
+      "data-toggle": "modal",
+      "data-target": "#modal-edit-client"
+    }
+  }, [_vm._v("\n                    Create New Token\n                ")])])], 2)], 1), _vm._v(" "), _c('bootstrap-modal', {
+    attrs: {
+      "id": "modal-edit-client",
+      "b-size": "modal-lg",
       "tabindex": "-1",
       "role": "dialog"
     }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("\n            Create Token\n        ")]), _vm._v(" "), _c('template', {
+    slot: "body"
   }, [(_vm.form.errors.length > 0) ? _c('div', {
     staticClass: "alert alert-danger"
-  }, [_vm._m(2), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.form.errors), function(error) {
-    return _c('li', [_vm._v("\n                                " + _vm._s(error) + "\n                            ")])
+  }, [_c('p', [_c('strong', [_vm._v("Whoops!")]), _vm._v(" Something went wrong!")]), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.form.errors), function(error) {
+    return _c('li', [_vm._v("\n                        " + _vm._s(error) + "\n                    ")])
   }))]) : _vm._e(), _vm._v(" "), _c('form', {
     staticClass: "form-horizontal",
     attrs: {
@@ -76842,9 +77535,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "col-md-4 control-label"
+    staticClass: "control-label"
   }, [_vm._v("Name")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
+    staticClass: "input-group"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -76870,9 +77563,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), (_vm.scopes.length > 0) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "col-md-4 control-label"
+    staticClass: "control-label"
   }, [_vm._v("Scopes")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
+    staticClass: "input-group"
   }, _vm._l((_vm.scopes), function(scope) {
     return _c('div', [_c('div', {
       staticClass: "checkbox"
@@ -76888,11 +77581,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.toggleScope(scope.id)
         }
       }
-    }), _vm._v("\n\n                                                " + _vm._s(scope.id) + "\n                                        ")])])])
-  }))]) : _vm._e()])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
+    }), _vm._v("\n\n                                        " + _vm._s(scope.id) + "\n                                ")])])])
+  }))]) : _vm._e()])]), _vm._v(" "), _c('template', {
+    slot: "footer"
   }, [_c('button', {
-    staticClass: "btn btn-default",
+    staticClass: "btn btn-secondary",
     attrs: {
       "type": "button",
       "data-dismiss": "modal"
@@ -76905,61 +77598,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.store
     }
-  }, [_vm._v("\n                        Create\n                    ")])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade",
+  }, [_vm._v("Create")])])], 2), _vm._v(" "), _c('bootstrap-modal', {
     attrs: {
       "id": "modal-access-token",
+      "b-size": "modal-lg",
       "tabindex": "-1",
       "role": "dialog"
     }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
-  }, [_c('p', [_vm._v("\n                        Here is your new personal access token. This is the only time it will be shown so don't lose it!\n                        You may now use this token to make API requests.\n                    ")]), _vm._v(" "), _c('pre', [_c('code', [_vm._v(_vm._s(_vm.accessToken))])])]), _vm._v(" "), _vm._m(4)])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th')])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
+  }, [_c('template', {
+    slot: "header"
+  }, [_vm._v("\n            Personal Access Token\n        ")]), _vm._v(" "), _c('template', {
+    slot: "body"
+  }, [_c('p', [_vm._v("\n                Here is your new personal access token. This is the only time it will be shown so don't lose it!\n                You may now use this token to make API requests.\n            ")]), _vm._v(" "), _c('pre', [_c('code', [_vm._v(_vm._s(_vm.accessToken))])])]), _vm._v(" "), _c('template', {
+    slot: "footer"
   }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button ",
-      "data-dismiss": "modal",
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("\n                        Create Token\n                    ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('strong', [_vm._v("Whoops!")]), _vm._v(" Something went wrong!")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button ",
-      "data-dismiss": "modal",
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("\n                        Personal Access Token\n                    ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-default",
+    staticClass: "btn btn-secondary",
     attrs: {
       "type": "button",
       "data-dismiss": "modal"
     }
-  }, [_vm._v("Close")])])
-}]}
+  }, [_vm._v("Close")])])], 2)], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -76969,31 +77628,31 @@ if (false) {
 }
 
 /***/ }),
-/* 268 */
+/* 273 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 269 */
+/* 274 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 270 */
+/* 275 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 271 */
+/* 276 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 272 */
+/* 277 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

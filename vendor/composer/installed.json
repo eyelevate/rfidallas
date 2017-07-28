@@ -4390,5 +4390,62 @@
         ],
         "description": "HTML and Form Builders for the Laravel Framework",
         "homepage": "http://laravelcollective.com"
+    },
+    {
+        "name": "highideas/laravel-users-online",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/highideas/laravel-users-online.git",
+            "reference": "6a5452ae123ec335978870968ce7cfa9463fa3a7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/highideas/laravel-users-online/zipball/6a5452ae123ec335978870968ce7cfa9463fa3a7",
+            "reference": "6a5452ae123ec335978870968ce7cfa9463fa3a7",
+            "shasum": ""
+        },
+        "require-dev": {
+            "codacy/coverage": "dev-master",
+            "illuminate/auth": "^5.4",
+            "illuminate/cache": "^5.4",
+            "illuminate/database": "^5.4",
+            "illuminate/session": "^5.4",
+            "illuminate/support": "^5.4",
+            "orchestra/testbench": "~3.4",
+            "phpunit/phpunit": "^5.6"
+        },
+        "time": "2017-02-22T23:00:41+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "HighIdeas\\UsersOnline\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gabriel Goncalves",
+                "email": "gabrielll_07@hotmail.com",
+                "homepage": "http://gabrieldeveloper.com.br",
+                "role": "Developer"
+            },
+            {
+                "name": "Marco Araujo",
+                "email": "marco.araujo.junior@gmail.com",
+                "homepage": "http://marcojunior.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "This package will provide an online users management.",
+        "keywords": [
+            "Users",
+            "laravel"
+        ]
     }
 ]

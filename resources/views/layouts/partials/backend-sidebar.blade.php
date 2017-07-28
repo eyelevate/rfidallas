@@ -16,6 +16,20 @@
                 Menu
             </li>
             <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-key"></i> Accessibility </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('apis_index') }}"><i class="icon-arrow-right-circle"></i> Clients </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('apis_clients') }}"><i class="icon-arrow-right-circle"></i> Authorized </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('apis_tokens') }}"><i class="icon-arrow-right-circle"></i> Access Tokens </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item nav-dropdown">
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-people"></i> Admins</a>
                 <ul class="nav-dropdown-items">
                     @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 1)
@@ -36,9 +50,7 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-people"></i> Membership </a>
                 <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="widgets.html"><i class="icon-key"></i> Accessibility </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('customers_index') }}"><i class="icon-arrow-right-circle"></i> Customers <span class="badge badge-info">{{ $customer_count }}</span></a>
                     </li>

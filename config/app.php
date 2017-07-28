@@ -178,7 +178,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class,
+        HighIdeas\UsersOnline\UsersOnlineServiceProvider::class,
+        HighIdeas\UsersOnline\Providers\UsersOnlineEventServiceProvider::class,
 
     ],
 

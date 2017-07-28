@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 287);
+/******/ 	return __webpack_require__(__webpack_require__.s = 294);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 287:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(288);
+module.exports = __webpack_require__(295);
 
 
 /***/ }),
 
-/***/ 288:
+/***/ 295:
 /***/ (function(module, exports) {
 
 var app = new Vue({

@@ -53,6 +53,12 @@ Route::group(['middleware' => ['check:3']], function () {
 	// Admins
     Route::get('/admins','AdminsController@index')->name('admins_index');
     Route::get('/admins/logout','AdminsController@logout')->name('admins_logout');
+
+    // Apis Controller
+    Route::get('/apis','ApisController@index')->name('apis_index');
+    Route::get('/apis/clients','ApisController@clients')->name('apis_clients');
+    Route::get('/apis/tokens','ApisController@tokens')->name('apis_tokens');
+    Route::get('/apis/charts/{type}','ApisController@charts')->name('apis_charts');
     
     // Assets
 	Route::get('/assets','AssetsController@index')->name('assets_index');
