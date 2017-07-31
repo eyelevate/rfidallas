@@ -404,6 +404,9 @@ class Job extends Model
 
                     ]
                 ];
+
+                // Traffic Map
+                $data['main-chart'] = [];
                 break;
             
             default:
