@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Job;
+use App\Plan;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -86,7 +87,7 @@ class CompaniesController extends Controller
         $columns = $user->prepareTableSelectColumns();
         $rows = $user->prepareTableSelectRows($user->where('role_id',4)->orderBy('last_name')->get());
         $plan_columns = $plan->prepareTableSelectColumns();
-        $plan_rows = $plan->prepareTableSelectRows();
+        $plan_rows = $plan->prepareTableSelectRows($plan->orderBy('name','asc')->get());
         return view('companies.edit',compact('company','states','countries','columns','rows','plan_columns','plan_rows'));
     }
 
@@ -110,6 +111,9 @@ class CompaniesController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        if ($company->delete()) {
+            flash('Successfully deleted company from database.')->success();
+            return redirect()->route('companies_index');
+        }
     }
 }

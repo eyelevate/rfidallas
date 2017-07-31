@@ -38,6 +38,12 @@ class CreateUsersTable extends Migration
             $table->integer('user_id');
             $table->primary(['company_id','user_id']);
         });
+
+        Schema::create('store_user', function (Blueprint $table){
+            $table->integer('store_id');
+            $table->integer('user_id');
+            $table->primary(['store_id','user_id']);
+        });
     }
 
     /**
@@ -49,5 +55,6 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('company_user');
+        Schema::dropIfExists('store_user');
     }
 }

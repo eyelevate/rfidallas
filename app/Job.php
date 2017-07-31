@@ -417,5 +417,39 @@ class Job extends Model
         return $data;
     }
 
+    public function prepareHours()
+    {
+    	$hours = [];
+    	for ($i=1; $i <= 12; $i++) { 
+    		$hours[$i] = $i;
+    	}
+    	return $hours;
+    }
+
+    public function prepareMinutes()
+    {
+    	$minutes = [];
+    	for ($i=0; $i < 60 ; $i++) { 	
+    		$minutes[str_pad($i, 2,"0",STR_PAD_LEFT)] = ':'.str_pad($i, 2,"0",STR_PAD_LEFT);
+    	}
+
+    	return $minutes;
+    }
+
+    public function prepareAmpm()
+    {
+    	return ['am'=>'AM','pm'=>'PM'];
+    }
+
+    public function prepareOpen()
+    {
+    	return ['open'=>'Open','closed'=>'Closed'];
+    }
+
+    public function prepareDays()
+    {
+    	return [0=>'Sunday',1=>'Monday',2=>'Tuesday',3=>'Wednesday',4=>'Thursday',5=>'Friday',6=>'Saturday'];
+    }
+
 
 }

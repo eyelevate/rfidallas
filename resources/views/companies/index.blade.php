@@ -92,7 +92,7 @@
 					use-input="true"
 					b-value="{{ $row->suite }}"
 					use-label="true"
-					b-label="suite"
+					b-label="Suite"
 				></bootstrap-readonly>
 
 				<!-- City -->
@@ -174,6 +174,7 @@
 		</template>
 		<template slot="footer">
 			<button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+			<button id="deleteModal" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ $row->id }}">Delete</button>	
 			<a href="{{ route('companies_edit',$row->id) }}" class="btn btn-primary">Edit</a>
 		</template>
 	</bootstrap-modal>
@@ -225,6 +226,18 @@
 			<button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
 		</template>
 	</bootstrap-modal>
+	{!! Form::open(['method'=>'delete','route'=>['companies_destroy',$row->id]]) !!}
+		<bootstrap-modal id="deleteModal-{{ $row->id }}">
+			<template slot="header">Delete Confirmation</template>
+			<template slot="body">
+				Are you sure you wish to delete {{ $row->name}}?
+			</template>
+			<template slot="footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-danger">Delete</button>	
+			</template>
+		</bootstrap-modal>
+		{!! Form::close() !!}
 	@endforeach
 @endif
 @endsection

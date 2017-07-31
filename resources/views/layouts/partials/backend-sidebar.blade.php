@@ -77,6 +77,9 @@
                         <a class="nav-link" href="{{ route('services_index') }}"><i class="icon-arrow-right-circle"></i> Services <span class="badge badge-info">{{ $service_count }}</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('stores_index') }}"><i class="icon-arrow-right-circle"></i> Stores <span class="badge badge-info">{{ $store_count }}</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('vendors_index') }}"><i class="icon-arrow-right-circle"></i> Vendors <span class="badge badge-info">{{ $vendor_count }}</span></a>
                     </li>
                     <li class="nav-item">

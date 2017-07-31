@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $service_count = \App\Service::countServices();
             $vendor_count = \App\Vendor::countVendors();
             $plan_count = \App\Plan::countPlans();
+            $store_count = \App\Store::countStores();
             $view->with('asset_issues', $issues)
                  ->with('asset_items_count', $asset_items_count)
                  ->with('companies_count', $companies_count)
@@ -36,7 +37,8 @@ class AppServiceProvider extends ServiceProvider
                  ->with('fee_count',$fee_count)
                  ->with('service_count',$service_count)
                  ->with('vendor_count',$vendor_count)
-                 ->with('plan_count',$plan_count);
+                 ->with('plan_count',$plan_count)
+                 ->with('store_count',$store_count);
         });
     }
 

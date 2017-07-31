@@ -98,6 +98,7 @@ Route::group(['middleware' => ['check:3']], function () {
 	// Companies
 	Route::get('/companies','CompaniesController@index')->name('companies_index');
 	Route::get('/companies/create','CompaniesController@create')->name('companies_create');
+	Route::delete('/companies/{company}','CompaniesController@destroy')->name('companies_destroy');
 	Route::post('/companies/store','CompaniesController@store')->name('companies_store');
 	Route::get('/companies/{company}/show','CompaniesController@show')->name('companies_show');
 	Route::get('/companies/{company}/edit','CompaniesController@edit')->name('companies_edit');
@@ -143,6 +144,15 @@ Route::group(['middleware' => ['check:3']], function () {
 	Route::get('/services/{service}/edit','ServicesController@edit')->name('services_edit');
 	Route::patch('/services/{service}','ServicesController@update')->name('services_update');
 	Route::post('/services/retrieve','ServicesController@retrieve')->name('services_retrieve');
+
+	// Stores
+	Route::get('/stores','StoresController@index')->name('stores_index');
+	Route::get('/stores/create','StoresController@create')->name('stores_create');
+	Route::delete('/stores/{store}','StoresController@destroy')->name('stores_destroy');
+	Route::post('/stores/store','StoresController@store')->name('stores_store');
+	Route::get('/stores/{store}/show','StoresController@show')->name('stores_show');
+	Route::get('/stores/{store}/edit','StoresController@edit')->name('stores_edit');
+	Route::patch('/stores/{store}','StoresController@update')->name('stores_update');
 
 	// Taxes
 	Route::get('/taxes','TaxesController@index')->name('taxes_index');

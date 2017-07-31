@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'store_id',
         'first_name', 
         'last_name',
         'phone',
@@ -35,17 +36,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // public function companies()
-    // {
-    //     return $this->hasMany(Company::class);
-    // }
+    public function stores()
+    {
+        return $this->belongsTo(Store::class,'store_user');
+    }
 
     public function companies()
     {
-        // companies may have many devices
-        // one device may be applied to one company
-        return $this->hasMany(Company::class);
+        return $this->hasMany(Company::class,'company_user');
     }
+
 
     public function cards()
     {

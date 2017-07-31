@@ -6,54 +6,35 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ mix('/js/views/admins/index.js') }}"></script>
-<script type="text/javascript" src="{{ mix('/js/views/companies/create.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/views/stores/create.js') }}"></script>
 @endsection
 
 @section('content')
 <!-- Breadcrumb -->	
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('admins_index') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('companies_index') }}">Companies</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('stores_index') }}">Stores</a></li>
     <li class="breadcrumb-item active">Create</li>
 </ol>
 
 <div class="container-fluid">
-	<form class="" method="POST" action="{{ route('companies_store') }}">
+	<form class="" method="POST" action="{{ route('stores_store') }}">
 
 	{{ csrf_field() }}
 
 		<bootstrap-card use-header = "true" use-body="true" use-footer = "true">
 			
-			<template slot = "header"> Create A Company </template>
+			<template slot = "header"> Create A Store </template>
 			<template slot = "body">
 	            <div class="content">
 
-	            	<!-- User -->
-
-	                <bootstrap-select class="form-group-no-border {{ $errors->has('user_id') ? ' has-danger' : '' }}"
-	                    use-label = "true"
-	 					label = "User"
-	                    b-err="{{ $errors->has('user_id') }}"
-	                    b-error="{{ $errors->first('user_id') }}"
-	                    >
-	                    <template slot="select">
-	                    	<div class="input-group">
-	                    		{{ Form::text('user_display',old('user_id'),['id'=>'user-display','class'=>'form-control','readonly'=>'true','style'=>'background-color:#ffffff;']) }}
-	                    		<span class="input-group-btn">
-									<button id="searchUsers" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#userModal">Select User</button>
-								</span>
-	                    	</div>
-	                    	{{ Form::hidden('user_id','',['id'=>'user-id-hidden-input']) }}
-	                    </template>
-	                    
-	                </bootstrap-select>
+	            	
 	            	
 	            	<!--Name-->
 	                <bootstrap-input class="form-group-no-border {{ $errors->has('name') ? ' has-danger' : '' }}" 
 	                    use-label = "true"
 	 					label = "Name"
-	                    b-placeholder="Company Name"
+	                    b-placeholder="Store Name"
 	                    b-name="name"
 	                    b-type="text"
 	                    b-value="{{ old('name') }}"
@@ -99,20 +80,6 @@
 	                    b-value="{{ old('phone_option') }}"
 	                    b-err="{{ $errors->has('phone_option') }}"
 	                    b-error="{{ $errors->first('phone_option') }}"
-	                    >
-	                </bootstrap-input>
-
-
-					<!-- E-mail -->
-	              	<bootstrap-input class="form-group-no-border {{ $errors->has('email') ? ' has-danger' : '' }}" 
-	                    use-label = "true"
-	 					label = "E-mail Address"
-	                    b-placeholder="E-mail Address"
-	                    b-name="email"
-	                    b-type="email"
-	                    b-value="{{ old('email') }}"
-	                    b-err="{{ $errors->has('email') }}"
-	                    b-error="{{ $errors->first('email') }}"
 	                    >
 	                </bootstrap-input>
 
@@ -192,12 +159,97 @@
 	                    b-error="{{ $errors->first('zipcode') }}"
 	                    >
 	                </bootstrap-input>
+
+	                <!-- Store Hours -->
+	                <hr/>
+	                <label>Store Hours</label>
+	                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#storehoursModal">Set Store Hours</button>
+	                <bootstrap-modal id="storehoursModal" b-size="modal-lg">
+					<template slot="header">Set Store Hours</template>
+					<template slot="body">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Day</th>
+										<th>Open</th>
+										<th>Open Hour</th>
+										<th>Open Mins</th>
+										<th>Open AM/PM</th>
+										<th>Closed Hour</th>
+										<th>Closed Mins</th>
+										<th>Closed AM/PM</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="day,key in days">
+										<td>@{{ day }}</td>
+										<td>
+											<select class="form-control status" :name="select_name(key,'status')" @change="setClosed($event)">
+												@foreach($open as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control open-hours" :name="select_name(key,'open_hours')">
+												@foreach($hours as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control open-minutes" :name="select_name(key,'open_minutes')">
+												@foreach($minutes as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control open-ampm" :name="select_name(key,'open_ampm')">
+												@foreach($ampm as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control closed-hours" :name="select_name(key,'closed_hours')">
+												@foreach($hours as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control closed-minutes" :name="select_name(key,'closed_minutes')">
+												@foreach($minutes as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+										<td>
+											<select class="form-control closed-ampm" :name="select_name(key,'closed_ampm')">
+												@foreach($ampm as $key => $value)
+												<option value="{{ $key }}">{{ $value }}</option>
+												@endforeach
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+					    </div>
+					</template>
+					<template slot="footer">
+						<button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button id="closeModal" type="button" class="btn btn-primary" data-dismiss="modal">Finished</button>
+					</template>
+				</bootstrap-modal>
+	                <hr/>
 	          
 		        </div>
 			</template>
 
 			<template slot = "footer">
-				<a href="{{ route('companies_index') }}" class="btn btn-secondary">Back</a>
+				<a href="{{ route('stores_index') }}" class="btn btn-secondary">Back</a>
 				<button type="submit" class = "btn btn-primary">Save</button>
 			</template>
 
@@ -209,21 +261,5 @@
 @endsection
 
 @section('modals')
-<bootstrap-modal id="userModal" b-size="modal-lg">
-	<template slot="header">Select User</template>
-	<template slot="body">
-		<div class="table-responsive">
-			<bootstrap-table
-				:columns="{{ $columns }}"
-				:rows="{{ $rows }}"
-				:paginate="true"
-				:global-search="true"
-				:line-numbers="true"/>
-			</bootstrap-table>
-	    </div>
-	</template>
-	<template slot="footer">
-		<button id="closeModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
-	</template>
-</bootstrap-modal>
+
 @endsection

@@ -65,3 +65,6 @@ mix.js('resources/assets/js/views/companies/create.js','public/js/views/companie
 // Plans
 mix.js('resources/assets/js/views/plans/create.js','public/js/views/plans')
    .js('resources/assets/js/views/plans/edit.js','public/js/views/plans');
+
+// Stores
+mix.js('resources/assets/js/views/stores/create.js','public/js/views/stores');
