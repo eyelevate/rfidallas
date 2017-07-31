@@ -98,6 +98,37 @@ charts = {
 					}
 				}
 				break;
+			case 'traffic':
+				var options = {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					scales: {
+						xAxes: [{
+							gridLines: {
+								drawOnChartArea: false,
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								maxTicksLimit: 5,
+								stepSize: Math.ceil(250 / 5),
+								max: 250
+							}
+						}]
+					},
+					elements: {
+						point: {
+							radius: 0,
+							hitRadius: 10,
+							hoverRadius: 4,
+							hoverBorderWidth: 3,
+						}
+					},
+				};
+				break;
 			default:
 				// statements_def
 				break;

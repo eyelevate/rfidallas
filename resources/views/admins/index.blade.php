@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('scripts')
-{{-- <script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script> --}}
+<script type="text/javascript" src="{{ mix('/js/themes/coreui/main.js') }}"></script>
 <script type="text/javascript" src="{{ mix('/js/views/admins/index.js') }}"></script>
 <script type="text/javascript" src="{{ mix('/js/views/admins/charts.js') }}"></script>
 @endsection

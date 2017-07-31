@@ -350,11 +350,11 @@ class Job extends Model
                 $customers_logged_in = count($user->getOnlineByRole($user->allOnline(),4));
                 $customers = $user->where('role_id',4)->count() - $customers_logged_in;
                 $data['chart1'] = [
-                    'type'=>'pie',
+                    'type'=>'doughnut',
                     'labels'=>['Logged In','Not Logged In'],
                     'datasets'=> [
                     	'label'=>'Customers Logged In',
-                    	'backgroundColor'=> $brandPrimary,
+                    	'backgroundColor'=> [$brandPrimary, $grayLightest],
 				        'borderColor' => 'rgba(255,255,255,.55)',
 				        'data'=> [$customers_logged_in,$customers]
 
@@ -364,11 +364,11 @@ class Job extends Model
                 $employees_logged_in = count($user->getOnlineByRole($user->allOnline(),3));
                 $employees = $user->where('role_id',3)->count() - $employees_logged_in;
                 $data['chart2'] = [
-                    'type'=>'pie',
+                    'type'=>'doughnut',
                     'labels'=>['Logged In','Not Logged In'],
                     'datasets'=> [
                     	'label'=>'Employees Logged In',
-                    	'backgroundColor'=> $brandPrimary,
+                    	'backgroundColor'=> [$brandInfo,$grayLightest],
 				        'borderColor' => 'rgba(255,255,255,.55)',
 				        'data'=> [$employees_logged_in,$employees]
 
@@ -379,11 +379,11 @@ class Job extends Model
                 $managers_logged_in = count($user->getOnlineByRole($user->allOnline(),2));
                 $managers = $user->where('role_id',2)->count() - $managers_logged_in;
                 $data['chart3'] = [
-                    'type'=>'pie',
+                    'type'=>'doughnut',
                     'labels'=>['Logged In','Not Logged In'],
                     'datasets'=> [
                     	'label'=>'Managers Logged In',
-                    	'backgroundColor'=> $brandPrimary,
+                    	'backgroundColor'=> [$brandWarning,$grayLightest],
 				        'borderColor' => 'rgba(255,255,255,.55)',
 				        'data'=> [$managers_logged_in,$managers]
 
@@ -394,11 +394,11 @@ class Job extends Model
                 $partners_logged_in = count($user->getOnlineByRole($user->allOnline(),1));
                 $partners = $user->where('role_id',1)->count() - $partners_logged_in;
                 $data['chart4'] = [
-                    'type'=>'pie',
+                    'type'=>'doughnut',
                     'labels'=>['Logged In','Not Logged In'],
                     'datasets'=> [
                     	'label'=>'Partners Logged In',
-                    	'backgroundColor'=> $brandPrimary,
+                    	'backgroundColor'=> [$brandDanger,$grayLightest],
 				        'borderColor' => 'rgba(255,255,255,.55)',
 				        'data'=> [$partners_logged_in,$partners]
 
